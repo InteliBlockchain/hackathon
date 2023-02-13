@@ -51,7 +51,10 @@ const Card = () => {
       <div className="bg-[#1d1d1d] py-4 px-2">
         <p className="text-xl font-medium mb-2">Infraestrutura</p>
 
-        <p className="text-sm">Salas de reunião, conexão Wi-Fi rápida e ambiente pensado para favorecer a inovação.<br /><br />O evento será no Inteli, a faculdade feita para você desenvolver uma solução do c*ralho e ganhar muito (MUITO) dinheiro dos patrocinadores.</p>
+        {/* <p className="text-sm">Salas de reunião, conexão Wi-Fi rápida e ambiente pensado para favorecer a inovação.<br /><br />O evento será no Inteli, a faculdade feita para você desenvolver uma solução do c*ralho e ganhar muito (MUITO) dinheiro dos patrocinadores.</p> */}
+        <p className="text-sm">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquet nisl, nec aliquet nisl nisl eu nisl. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquet nisl, nec aliquet nisl nisl eu nisl.
+        </p>
       </div>
     </div>
   )
