@@ -2,9 +2,12 @@ import React, { ReactNode } from "react"
 import Head from "next/head"
 
 import { Montserrat } from '@next/font/google';
+import Image from "next/image";
 const montserrat = Montserrat({
     subsets: ["latin"]
 });
+
+import menu from "@/assets/menu.svg"
 
 type Props = {
     children?: ReactNode;
@@ -23,6 +26,9 @@ export const Layout = ({ children, title }: Props) => {
             </Head>
 
             <div className={`min-h-screen h-full ${montserrat.className} text-white`}>
+                <div className="">
+                    <Image src={menu} className="" alt="menu" />
+                </div>
                 {children}
             </div>
         </>

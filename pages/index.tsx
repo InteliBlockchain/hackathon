@@ -8,7 +8,7 @@ import Link from "next/link";
 const Home = () => {
   return (
     <Layout>
-      <div className="border-2 border-yellow flex flex-col items-center justify-center bg1 bg-fixed bg-center bg-cover py-24 h-auto">
+      <div className="flex flex-col items-center justify-center bg1 bg-fixed bg-center bg-cover py-24 h-auto">
         <Link href={"https://inteliblockchain.co/"} target="_blank">
           <Image src={logo} />
         </Link>
