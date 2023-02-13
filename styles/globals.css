@@ -2,3 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    background-color: #0E0E10;
+}
+
+.bg1 {
+    background-image: url(../assets/background-1.svg);
+}
