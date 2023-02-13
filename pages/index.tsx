@@ -10,11 +10,11 @@ const Home = () => {
     <Layout>
       <div className="flex flex-col items-center justify-center bg1 bg-fixed bg-center bg-cover py-24 h-auto">
         <Link href={"https://inteliblockchain.co/"} target="_blank">
-          <Image src={logo} />
+          <Image src={logo} alt="inteli-blockchain" />
         </Link>
 
         <div className="my-8">
-          <Image src={challenge} />
+          <Image src={challenge} alt="Challenge 2023" />
         </div>
 
         <div>
