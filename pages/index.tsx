@@ -88,14 +88,14 @@ const Home = () => {
           <div className="flex flex-col items-center w-full mb-8">
             <p className="text-xl font-semibold">Apoio:</p>
             <div className="w-full">
-              {sponsors.map(({ name, link, icon }, index) => index % 2 == 0 ? <Sponsor name={name} icon={icon} link={link} /> : null)}
+              {sponsors.map(({ name, link, icon }, index) => index % 2 == 0 ? <Sponsor name={name} icon={icon} link={link} key={index} /> : null)}
             </div>
           </div>
 
           <div className="flex flex-col items-center w-full">
             <p className="text-xl font-semibold">Patrocinadores:</p>
             <div className="w-full">
-              {sponsors.map(({ name, link, icon }, index) => index % 2 != 0 ? <Sponsor name={name} icon={icon} link={link} /> : null)}
+              {sponsors.map(({ name, link, icon }, index) => index % 2 != 0 ? <Sponsor name={name} icon={icon} link={link} key={index} /> : null)}
             </div>
           </div>
         </div>
