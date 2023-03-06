@@ -43,7 +43,7 @@ export const Layout = ({ children, title }: Props) => {
                 </div>
 
                 {sidebar ? <Sidebar setSidebar={setSidebar} /> : null}
-                <div className="mx-auto md:w-2/5">
+                <div className="mx-auto w-full">
                     {children}
                 </div>
             </div>

@@ -36,8 +36,8 @@ const Home = () => {
           <Image src={logo} alt="inteli-blockchain" />
         </Link>
 
-        <div className="my-16">
-          <Image src={challenge} alt="Challenge 2023" className="w-full" />
+        <div className="my-16 md:h-32 lg:h-40">
+          <Image src={challenge} alt="Challenge 2023" className="w-full h-full" />
         </div>
 
         <div>
@@ -52,7 +52,7 @@ const Home = () => {
 
 
       {/* carousel */}
-      <div className="flex flex-col items-center justify-center translate-y-[-4rem] h-auto w-full mx-auto">
+      <div className="flex flex-col items-center justify-center translate-y-[-4rem] h-auto w-full mx-auto md:w-3/5 lg:w-2/5">
         <Carousel>
           <Card title={"Slide 1"} desc={`Salas de reunião, conexão Wi-Fi rápida e ambiente pensado para favorecer a inovação.\n\nO evento será no Inteli, a faculdade feita para você desenvolver uma solução do c*ralho e ganhar muito (MUITO) dinheiro dos patrocinadores.`} image={one} />
           <Card title={"Slide 2"} desc={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquet nisl, nec aliquet nisl nisl eu nisl.`} image={two} />
@@ -61,8 +61,8 @@ const Home = () => {
       </div>
 
       {/* Empurraozinho */}
-      <div className="flex flex-col items-center justify-center bg2 bg-center bg-cover pt-16 pb-24 h-auto w-full mx-auto translate-y-[-2rem]">
-        <div className="w-4/5 flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center bg2 bg-center bg-cover pt-16 pb-24 h-auto w-full mx-auto">
+        <div className="w-4/5 md:w-3/5 flex flex-col items-center justify-center">
           <div className="flex flex-col items-center">
             <p className="text-2xl text-center font-semibold mb-2">Precisa de um
               empurrãozinho?</p>
@@ -70,7 +70,7 @@ const Home = () => {
           </div>
 
           <div className="flex flex-col my-4 items-center">
-            <button className="items-center justify-center font-semibold text-lg mb-4 py-4 px-8 rounded-md flex bg-[#04D361]">Acessar conteúdo <Image alt="content" width={24} src={right} className={"ml-2"} /></button>
+            <button className="items-center justify-center font-semibold text-lg mb-4 py-4 px-8 rounded-md flex bg-[#04d361] text-[#f1f1f1]">Acessar conteúdo <Image alt="content" width={24} src={right} className={"ml-2"} /></button>
 
             <button className="text-md flex justify-center items-center border-2 border-[#4863F7] rounded-lg p-2"><Image className={"mr-4"} src={document} alt={"document"} width={24} />Veja o regulamento</button>
           </div>
@@ -84,7 +84,7 @@ const Home = () => {
         </div>
 
         {/* Sponsors */}
-        <div className="w-4/5">
+        <div className="w-4/5 md:w-2/5">
           <div className="flex flex-col items-center w-full mb-8">
             <p className="text-xl font-semibold">Apoio:</p>
             <div className="w-full">
