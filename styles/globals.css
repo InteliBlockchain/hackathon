@@ -8,11 +8,11 @@ body {
 }
 
 .bg1 {
-    background-image: url(../assets/background-1.svg);
+    background-image: url(../assets/bg-mobile-1.png);
 }
 
 .bg2 {
-    background-image: url(../assets/background-2.svg);
+    background-image: url(../assets/bg-mobile-2.png);
 }
 
 // Scroll bar
