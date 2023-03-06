@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -23,6 +23,28 @@ import { useRouter } from "next/router";
 const Home = () => {
   const router = useRouter();
 
+  // contadores de tempo até inscrição
+  const [daysLeft, setDaysLeft] = useState(0)
+  const [hoursLeft, setHoursLeft] = useState(0)
+  const [minutesLeft, setMinutesLeft] = useState(0)
+  const [secondsLeft, setSecondsLeft] = useState(0)
+
+  useEffect(()=>{
+
+    // calcula a quantidade de tempo até a inscrição abrir e coloca no lugar do botão
+    setInterval(()=>{
+      const openingDate = Math.floor(new Date('2023-03-17T18:00:00').getTime() / 1000)
+      const currentDate = Math.floor(new Date().getTime() / 1000)
+      const timeDiference = openingDate - currentDate
+      setDaysLeft(Math.floor(timeDiference / (3600*24)))
+      setHoursLeft(Math.floor(timeDiference % (3600*24) / 3600) - 2)
+      setMinutesLeft(Math.floor(timeDiference % 3600 / 60))
+      let seconds = timeDiference - (daysLeft*3600*24)- (hoursLeft * 3600) - (minutesLeft * 60)
+      setSecondsLeft(timeDiference % 60)
+    }, 1000)
+
+  }, [])
+
   const [sponsors, setSponsors] = useState([
     { link: "https://inteli.edu.br", name: "Inteli", icon: inteli },
     { link: "https://ethereum.org/en/foundation/", name: "Ethereum Foundation", icon: eth_foundation }
@@ -43,11 +65,16 @@ const Home = () => {
         <div>
           <p className="text-gray1 text-2xl font-bold">5-7 de Maio</p>
         </div>
-
-        <div className="mt-8">
-          <button className="px-8 py-4 text-[#4863F7] border-2 border-[#4863F7] rounded-lg font-semibold" onClick={() => router.push("/preinscricao")
-          }>Faça sua pré-inscrição</button>
+        <div>
+          <p className="text-gray1 text-lg font-medium">Inscrições: 17.03.2023</p>
         </div>
+
+        <p className="mt-8 mb-2 text-gray1 italic ">Faltam</p>
+        <div className="">
+          <button className="px-4 py-2 text-[#4863F7] text-xs border-2 border-[#4863F7] rounded-lg font-medium" onClick={() => router.push("/preinscricao")
+          }>{`${daysLeft || "?"} dias, ${hoursLeft || "?"} horas, ${minutesLeft || "?"} minutos e ${secondsLeft || "?"} segundos`}</button>
+        </div>
+        <p className="mt-2 text-gray1 italic">Para o início das inscrições</p>
       </div>
 
 
