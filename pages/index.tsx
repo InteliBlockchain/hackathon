@@ -9,7 +9,7 @@ import { Sponsor } from "@/components/Sponsor";
 
 import logo from "@/assets/logo.svg"
 import challenge from "@/assets/Challenge 2023.svg"
-import one from "@/assets/cards/1.png"
+import one from "@/assets/inteli 1.png"
 import two from "@/assets/cards/2.png"
 import three from "@/assets/cards/3.png"
 import right from '@/assets/arrow-right.svg'
@@ -28,10 +28,12 @@ const Home = () => {
     { link: "https://ethereum.org/en/foundation/", name: "Ethereum Foundation", icon: eth_foundation }
   ])
 
+  const inteli1 = "https://imgur.com/dsBSU0e.png"
+
   return (
     <Layout>
       {/* <div className="flex flex-col items-center justify-center bg1 bg-fixed bg-center bg-cover py-16 h-auto w-full mx-auto md:w-2/5"> */}
-      <div className="flex flex-col items-center justify-center bg1 bg-center bg-cover pt-16 pb-24 h-auto w-full mx-auto">
+      <div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-48 pb-48 h-auto w-full mx-auto">
         <Link href={"https://inteliblockchain.co/"} target="_blank">
           <Image src={logo} alt="inteli-blockchain" />
         </Link>
@@ -54,9 +56,9 @@ const Home = () => {
       {/* carousel */}
       <div className="flex flex-col items-center justify-center translate-y-[-4rem] h-auto w-full mx-auto">
         <Carousel>
-          <Card title={"Slide 1"} desc={`Salas de reunião, conexão Wi-Fi rápida e ambiente pensado para favorecer a inovação.\n\nO evento será no Inteli, a faculdade feita para você desenvolver uma solução do c*ralho e ganhar muito (MUITO) dinheiro dos patrocinadores.`} image={one} />
-          <Card title={"Slide 2"} desc={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquet nisl, nec aliquet nisl nisl eu nisl.`} image={two} />
-          <Card title={"Slide 3"} desc={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquet nisl, nec aliquet nisl nisl eu nisl.\n\nSed euismod, nisl vel ultricies lacinia, nisl nisl aliquet nisl, nec aliquet nisl nisl eu nisl.`} image={three} />
+          <Card title={"Slide 1"} desc={`Salas de reunião, conexão Wi-Fi rápida e ambiente pensado para favorecer a inovação.\n\nO evento será no Inteli, a faculdade feita para você desenvolver uma solução do c*ralho e ganhar muito (MUITO) dinheiro dos patrocinadores.`} image={inteli1} />
+          <Card title={"Slide 2"} desc={`Salas de reunião, conexão Wi-Fi rápida e ambiente pensado para favorecer a inovação.\n\nO evento será no Inteli, `} image={inteli1} />
+          <Card title={"Slide 3"} desc={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquet nisl, nec aliquet nisl nisl eu nisl.\n\nSed euismod, nisl vel ultricies lacinia, nisl nisl aliquet nisl, nec aliquet nisl nisl eu nisl.`} image={inteli1} />
         </Carousel>
       </div>
 
