@@ -9,9 +9,9 @@ import { Sponsor } from "@/components/Sponsor";
 
 import logo from "@/assets/logo.svg"
 import challenge from "@/assets/Challenge 2023.svg"
-import one from "@/assets/cards/1.svg"
-import two from "@/assets/cards/2.svg"
-import three from "@/assets/cards/3.svg"
+import one from "@/assets/cards/1.png"
+import two from "@/assets/cards/2.png"
+import three from "@/assets/cards/3.png"
 import right from '@/assets/arrow-right.svg'
 import document from '@/assets/document.svg'
 import telegram from "@/assets/telegram.svg"
@@ -64,7 +64,7 @@ const Home = () => {
       <div className="flex flex-col items-center justify-center bg2 bg-center bg-cover pt-16 pb-24 h-auto w-full mx-auto translate-y-[-2rem]">
         <div className="w-4/5 flex flex-col items-center justify-center">
           <div className="flex flex-col items-center">
-            <p className="text-2xl font-semibold mb-2">Precisa de um
+            <p className="text-2xl text-center font-semibold mb-2">Precisa de um
               empurrãozinho?</p>
             <p className="text-md text-gray-300 text-center">Aqui você pode conhecer todas as tecnologias que serão necessárias para se sair bem no hackathon!</p>
           </div>
