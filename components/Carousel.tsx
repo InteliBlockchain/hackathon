@@ -24,7 +24,7 @@ export const Carousel = ({ children }:
     };
 
     return (
-        <div className='max-w-screen w-full h-max m-auto px-4 group w-auto'>
+        <div className='max-w-screen w-full h-max m-auto px-4 group'>
             <div className='w-[85%] md:w-[60%] mx-auto h-full duration-500 transition-all ease-in-out transform hover:scale-105'>
                 {/* render the card */}
                 {slides[currentIndex]}
