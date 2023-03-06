@@ -9,9 +9,10 @@ import { Sponsor } from "@/components/Sponsor";
 
 import logo from "@/assets/logo.svg"
 import challenge from "@/assets/Challenge 2023.svg"
-import one from "@/assets/inteli 1.png"
-import two from "@/assets/cards/2.png"
-import three from "@/assets/cards/3.png"
+
+import instagram from "@/assets/instagram.svg"
+import linkedin from "@/assets/linkedin.svg"
+
 import right from '@/assets/arrow-right.svg'
 import document from '@/assets/document.svg'
 import telegram from "@/assets/telegram.svg"
@@ -45,7 +46,7 @@ const Home = () => {
 
 	}, [])
 
-	const [sponsors, setSponsors] = useState([
+	const [sponsors] = useState([
 		{ link: "https://inteli.edu.br", name: "Inteli", icon: inteli },
 		{ link: "https://ethereum.org/en/foundation/", name: "Ethereum Foundation", icon: eth_foundation }
 	])
@@ -55,7 +56,7 @@ const Home = () => {
 	return (
 		<Layout>
 			{/* <div className="flex flex-col items-center justify-center bg1 bg-fixed bg-center bg-cover py-16 h-auto w-full mx-auto md:w-2/5"> */}
-			<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-32 pb-48 h-auto w-full mx-auto">
+			<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-32 pb-24 h-auto w-full mx-auto">
 				<Link href={"https://inteliblockchain.co/"} target="_blank">
 					<Image src={logo} alt="inteli-blockchain" />
 				</Link>
@@ -72,7 +73,7 @@ const Home = () => {
 
 						<p className="mt-8 text-gray1 italic text-xl font-medium">Faltam</p>
 
-						<button className="px-4 py-2 text-[#4863F7] text-xl border-2 border-[#4863F7] rounded-lg font-medium my-2" onClick={() => router.push("/preinscricao")
+						<button className="px-4 py-2 text-[#4863F7] text-xl border-2 border-[#4863F7] rounded-lg font-medium my-2 w-2/3" onClick={() => router.push("/preinscricao")
 						}>
 							{`${daysLeft || "?"} dias, ${hoursLeft || "?"} horas, ${minutesLeft || "?"} minutos e ${secondsLeft || "?"} segundos`}
 						</button>
@@ -113,13 +114,13 @@ const Home = () => {
 						<p className="flex text-center text-lg mb-4 font-semibold">Acompanhe as atualizações pelas redes sociais:</p>
 
 						<div className="flex w-full justify-evenly">
-							<button className="text-md flex justify-center items-center p-[1.25px] bg-gradient-to-r from-[#F78D35] to-[#B832A6] rounded-lg">
+							<Link className="text-md flex justify-center items-center p-[1.25px] bg-gradient-to-r from-[#F78D35] to-[#B832A6] rounded-lg" href="https://www.instagram.com/inteli_blockchain/" target={"_blank"}>
 								<div className="text-md flex justify-center items-center p-3 rounded-lg bg-black">
-									<Image className={"mr-4"} src={telegram} width={32} alt={"telegram"} /> Instagram
+									<Image className={"mr-4"} src={instagram} width={32} alt={"telegram"} /> Instagram
 								</div>
-							</button>
+							</Link>
 
-							<button className="text-md flex justify-center items-center border-2 p-3 border-[#0077B7] rounded-lg"><Image className={"mr-4"} src={telegram} width={32} alt={"telegram"} /> Linkedin</button>
+							<Link className="text-md flex justify-center items-center border-2 p-3 border-[#0077B7] rounded-lg" href="https://www.linkedin.com/company/inteli-blockchain/" target={"_blank"}><Image className={"mr-4"} src={linkedin} width={32} alt={"telegram"} /> Linkedin</Link>
 						</div>
 					</div>
 				</div>
