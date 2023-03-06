@@ -31,17 +31,17 @@ const Home = () => {
   return (
     <Layout>
       {/* <div className="flex flex-col items-center justify-center bg1 bg-fixed bg-center bg-cover py-16 h-auto w-full mx-auto md:w-2/5"> */}
-      <div className="flex flex-col items-center justify-center bg1 bg-fixed bg-center bg-cover pt-16 pb-24 h-auto w-full mx-auto">
+      <div className="flex flex-col items-center justify-center bg1 bg-center bg-cover pt-16 pb-24 h-auto w-full mx-auto">
         <Link href={"https://inteliblockchain.co/"} target="_blank">
           <Image src={logo} alt="inteli-blockchain" />
         </Link>
 
-        <div className="my-16">
+        <div className="my-10">
           <Image src={challenge} alt="Challenge 2023" className="w-full" />
         </div>
 
         <div>
-          <p className="text-white text-md">5-7 de Maio</p>
+          <p className="text-gray1 text-2xl font-bold">5-7 de Maio</p>
         </div>
 
         <div className="mt-8">
@@ -61,7 +61,7 @@ const Home = () => {
       </div>
 
       {/* Empurraozinho */}
-      <div className="flex flex-col items-center justify-center bg2 bg-center bg-cover pt-16 pb-24 h-auto w-full mx-auto translate-y-[-2rem]">
+      <div className="flex flex-col items-center justify-center bg2 bg-center bg-cover pt-4 pb-24 h-auto w-full mx-auto translate-y-[-2rem]">
         <div className="w-4/5 flex flex-col items-center justify-center">
           <div className="flex flex-col items-center">
             <p className="text-2xl text-center font-semibold mb-2">Precisa de um
