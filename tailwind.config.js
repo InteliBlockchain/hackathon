@@ -10,8 +10,17 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        "xxs": "10px",
+      },
       colors: {
-        gray1: "#BBBBBB"
+        gray1: "#BBBBBB",
+        purple1: "#4863F7",
+        blue: "#4863F7",
+      },
+      textColor: {
+        grayText: "#ABABAB",
+        blueText: "#4863F7",
       },
     },
   },

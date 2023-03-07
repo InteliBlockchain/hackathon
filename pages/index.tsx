@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import Link from "next/link";
 import Image from "next/image";
 import { Layout } from "@/components/Layout"
 import { Card } from "@/components/Card"
-import { Carousel } from '@/components/Carousel'
+import { Carousel } from "react-responsive-carousel";
 import { Sponsor } from "@/components/Sponsor";
 import { Modal } from "@/components/Modal";
 
@@ -15,6 +16,8 @@ import instagram from "@/assets/instagram.svg"
 import linkedin from "@/assets/linkedin.svg"
 
 import right from '@/assets/arrow-right.svg'
+import arrowLeft from '@/assets/arrow-left2.svg'
+import arrowRight from '@/assets/arrow-right2.svg'
 import document from '@/assets/document.svg'
 import telegram from "@/assets/telegram.svg"
 import inteli from "@/assets/sponsors/inteli.svg"
@@ -54,18 +57,49 @@ const Home = () => {
 
 
 			{/* carousel */}
-			<div className="flex flex-col items-center justify-center translate-y-[-4rem] h-auto w-full mx-auto md:w-3/5 lg:w-4/5">
-				<Carousel>
-					<Card title={"Slide 1"} desc={`Salas de reunião, conexão Wi-Fi rápida e ambiente pensado para favorecer a inovação.\n\nO evento será no Inteli, a faculdade feita para você desenvolver uma solução do c*ralho e ganhar muito (MUITO) dinheiro dos patrocinadores.`} image={inteli1} />
-					<Card title={"Slide 2"} desc={`Salas de reunião, conexão Wi-Fi rápida e ambiente pensado para favorecer a inovação.\n\nO evento será no Inteli, `} image={inteli1} />
-					<Card title={"Slide 3"} desc={`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquet nisl, nec aliquet nisl nisl eu nisl.\n\nSed euismod, nisl vel ultricies lacinia, nisl nisl aliquet nisl, nec aliquet nisl nisl eu nisl.`} image={inteli1} />
-				</Carousel>
-			</div>
+			<div className="grid grid-cols-10 h-auto">
+        <div className="flex">
+          <Image className="ml-2" alt="arrow" src={arrowLeft}></Image>
+        </div>
+        <Carousel className="col-span-8" autoPlay={true} showArrows={false} showThumbs={false} showIndicators={false} showStatus={false} infiniteLoop={true} interval={3000} transitionTime={800} dynamicHeight={false}>
+          <div className="border-2 border-purple1 mx-2 rounded">
+            <img src={inteli1} alt="" />
+            <div className="bg-gray-900">
+              <p className=" text-2xl font-semibold text-left ml-2 pt-2">Infraestrutura</p>
+              <p className="text-left text-sm p-4 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod veniam, delectus nulla fuga pariatur consequatur! Molestias ut rerum dignissimos quibusdam consectetur cupiditate, maiores nemo nulla similique, voluptates fugit culpa porro!</p>
+            </div>
+          </div>
+          <div className="border-2 border-purple1 mx-2 rounded">
+            <img src={inteli1} alt="" className="rotate-180" />
+            <div className="bg-gray-900">
+              <p className=" text-2xl font-semibold text-left ml-2 pt-2">Prêmios</p>
+              <p className="text-left text-sm p-4 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod veniam, delectus nulla fuga pariatur consequatur! Molestias ut rerum dignissimos quibusdam consectetur cupiditate, maiores nemo nulla similique, voluptates fugit culpa porro!</p>
+            </div>
+          </div>
+          <div className="border-2 border-purple1 mx-2 rounded">
+            <img src={inteli1} alt="" />
+            <div className="bg-gray-900">
+              <p className=" text-2xl font-semibold text-left ml-2 pt-2">Mentores</p>
+              <p className="text-left text-sm p-4 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod veniam, delectus nulla fuga pariatur consequatur! Molestias ut rerum dignissimos quibusdam consectetur cupiditate, maiores nemo nulla similique, voluptates fugit culpa porro!</p>
+            </div>
+          </div>
+          <div className="border-2 border-purple1 mx-2 rounded">
+            <img src={inteli1} alt="" className="rotate-180" />
+            <div className="bg-gray-900">
+              <p className=" text-2xl font-semibold text-left ml-2 pt-2">Festas</p>
+              <p className="text-left text-sm p-4 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod veniam, delectus nulla fuga pariatur consequatur! Molestias ut rerum dignissimos quibusdam consectetur cupiditate, maiores nemo nulla similique, voluptates fugit culpa porro!</p>
+            </div>
+          </div>
+        </Carousel>
+        <div className="flex">
+          <Image className="ml-2" alt="arrow" src={arrowRight}></Image>
+        </div>
+      </div>
 
 			{/* Empurraozinho */}
 			{/* <div className="flex flex-col items-center justify-center bg2 bg-center bg-cover pt-16 pb-24 h-auto w-full mx-auto">
         <div className="w-4/5 md:w-3/5 flex flex-col items-center justify-center"> */}
-			<div className="flex flex-col items-center justify-center bg2 bg-center bg-cover pt-4 pb-24 h-auto w-full mx-auto translate-y-[-2rem]">
+			<div className="flex flex-col items-center justify-center bg2 bg-center bg-cover pt-10 pb-24 h-auto w-full mx-auto ">
 				<div className="w-4/5 flex flex-col items-center justify-center">
 					<div className="flex flex-col items-center">
 						<p className="text-2xl text-center font-semibold mb-2" id="empurrao">Precisa de um empurrãozinho?</p>
@@ -83,7 +117,7 @@ const Home = () => {
 
 						<div className="flex w-full justify-evenly">
 							<Link className="text-md flex justify-center items-center p-[1.25px] bg-gradient-to-r from-[#F78D35] to-[#B832A6] rounded-lg" href="https://www.instagram.com/inteli_blockchain/" target={"_blank"}>
-								<div className="text-md flex justify-center items-center p-3 rounded-lg bg-black">
+								<div className="text-md flex justify-center items-center p-3 rounded-lg bg-gray-900">
 									<Image className={"mr-4"} src={instagram} width={32} alt={"telegram"} /> Instagram
 								</div>
 							</Link>
