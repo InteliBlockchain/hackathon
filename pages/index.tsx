@@ -79,7 +79,7 @@ const Home = () => {
 
 						<button className="px-4 py-2 text-[#4863F7] text-xl border-2 border-[#4863F7] rounded-lg font-medium my-2 w-2/3" onClick={() => router.push("/preinscricao")
 						}>
-							{`${daysLeft || "?"} dias, ${hoursLeft || "?"} horas, ${minutesLeft || "?"} minutos e ${secondsLeft || "?"} segundos`}
+							{`${daysLeft || "0"} dias, ${hoursLeft || "0"} horas, ${minutesLeft || "0"} minutos e ${secondsLeft || "0"} segundos`}
 						</button>
 
 						<p className="text-gray1 text-lg italic ">Para o início das inscrições</p>
