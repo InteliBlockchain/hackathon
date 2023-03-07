@@ -1,6 +1,8 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
+//require("dotenv").config();
+
 export const Subscription = ({ setModal }: {
     setModal:  React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
@@ -31,7 +33,8 @@ export const Subscription = ({ setModal }: {
 
     return (
         process.env.allow_subscriptions ? (
-            <div className="w-full md:w-2/5 flex flex-col items-center">
+//           true ? (
+                   <div className="w-full md:w-2/5 flex flex-col items-center">
                 <button className="font-semibold text-xl bg-[#4863F7] rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg" onClick={() => toggleModal()}>
                     Inscreva-se!
                 </button>

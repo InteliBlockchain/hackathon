@@ -20,8 +20,10 @@ import arrowLeft from '@/assets/arrow-left2.svg'
 import arrowRight from '@/assets/arrow-right2.svg'
 import document from '@/assets/document.svg'
 import telegram from "@/assets/telegram.svg"
+
 import inteli from "@/assets/sponsors/inteli.svg"
 import eth_foundation from "@/assets/sponsors/eth_foundation.svg"
+import blockchain_rio from "@/assets/sponsors/blockchain_rio.svg"
 
 import { useRouter } from "next/router";
 import { Subscription } from "@/components/Subscription";
@@ -31,10 +33,11 @@ const Home = () => {
 
 	const [sponsors] = useState([
 		{ link: "https://inteli.edu.br", name: "Inteli", icon: inteli },
-		{ link: "https://ethereum.org/en/foundation/", name: "Ethereum Foundation", icon: eth_foundation }
+		{ link: "https://ethereum.org/en/foundation/", name: "Ethereum Foundation", icon: eth_foundation },
+        { link: "https://www.blockchainrio.com.br/", name: "BlockchainRio", icon: blockchain_rio }
 	])
 
-	const [ modal, setModal ] = useState(false)
+	const [ modal, setModal ] = useState(true)
 
 	const inteli1 = "https://imgur.com/dsBSU0e.png"
 
@@ -128,18 +131,13 @@ const Home = () => {
 				</div>
 
 				{/* Sponsors */}
-				<div className="w-4/5 md:w-2/5">
+				<div className="w-4/5 md:w-2/5 mt-8">
 					<div className="flex flex-col items-center w-full mb-8">
 						<p className="text-xl font-semibold">Apoio:</p>
-						<div className="w-full">
-							{sponsors.map(({ name, link, icon }, index) => index % 2 == 0 ? <Sponsor name={name} icon={icon} link={link} key={index} /> : null)}
-						</div>
-					</div>
-
-					<div className="flex flex-col items-center w-full">
-						<p className="text-xl font-semibold">Patrocinadores:</p>
-						<div className="w-full">
-							{sponsors.map(({ name, link, icon }, index) => index % 2 != 0 ? <Sponsor name={name} icon={icon} link={link} key={index} /> : null)}
+                        <div className="w-full flex flex-col md:gap-4 md:grid-cols-2 md:grid">
+							{sponsors.map(({ name, link, icon }, index) =>
+                                <Sponsor name={name} icon={icon} link={link} key={index} />
+                            )}
 						</div>
 					</div>
 				</div>
