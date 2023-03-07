@@ -24,9 +24,9 @@ export const Sidebar = ({ setSidebar }: {
             if (window.matchMedia("(max-width: 768px)").matches) {
                 sidebar?.animate([
                     { width: "0%", height: "0%" },
-                    { width: "70%", height: "100%" }
+                    { width: "75%", height: "100%" }
                 ], {
-                    duration: 800,
+                    duration: 1500,
                     easing: "ease-in-out",
                     fill: "forwards"
                 })

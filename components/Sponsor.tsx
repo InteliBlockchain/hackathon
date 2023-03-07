@@ -7,9 +7,9 @@ export const Sponsor = ({ name, icon, link }: {
     icon: string;
 }) => {
     return (
-        <div className="border border-gray rounded-lg w-full mt-4 bg-[rgba(0,0,0,0.25)]">
-            <Link className="p-4 w-full flex items-center" target={"_blank"} href={link}>
-                <Image alt={name} src={icon} className={"mx-auto"} />
+        <div className="border border-gray rounded-lg flex items-center justify-center w-full mt-4 md:mt-2 py-4 bg-[rgba(0,0,0,0.25)]">
+            <Link className="w-full flex items-center justify-center" target={"_blank"} href={link}>
+                <Image alt={name} src={icon} />
             </Link>
         </div>
     )
