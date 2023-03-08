@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import close from "../assets/x.svg"
 
-import seta from "../assets/Seta.png"
+import seta from "../assets/arrow-left2.svg"
 
 export const QeAInput = ({ name, description, debug }: {
     name: string;
@@ -25,7 +25,7 @@ export const QeAInput = ({ name, description, debug }: {
                 { height: "3.5rem" },
                 { height: "12rem" }
             ], {
-                duration: 800,
+                duration: 300,
                 easing: "ease-in-out",
                 fill: "forwards"
             })
@@ -34,7 +34,7 @@ export const QeAInput = ({ name, description, debug }: {
                 { height: "12rem" },
                 { height: "3.5rem" }
             ], {
-                duration: 800,
+                duration: 300,
                 easing: "ease-in-out",
                 fill: "forwards"
             })
@@ -54,24 +54,24 @@ export const QeAInput = ({ name, description, debug }: {
 
     if(isOpen) {
         return (
-            <div id={`box${debug}`} className="w-full md:w-10/12 h-48 rounded-lg bg-[#2C2C2C]">
-                <div className="flex flex-col h-full ml-4 mr-4 mt-4">
+            <div id={`box${debug}`} onClick={open} className="cursor-pointer w-full md:w-10/12 shadow-lg rounded-lg bg-[#2C2C2C]">
+                <div className="flex flex-col h-full p-2">
                     <div className="flex flex-row w-full justify-between align-center">
-                        <label className="font-normal text-sm md:text-xl">{name}</label>
-                        <button className="bg-transparent h-5" onClick={open}><Image alt={"seta"} src={seta} width={20} height={20}></Image></button>
+                        <label className="cursor-pointer font-medium text-lg md:text-xl">{name}</label>
+                        <button className="bg-transparent text-sm h-5 pr-2 pt-4" onClick={open}><Image className="rotate-90" alt={"seta"} src={seta} width={20} height={20}></Image></button>
                     </div>
                     <div className="mt-6">
-                        <label className="font-extrathin text-md">{description}</label>    
+                        <label className=" text-md">{description}</label>    
                     </div>            
                 </div>
             </div>
         )
     } else {
         return (
-            <div id={`box${debug}`} className="w-full md:w-10/12 h-14 rounded-lg bg-[#2C2C2C]">
-                <div className="flex justify-between h-full items-center ml-4 mr-4">
-                    <label className="font-normal text-xl">{name}</label>
-                    <button className="bg-transparent" onClick={open}><Image alt={"seta"} src={seta} width={20} height={20}></Image></button>                                
+            <div id={`box${debug}`}  onClick={open} className="h-14 shadow-lg cursor-pointer w-full md:w-10/12 rounded-lg bg-[#2C2C2C]">
+                <div className="flex justify-between h-full items-center ml-2 mr-4">
+                    <label className="cursor-pointer font-medium text-lg ">{name}</label>
+                    <button className="bg-transparent"><Image className="-rotate-90 mb-2" alt={"seta"} src={seta} width={20} height={20}></Image></button>                                
                 </div>
             </div>
         )

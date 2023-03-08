@@ -16,7 +16,7 @@ export const Sidebar = ({ setSidebar }: {
                 { opacity: "0%", backdropFilter: "blur(0px)" },
                 { opacity: "100%", backdropFilter: "blur(10px)" }
             ], {
-                duration: 800,
+                duration: 400,
                 easing: "ease-in-out",
                 fill: "forwards"
             })
@@ -24,9 +24,9 @@ export const Sidebar = ({ setSidebar }: {
             if (window.matchMedia("(max-width: 768px)").matches) {
                 sidebar?.animate([
                     { width: "0%", height: "0%" },
-                    { width: "75%", height: "100%" }
+                    { width: "70%", height: "100%" }
                 ], {
-                    duration: 1500,
+                    duration: 400,
                     easing: "ease-in-out",
                     fill: "forwards"
                 })
@@ -35,7 +35,7 @@ export const Sidebar = ({ setSidebar }: {
                     { width: "0%", height: "0%" },
                     { width: "30%", height: "100%" }
                 ], {
-                    duration: 800,
+                    duration: 400,
                     easing: "ease-in-out",
                     fill: "forwards"
                 })
