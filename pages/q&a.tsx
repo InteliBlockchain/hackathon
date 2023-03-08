@@ -13,7 +13,7 @@ import seta from "../assets/Seta.png"
 import { QeAInput } from "@/components/Q&AInput";
 
 const QeA = () => {
-	const router = useRouter();
+    const router = useRouter();
 
     const [questions, setQuestions] = useState([
         {
@@ -41,7 +41,7 @@ const QeA = () => {
             id: 8, question: "Não sou um programador. Posso participar?", answer: "Teste de questão 1"
         },
         {
-            id: 9, question: "Não sei oque é blockchain. Posso participar?" , answer: "Teste de questão 1"
+            id: 9, question: "Não sei oque é blockchain. Posso participar?", answer: "Teste de questão 1"
         },
         {
             id: 10, question: "Não tenho computador. Oque faço?", answer: "Teste de questão 1"
@@ -49,7 +49,7 @@ const QeA = () => {
     ])
 
     return (
-            <>
+        <>
             <Layout>
                 <div className="flex flex-col items-center justify-center bg2 md:bg-black bg-center bg-cover pt-32 pb-24 h-auto w-full mx-auto">
                     <div className="md:h-32 lg:h-40">
@@ -62,16 +62,16 @@ const QeA = () => {
                 <div className="flex justify-center w-min-full -mt-8 mb-16">
                     <div className="w-11/12 md:4/5">
                         <div className="flex md:grid md:grid-cols-2 gap-4 md:gap-4 flex-col justify-center md:items-center min-w-full items-center self-center">
-                            {questions.map((question, { index}) => (
-                                    <QeAInput {...question} key={index} />
+                            {questions.map((question, index) => (
+                                <QeAInput {...question} key={index} />
                             ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-			</Layout>
-		</>
-	)
+
+            </Layout>
+        </>
+    )
 }
 
 export default QeA;
