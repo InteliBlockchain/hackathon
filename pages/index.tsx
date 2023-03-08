@@ -37,7 +37,7 @@ const Home = () => {
         { link: "https://www.blockchainrio.com.br/", name: "BlockchainRio", icon: blockchain_rio }
 	])
 
-	const [ modal, setModal ] = useState(true)
+	const [ modal, setModal ] = useState(false)
 
 	const inteli1 = "https://imgur.com/dsBSU0e.png"
 

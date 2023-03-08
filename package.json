@@ -24,10 +24,5 @@
     "react-responsive-carousel": "^3.2.23",
     "tailwindcss": "^3.2.6",
     "typescript": "4.9.5"
-  },
-  "browser": {
-    "fs": false,
-    "os": false,
-    "path": false
   }
 }

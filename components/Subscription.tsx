@@ -17,12 +17,18 @@ export const Subscription = ({ setModal }: {
         setInterval(() => {
             const openingDate = Math.floor(new Date('2023-03-17T18:00:00').getTime() / 1000)
             const currentDate = Math.floor(new Date().getTime() / 1000)
-            const timeDiference = openingDate - currentDate
-            setDaysLeft(Math.floor(timeDiference / (3600 * 24)))
-            setHoursLeft(Math.floor(timeDiference % (3600 * 24) / 3600) - 2)
-            setMinutesLeft(Math.floor(timeDiference % 3600 / 60))
-            let seconds = timeDiference - (daysLeft * 3600 * 24) - (hoursLeft * 3600) - (minutesLeft * 60)
-            setSecondsLeft(timeDiference % 60)
+
+            const timeLeft = openingDate - currentDate
+
+            const days = Math.floor(timeLeft / 86400)
+            const hours = Math.floor((timeLeft - (days * 86400)) / 3600)
+            const minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60)
+            const seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)))
+
+            setDaysLeft(days)
+            setHoursLeft(hours)
+            setMinutesLeft(minutes)
+            setSecondsLeft(seconds)
         }, 1000)
     }, [])
 
@@ -49,7 +55,7 @@ export const Subscription = ({ setModal }: {
                     <p className="mt-8 text-gray1 italic text-xl font-medium">Faltam</p>
 
                     <button className="px-4 py-2 text-[#4863F7] text-xl border-2 border-[#4863F7] rounded-lg font-medium my-2 w-2/3 cursor-not-allowed hover:bg-[#4863f7] hover:text-black">
-                        {`${daysLeft || "?"} dias, ${hoursLeft || "?"} horas, ${minutesLeft || "?"} minutos e ${secondsLeft || "?"} segundos`}
+                        {`${daysLeft || "0"} dias, ${hoursLeft || "0"} horas, ${minutesLeft || "0"} minutos e ${secondsLeft || "0"} segundos`}
                     </button>
 
                     <p className="text-gray1 text-xl italic font-medium">Para o início das inscrições</p>
