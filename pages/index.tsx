@@ -110,7 +110,9 @@ const Home = () => {
 					</div>
 
 					<div className="flex flex-col my-4 items-center">
+						<Link href={"/educacional"}>
 						<button className="items-center justify-center font-semibold text-lg mb-4 py-4 px-8 rounded-md flex bg-[#04d361] text-[#f1f1f1]">Acessar conteúdo <Image alt="content" width={24} src={right} className={"ml-2"} /></button>
+						</Link>
 
 						<button className="text-md flex justify-center items-center border-2 border-[#4863F7] rounded-lg p-2"><Image className={"mr-4"} src={document} alt={"document"} width={24} />Veja o regulamento</button>
 					</div>
