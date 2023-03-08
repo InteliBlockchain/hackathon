@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import close from "../assets/x.svg"
 
-import seta from "../assets/Seta.svg"
+import seta from "../assets/arrow-right2.svg"
 
 export const QeAInput = ({ id, question, answer }: {
     id: number;
@@ -21,10 +21,10 @@ export const QeAInput = ({ id, question, answer }: {
         //Animate box height when opening
         if (!isOpen) {
             box?.animate([
-                { height: "0" },
-                { "min-height": "3rem", height: "auto" }
+                { height: "fit-content" },
+                { height: "0" }
             ], {
-                duration: 800,
+                duration: 1500,
                 easing: "ease-in-out",
                 fill: "forwards"
             })
@@ -40,9 +40,9 @@ export const QeAInput = ({ id, question, answer }: {
         } else {
             box?.animate([
                 { height: "0" },
-                { "min-height": "3rem", height: "auto" }
+                { height: "fit-content" }
             ], {
-                duration: 800,
+                duration: 1500,
                 easing: "ease-in-out",
                 fill: "forwards"
             })
@@ -72,7 +72,7 @@ export const QeAInput = ({ id, question, answer }: {
                     </button>
                 </div>
                 {isOpen ? (
-                    <div id={`box${id}`} className="mt-4 transition-all duration-200 ease-in-out h-auto">
+                    <div id={`box${id}`} className="mt-4">
                         <p className="text-base opacity-80 font-extrathin">{answer}</p>
                     </div>
                 ) : null}
