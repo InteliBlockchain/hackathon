@@ -6,15 +6,18 @@ import close from "../assets/x.svg"
 
 import seta from "../assets/Seta.png"
 
-export const QeAInput = ({ name, description }: {
+export const QeAInput = ({ name, description, debug }: {
     name: string;
     description: string;
+    debug: any;
 }) => {
+
+    debug = debug.toString();
 
     const [ isOpen, setIsOpen ] = React.useState(false);
 
     const open = () => {
-        const box = document.getElementById("box");
+        const box = document.getElementById(`box${debug}`);
 
         //Animate box height when opening
         if(!isOpen) {
@@ -51,7 +54,7 @@ export const QeAInput = ({ name, description }: {
 
     if(isOpen) {
         return (
-            <div id="box" className="w-full md:w-10/12 h-48 rounded-lg bg-[#2C2C2C]">
+            <div id={`box${debug}`} className="w-full md:w-10/12 h-48 rounded-lg bg-[#2C2C2C]">
                 <div className="flex flex-col h-full ml-4 mr-4 mt-4">
                     <div className="flex flex-row w-full justify-between align-center">
                         <label className="font-normal text-sm md:text-xl">{name}</label>
@@ -65,7 +68,7 @@ export const QeAInput = ({ name, description }: {
         )
     } else {
         return (
-            <div id="box" className="w-full md:w-10/12 h-14 rounded-lg bg-[#2C2C2C]">
+            <div id={`box${debug}`} className="w-full md:w-10/12 h-14 rounded-lg bg-[#2C2C2C]">
                 <div className="flex justify-between h-full items-center ml-4 mr-4">
                     <label className="font-normal text-xl">{name}</label>
                     <button className="bg-transparent" onClick={open}><Image alt={"seta"} src={seta} width={20} height={20}></Image></button>                                
