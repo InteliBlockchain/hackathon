@@ -29,7 +29,7 @@ const Educacional = () => {
             type={"Texto"}
             level={1}
             important={true}
-            link={"https://google.com"}
+            link={"noneyet"}
           ></EducacionalCard>
           <EducacionalCard
             title={"O que é web3? O que é uma carteira?"}
@@ -45,7 +45,7 @@ const Educacional = () => {
             text={"Os casos de uso onde a blockchain está se saindo bem"}
             type={"Texto"}
             level={1}
-            link={"https://google.com"}
+            link={"https://www.ibm.com/topics/blockchain-for-business"}
           ></EducacionalCard>
           <EducacionalCard
             title={"O que é um NFT"}
