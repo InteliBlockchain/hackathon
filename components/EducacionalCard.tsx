@@ -6,10 +6,12 @@ type Props = {
     title: string,
     text: string,
     type: string,
-    level: number
+    level: number,
+    link: string,
+    important?: boolean
 }
 
-const EducacionalCard = ({title, text, level, type}: Props) => {
+const EducacionalCard = ({title, text, level, type, important, link}: Props) => {
 
     const [levelText,setLevelText] = useState("")
     const [levelStyle,setLevelStyle] = useState("")
@@ -38,10 +40,12 @@ const EducacionalCard = ({title, text, level, type}: Props) => {
     <div className="flex p-2">
         <p className="mr-32">{type}</p>
         <p className={levelStyle}>{levelText}</p>
+        {important ? <p className="text-red-500 absolute translate-x-16">Importante</p> : null}
+        
     </div>
 
     <div className="text-center p-2 h-12 hover:text-black transition-all text-purple1 hover:bg-purple1 rounded-lg border-t-2 border-purple1 w-full">
-    <Link href={"https://google.com"}>
+    <Link href={link}>
         <p className="text-lg"> Acessar</p>
     </Link>
     </div>
