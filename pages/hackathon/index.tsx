@@ -47,17 +47,20 @@ const Home = () => {
 			{modal ? <Modal setModal={setModal} /> : null}
 
 			{/* <div className="flex flex-col items-center justify-center bg1 bg-fixed bg-center bg-cover py-16 h-auto w-full mx-auto md:w-2/5"> */}
-			<div className="absolute z-0 border-2 h-64 border-yellow-500">
-				<Cube />
-			</div>
 			<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover py-32 h-auto w-full mx-auto z-50">
 				<Link href={"https://inteliblockchain.co/"} target="_blank">
 					<Image src={logo} alt="inteli-blockchain" />
 				</Link>
 
-				<div className="my-16 md:h-32 lg:h-40">
-					<Image src={challenge} alt="Challenge 2023" className="z-10 w-full h-full" />
-				</div>
+                <div className="relative flex w-full h-56 md:h-72 items-center justify-center">
+                    <div className="absolute h-80 md:h-96 left-auto right-auto">
+                        <Cube />
+                    </div>
+                    <div className="my-16 md:h-32 lg:h-40 absolute">
+                        <Image src={challenge} alt="Challenge 2023" className="z-100 w-full h-full" />
+                    </div>
+                </div>
+
 
 				<Subscription setModal={setModal} />
 			</div>
