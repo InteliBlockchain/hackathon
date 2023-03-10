@@ -10,7 +10,7 @@ const Home = () => {
     const router = useRouter();
 
     useEffect(() => {
-//        setTimeout(() => router.push("/hackathon"), 1000)
+        setTimeout(() => router.push("/hackathon"), 250)
     }, [])
 
     return (
