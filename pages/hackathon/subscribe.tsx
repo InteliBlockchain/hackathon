@@ -8,12 +8,38 @@ import { Layout } from "@/components/Layout"
 
 import logo from "@/assets/logo.svg"
 import challenge from "@/assets/Challenge 2023.svg"
+import { GetServerSideProps } from "next";
 
-const Subscription = () => {
+export const getServerSideProps: GetServerSideProps = async ctx => {
+	const { token, email } = ctx.query;
+
+	console.log(token, email)
+
+	if (token == "123456") {
+		return {
+			props: { validToken: true },
+		}
+	}
+
+	return {
+		props: { validToken: false },
+	}
+}
+
+const Subscription = ({ validToken }: {
+	validToken: boolean;
+}) => {
 	const router = useRouter();
 
+	useEffect(() => {
+        !process.env.allow_subscription ? router.push("/") : null 
+
+		console.log(validToken)
+		!validToken ? setTimeout(() => router.push("/"), 1000) : console.log("Token validated");
+	}, [])
+
 	return (
-        <>
+		<>
 			<Layout>
 				<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-16 pb-6 h-auto w-full mx-auto">
 					<Link href={"https://inteliblockchain.co/"} target="_blank">
@@ -52,7 +78,7 @@ const Subscription = () => {
 								</div>
 							</div>
 						</div>
-						
+
 						<div className="w-auto">
 							<div className="flex justify-center items-center min-w-full">
 								<div className="flex flex-col w-full">
@@ -61,7 +87,7 @@ const Subscription = () => {
 								</div>
 							</div>
 						</div>
-						
+
 					</div>
 				</div>
 				<div className="w-full mt-6">
@@ -78,7 +104,7 @@ const Subscription = () => {
 								<label className="ml-1 font-normal text-sm text-white">Documento<label className="font-normal text-sm text-blueText">*</label></label>
 								<input placeholder="___.___.___-__" className="w-40 h-10 rounded-lg border-2 border-blue bg-[#0e0e10] outline-0 font-extralight placeholder:text-center placeholder:text-xl placeholder:text-white"></input>
 							</div>
-							
+
 						</div>
 					</div>
 				</div>
@@ -90,7 +116,7 @@ const Subscription = () => {
 							</div>
 							<div className="text-center">
 								<label className="font-ligth text-xs text-[#8F8F8F]">Para o credenciamento, será obrigatória a apresentação de documento <b>COM FOTO</b> que <b>CONTENHA O NÚMERO ACIMA</b> no dia do evento.
-</label>
+								</label>
 							</div>
 							<div className="mt-3 text-center">
 								<label className="font-ligth text-xs text-[#8F8F8F]">Os dados acima serão utilizados única e exclusivamente para o credenciamento.</label>
@@ -108,7 +134,7 @@ const Subscription = () => {
 								</div>
 							</div>
 						</div>
-						
+
 						<div className="w-auto">
 							<div className="flex justify-center items-center min-w-full">
 								<div className="flex flex-col w-full">
@@ -125,7 +151,7 @@ const Subscription = () => {
 							<label className="ml-1 font-normal text-xs text-white">Tem alguma necessidade especial?<label className="font-normal text-sm text-blueText">*</label></label>
 							<input className="w-full h-10 rounded-lg border-2 border-blue bg-[#0e0e10] outline-0 font-extralight"></input>
 						</div>
-						
+
 					</div>
 
 				</div>
@@ -172,11 +198,12 @@ const Subscription = () => {
 						</div>
 					</div>
 				</div> */}
-				
-				
+
+
 			</Layout>
 		</>
 	)
 }
+
 
 export default Subscription;

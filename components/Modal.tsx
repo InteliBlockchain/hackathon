@@ -21,25 +21,25 @@ export const Modal = ({ setModal }: {
                 fill: "forwards"
             })
 
-//            if (window.matchMedia("(max-width: 768px)").matches) {
-//                sidebar?.animate([
-//                    { width: "0%", height: "0%" },
-//                    { width: "75%", height: "100%" }
-//                ], {
-//                    duration: 1500,
-//                    easing: "ease-in-out",
-//                    fill: "forwards"
-//                })
-//            } else {
-//                sidebar?.animate([
-//                    { width: "0%", height: "0%" },
-//                    { width: "30%", height: "100%" }
-//                ], {
-//                    duration: 800,
-//                    easing: "ease-in-out",
-//                    fill: "forwards"
-//                })
-//            }
+            //            if (window.matchMedia("(max-width: 768px)").matches) {
+            //                sidebar?.animate([
+            //                    { width: "0%", height: "0%" },
+            //                    { width: "75%", height: "100%" }
+            //                ], {
+            //                    duration: 1500,
+            //                    easing: "ease-in-out",
+            //                    fill: "forwards"
+            //                })
+            //            } else {
+            //                sidebar?.animate([
+            //                    { width: "0%", height: "0%" },
+            //                    { width: "30%", height: "100%" }
+            //                ], {
+            //                    duration: 800,
+            //                    easing: "ease-in-out",
+            //                    fill: "forwards"
+            //                })
+            //            }
         }
 
         openAnimation();
