@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 //require("dotenv").config();
 
 export const Subscription = ({ setModal }: {
-    setModal:  React.Dispatch<React.SetStateAction<boolean>>;
+    setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
     const router = useRouter();
 
@@ -39,8 +39,7 @@ export const Subscription = ({ setModal }: {
 
     return (
         process.env.allow_subscriptions ? (
-//           true ? (
-                   <div className="w-full md:w-2/5 flex flex-col items-center">
+            <div className="w-full md:w-2/5 flex flex-col items-center">
                 <button className="font-semibold text-xl bg-[#4863F7] rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg" onClick={() => toggleModal()}>
                     Inscreva-se!
                 </button>
@@ -54,7 +53,7 @@ export const Subscription = ({ setModal }: {
 
                     <p className="mt-8 text-gray1 italic text-xl font-medium">Faltam</p>
 
-                    <button className="px-4 py-2 text-[#4863F7] text-xl border-2 border-[#4863F7] rounded-lg font-medium my-2 w-2/3 cursor-not-allowed hover:bg-[#4863f7] hover:text-black">
+                    <button className="px-4 py-2 text-[#4863F7] text-md border-2 border-[#4863F7] rounded-lg font-medium my-2 w-2/3 cursor-not-allowed hover:bg-[#4863f7] hover:text-black">
                         {`${daysLeft || "0"} dias, ${hoursLeft || "0"} horas, ${minutesLeft || "0"} minutos e ${secondsLeft || "0"} segundos`}
                     </button>
 

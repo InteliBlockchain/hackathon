@@ -3,7 +3,7 @@ const nextConfig = {
   // reactStrictMode: true,
   reactStrictMode: false,
   env: {
-    allow_subscriptions: true
+    allow_subscriptions: false
   }
 }
 
