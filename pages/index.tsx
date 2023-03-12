@@ -10,20 +10,20 @@ const Home = () => {
     const router = useRouter();
 
     useEffect(() => {
-        setTimeout(() => router.push("/hackathon"), 250)
+        setTimeout(() => router.push("/hackathon"), 500)
     }, [])
 
     return (
-            <Layout>
-                <div className="w-screen min-h-screen h-full flex justify-center">
-                    <div className="flex flex-col justify-center items-center w-full min-h-full">
-                        <p className={"text-2xl"}>Redirecting...</p>
-                        <div className="h-2/5">
-                            <Cube />
-                        </div>
+        <Layout>
+            <div className="w-screen min-h-screen h-full flex justify-center">
+                <div className="flex flex-col justify-center items-center w-full min-h-full">
+                    <p className={"text-2xl"}>Redirecting...</p>
+                    <div className="h-2/5">
+                        <Cube />
                     </div>
                 </div>
-            </Layout>
+            </div>
+        </Layout>
     )
 }
 

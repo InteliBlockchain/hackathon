@@ -55,7 +55,7 @@ const QeA = () => {
                     <div className="md:h-32 lg:h-40">
                         <div className="flex flex-col items-center">
                             <h1 className="font-bold text-7xl mb-4">Q&A</h1>
-                            <p className="font-semibold text-xl">Perguntas e Respostas</p>
+                            <p className="font-medium text-xl">Perguntas e Respostas</p>
                         </div>
                     </div>
                 </div>

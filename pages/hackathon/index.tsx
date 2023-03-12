@@ -52,7 +52,7 @@ const Home = () => {
 					<Image src={logo} alt="inteli-blockchain" />
 				</Link>
 
-                <div className="relative flex w-full h-56 md:h-72 items-center justify-center">
+                <div className="relative flex w-full h-64 md:h-80 items-center justify-center">
                     <div className="absolute h-80 md:h-96 left-auto right-auto">
                         <Cube />
                     </div>

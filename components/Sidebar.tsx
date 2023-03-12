@@ -90,12 +90,12 @@ export const Sidebar = ({ setSidebar }: {
                     <Image src={close} className="" alt="close" width={32} />
                 </button>
 
-                <div className="flex flex-col px-4 justify-center h-full">
-                    <Link href={"/"} className="text-[#cecece] text-2xl mb-4 font-semibold text">Início</Link>
-                    <Link href={"/educacional"} className="text-[#cecece] text-2xl mb-4 font-semibold text">Aprenda</Link>
-                    <Link href={"/q&a"} className="text-[#cecece] text-2xl mb-4 font-semibold text">Q&A</Link>
-                    <Link href={"/contact"} className="text-[#cecece] text-2xl mb-4 font-semibold text">Entre em contato</Link>
-                    <Link href={"/sponsorForm"} className="text-[#cecece] text-2xl mb-4 font-semibold text">Seja um patrocinador</Link>
+                <div className="flex flex-col px-4 justify-center h-full text-lg md:text-2xl">
+                    <Link href={"/hackathon"} className="text-[#cecece] mb-4 font-semibold text">Início</Link>
+                    <Link href={"/hackathon/educacional"} className="text-[#cecece] mb-4 font-semibold text">Aprenda</Link>
+                    <Link href={"/hackathon/q&a"} className="text-[#cecece] mb-4 font-semibold text">Q&A</Link>
+                    <Link href={"/hackathon/contact"} className="text-[#cecece] mb-4 font-semibold text">Entre em contato</Link>
+                    <Link href={"/hackathon/sponsorForm"} className="text-[#cecece] mb-4 font-semibold text">Seja um patrocinador</Link>
                     <Link href={"https://inteliblockchain.co"} className="text-[#737373] text-xl font-semibold text">Voltar para https://inteliblockchain.co</Link>
                 </div>
             </div>

@@ -11,7 +11,7 @@ const Contact = () => {
   } 
 
   return (
-    <>
+    
       <Layout>
         <div className="flex flex-col items-center justify-center md:bg-black bg-center bg-cover pt-32 pb-24 h-auto w-full mx-auto">
           <div className="md:h-32 lg:h-40">
@@ -45,7 +45,7 @@ const Contact = () => {
           </div>
         </div>
       </Layout>
-    </>
+    
   );
 };
 
