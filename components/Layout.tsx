@@ -13,6 +13,9 @@ import menu from "@/assets/menu.svg"
 import { Sidebar } from '@/components/Sidebar'
 import { Modal } from '@/components/Modal'
 
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 type Props = {
     children?: ReactNode;
     title?: string;
@@ -37,7 +40,7 @@ export const Layout = ({ children, title, modal }: Props) => {
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
 
-        <div className={`${montserrat.className} scroll-smooth text-white flex flex-col z-100 ${sidebar ? "max-h-screen overflow-hidden" : "min-h-screen h-full"} ${modal ? "max-h-screen overflow-hidden" : "min-h-screen h-full"}`}>
+            <div className={`${montserrat.className} scroll-smooth text-white flex flex-col z-100 ${sidebar ? "max-h-screen overflow-hidden" : "min-h-screen h-full"} ${modal ? "max-h-screen overflow-hidden" : "min-h-screen h-full"}`}>
                 <div className="fixed z-10 p-4 w-full">
                     <button onClick={toggleSidebar}>
                         <Image src={menu} alt="menu" width={32} />
@@ -46,6 +49,18 @@ export const Layout = ({ children, title, modal }: Props) => {
 
                 {sidebar ? <Sidebar setSidebar={setSidebar} /> : null}
 
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick={true}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
+                />
                 <div className="mx-auto w-full">
                     {children}
                 </div>

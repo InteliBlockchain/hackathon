@@ -95,7 +95,7 @@ export const Sidebar = ({ setSidebar }: {
                     <Link href={"/hackathon/educacional"} className="text-[#cecece] mb-4 font-semibold text">Aprenda</Link>
                     <Link href={"/hackathon/q&a"} className="text-[#cecece] mb-4 font-semibold text">Q&A</Link>
                     <Link href={"/hackathon/contact"} className="text-[#cecece] mb-4 font-semibold text">Entre em contato</Link>
-                    <Link href={"/hackathon/sponsorForm"} className="text-[#cecece] mb-4 font-semibold text">Seja um patrocinador</Link>
+                    <Link href={"/hackathon/sponsor-form"} className="text-[#cecece] mb-4 font-semibold text">Seja um patrocinador</Link>
                     <Link href={"https://inteliblockchain.co"} className="text-[#737373] text-xl font-semibold text">Voltar para https://inteliblockchain.co</Link>
                 </div>
             </div>

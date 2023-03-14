@@ -19,7 +19,6 @@ module.exports = {
         blue: "#4863F7",
       },
       textColor: {
-        grayText: "#ABABAB",
         blueText: "#4863F7",
       },
     },

@@ -1,0 +1,262 @@
+import { useEffect, useState } from "react";
+
+import { useRouter } from "next/router";
+
+import Link from "next/link";
+import Image from "next/image";
+import { Layout } from "@/components/Layout"
+
+import logo from "@/assets/logo.svg"
+import challenge from "@/assets/Challenge 2023.svg"
+import { GetServerSideProps } from "next";
+import { useForm } from "react-hook-form";
+
+import axios from "@/axios"
+import { toast } from "react-toastify";
+import getToken from "@/utils/getToken";
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+	const { token, email } = ctx.query;
+
+	console.log(token, email)
+
+	// if (token == "123456" && email) {
+	// 	console.log("Verified")
+	return {
+		props: {
+			validToken: true,
+			email: email
+		},
+	}
+	// }
+
+	// console.log("Not verified")
+	// return {
+	// 	props: { validToken: false },
+	// }
+}
+
+const Subscription = ({ validToken, email }: {
+	validToken: boolean;
+	email: string
+}) => {
+	const router = useRouter();
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
+
+	const [documentType, setDocumentType] = useState("cpf")
+
+	const [mathProblem, setMathProblem] = useState({
+		problem: "",
+		result: 0
+	});
+
+	useEffect(() => {
+		process.env.allow_subscription ? toast.warn("Inscrições não estão abertas no momento") && router.push("/") : null
+
+		// !email ? router.push("/") : null
+		// !validToken ? setTimeout(() => router.push("/"), 1000) : toast.success("Token e email verificados com sucesso")
+
+		setMathProblem(createMathProblem())
+
+		toast.info("Para se inscrever, preencha o formulário abaixo e resolva o problema matemático")
+	}, [])
+
+	const createMathProblem = () => {
+		const firstNumber = Math.floor(Math.random() * 10);
+		const secondNumber = Math.floor(Math.random() * 10);
+
+		const problem = `${firstNumber} + ${secondNumber} = ?`;
+
+		const result = firstNumber + secondNumber;
+
+		return { problem, result };
+	}
+
+	const [data, setData] = useState({})
+	const [loading, setLoading] = useState(false)
+
+	const onSubmit = async (data: any) => {
+		setLoading(true)
+		setData(data)
+
+		let token = getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
+
+		const headers = {
+			'frontend': token
+		}
+
+		try {
+			// await axios.post("/v1/sub/sendConfirmation", {
+			// 	email: data.email,
+			// }, {
+			// 	headers: headers,
+			// }).then((res: any) => {
+			// 	toast.success("Um email foi enviado para " + data.email + " com um link para confirmar seu cadastro")
+			// 	console.log("Success")
+
+			// 	// router.push("/success?email=" + data.email)
+
+			// 	setLoading(false)
+			// }).catch((err: any) => {
+			// 	toast.error("Ocorreu um erro e o email não pôde ser enviado para " + data.email + ". Tente novamente mais tarde ou cheque seu email")
+			// 	console.log("Request failed")
+			// 	setLoading(false)
+			// })
+
+			data.problemResult == mathProblem.result ? console.log({ ...data, email }) : toast.error("Resposta incorreta")
+
+		} catch (err) {
+			toast.error("Ocorreu um erro, tente novamente mais tarde")
+			console.log("Couldn't send request")
+			setLoading(false)
+		}
+	}
+
+	return (
+		<Layout>
+			<div className="w-full flex flex-col items-center justify-center">
+				<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-16 pb-6 h-auto w-full mx-auto">
+					<Link href={"https://inteliblockchain.co/"} target="_blank">
+						<Image src={logo} alt="inteli-blockchain" />
+					</Link>
+
+					<div className="mt-10 mb-10 md:h-32 lg:h-40">
+						<Image src={challenge} alt="Challenge 2023" className="w-full h-full" />
+					</div>
+
+					<div className="w-full text-center flex flex-col">
+						<p className="text-sm text-[#c4c4c4]">Você está se inscrevendo com o email:</p>
+						<p className="text-sm font-medium text-white">{email}</p>
+						<p className="font-thin text-sm text-blueText mt-2">* dados obrigatórios</p>
+					</div>
+				</div>
+
+				<div className="w-full md:w-2/5 flex flex-col items-center justify-center pb-8 bg-black">
+					<p className="font-semibold text-2xl text-white">Dados pessoais</p>
+					<form className="flex flex-col items-center justify-center w-full px-4" onSubmit={handleSubmit(onSubmit)}>
+
+						<div className="w-full mt-4">
+							<p className="text-sm text-[#c4c4c4]">Nome completo: <span className="text-blueText">*</span></p>
+							<input placeholder="Seu nome" className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("fullName", { required: true })} />
+							{errors.fullName && <p className="text-red-500 text-xs">Insira seu nome completo</p>}
+						</div>
+
+						<div className="w-full mt-4">
+							<p className="text-sm text-[#c4c4c4]">Link relevante:</p>
+							<input placeholder="GitHub, LinkedIn, ..." className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("relevantLink")} />
+						</div>
+
+						<div className="w-full mt-4">
+							<p className="text-sm text-[#c4c4c4]">Documento: <span className="text-blueText">*</span></p>
+							<div className="flex">
+								<select className="w-fit mr-2 p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("documentType", { required: true })} onChange={(e) => setDocumentType(e.target.value)}>
+									<option value="cpf">CPF</option>
+									<option value="rg">RG</option>
+								</select>
+								<input
+									placeholder={`${documentType == "cpf" ? "000.000.000-00" : "00.000.000-00"}`}
+									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex text-sm"
+									maxLength={documentType == "cpf" ? 14 : 13}
+									{...register("document", {
+										required: true,
+										maxLength: documentType == "cpf" ? 14 : 13,
+										minLength: documentType == "cpf" ? 14 : 13,
+										pattern: documentType == "cpf" ? /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/ : /^\d{2}\.\d{3}\.\d{3}\-\d{2}$/
+									})}
+								/>
+							</div>
+							{errors.document?.type == "required" && <p className="text-red-500 text-xs">
+								Insira seu {documentType == "cpf" ? "CPF" : "RG"}
+							</p>}
+							{errors.document?.type == "pattern" && <p className="text-red-500 text-xs">Formato inválido, insira "." e "-" se necessário</p>}
+
+							<div className="text-xs py-4 px-2 bg-[#4862f721] text-[#c4c4c4] flex flex-col items-center justify-center mt-4 rounded-lg">
+								<p className="text-base font-medium text-white">Atenção!</p>
+
+								<p className="text-center my-4">Para o credenciamento, será obrigatória a apresentação de documento <span className="font-semibold italic">COM FOTO</span> que <span className="font-semibold italic">CONTENHA O NÚMERO ACIMA</span> no dia do evento.</p>
+
+								<p className="text-center">Os dados acima serão utilizados única e exclusivamente para o credenciamento.</p>
+							</div>
+						</div>
+
+						<div className="w-full mt-4 text-sm">
+							<p className="text-[#c4c4c4]">De onde você é? <span className="text-blueText">*</span></p>
+							<input
+								placeholder="Ex.: Inteli, BTG Pactual, etc."
+								className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
+								{...register("institution", { required: true })}
+							/>
+							{errors.document?.type == "required" && <p className="text-red-500 text-xs">
+								Insira sua instituição/empresa
+							</p>}
+						</div>
+
+						<div className="text-sm w-full mt-4">
+							<p className="text-[#c4c4c4]">Tem alguma necessidade especial?</p>
+							<input
+								placeholder="Sua necessidade"
+								className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
+								{...register("specialNeed")}
+							/>
+						</div>
+
+						<div className="w-full mt-8 flex flex-col justify-center text-sm">
+							<p className="font-semibold text-2xl text-white mb-4 text-center">Contato</p>
+
+							<p className="text-[#c4c4c4]">Telefone (DDD + número) <span className="text-blueText">*</span></p>
+							<input placeholder="Número" className="p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight w-full" {...register("contact", {
+								required: true,
+								pattern: /^\(\d{2}\) \d \d{4}-\d{4}$/
+							})} />
+							{errors.fullName && <p className="text-red-500 text-xs">Insira sua forma de contato</p>}
+
+							<div className="text-xs py-4 px-2 bg-[#4862f721] text-[#c4c4c4] flex flex-col justify-center mt-4 rounded-lg">
+								<p className="text-sm text-[#c4c4c4]">Seu Discord (com apelido e número) <span className="text-blueText">*</span></p>
+
+								<input placeholder="nickname#1234" className="p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight w-full" {...register("discord", { required: true })} />
+								{errors.fullName && <p className="text-red-500 text-xs">Insira seu Discord</p>}
+
+								<p className="text-center my-4">O Discord será o principal meio de comunicação antes e durante o evento. Lá, você pode acessar conteúdos educacionais, conversar com os patrocinadores, se conectar com outros participantes e formar seu grupo!</p>
+
+								<p className="text-center">Ainda não tem uma conta? <Link className="text-green-500" href={"https://discord.com/register?email=marceloow147%40gmail.com"} target={"_blank"}>crie a sua aqui</Link></p>
+							</div>
+						</div>
+
+						<div className="w-full mt-8 flex flex-col justify-center text-sm">
+							<div className="mb-2">
+								<div className="flex text-xs">
+									<input type={"checkbox"} {...register("acceptTerms", { required: true })} className={"mr-2 checked:bg-green-500"} />
+									<p className="text-[#c4c4c4]">Li e concordo com os <Link href={"/regulamento"} className="text-green-500">regulamento do evento</Link>. <span className="text-blueText">*</span></p>
+								</div>
+								{errors.acceptTerms && <p className="text-red-500 text-xs">Você precisa aceitar os termos para se inscrever!</p>}
+							</div>
+
+							<div className="flex text-xs">
+								<input type={"checkbox"} {...register("receiveNotifications")} className={"mr-2 checked:bg-green-500"} />
+								<p className="text-[#c4c4c4]">Aceito receber emails sobre informações, prêmios e patrocinadores do evento.</p>
+							</div>
+						</div>
+
+						<div className="text-sm w-fit mt-8">
+							<p className="text-[#c4c4c4]">{mathProblem.problem} <span className="text-blueText">*</span></p>
+							<input placeholder="Resposta" type="number" className="w-auto p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight" {...register("problemResult", { required: true })} />
+							{errors.problemResult && <p className="text-red-500 text-xs">Responda o problema!</p>}
+						</div>
+
+						<div className="w-full px-8 flex flex-col justify-center mt-8">
+							<button type="submit" className={`${loading ? "bg-gray-500" : "bg-green-500"} py-2 px-8 rounded-lg font text-lg text-white`}>{loading ? "Enviando..." : "Enviar"}</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</Layout>
+	)
+}
+
+
+export default Subscription;
