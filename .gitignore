@@ -7,3 +7,4 @@ package-lock.json
 
 **/Zone.Identifier
 assets/**.png:Zone.Identifier
+next.config.js

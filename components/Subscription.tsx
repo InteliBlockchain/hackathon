@@ -47,12 +47,12 @@ export const Subscription = ({ setModal }: {
             <div className="w-full md:w-2/5 flex flex-col items-center px-4">
                 <p className="text-gray1 text-3xl font-bold mb-4">5-7 de Maio</p>
 
-                <div className="flex flex-col items-center w-full cursor-not-allowed">
+                <div className="flex flex-col items-center w-full">
                     <p className="text-gray1 text-lg font-medium">Inscrições: 17.03.2023</p>
 
                     <p className="mt-8 text-gray1 italic text-xl font-medium">Faltam</p>
 
-                    <button className="px-4 py-2 text-[#4863F7] text-md border-2 border-[#4863F7] rounded-lg font-medium my-2 w-full cursor-not-allowed hover:bg-[#4863f7] hover:text-black">
+                    <button className="px-4 py-2 text-[#4863F7] text-md border-2 border-[#4863F7] rounded-lg font-medium my-2 w-full hover:bg-[#4863f7] hover:text-black  cursor-not-allowed">
                         {`${daysLeft || "0"} dias, ${hoursLeft || "0"} horas, ${minutesLeft || "0"} minutos e ${secondsLeft || "0"} segundos`}
                     </button>
 
