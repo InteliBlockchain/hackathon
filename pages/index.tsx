@@ -31,8 +31,12 @@ import cartesi from "@/assets/sponsors/cartesi.svg"
 import alexiaVentures from "@/assets/sponsors/alexia-ventures.svg"
 import sevenVisions from "@/assets/sponsors/7visions.svg"
 
+import inteli1 from "@/assets/inteli.png"
+import inteliblockchain from '@/assets/inteliblockchain.jpg'
+
 import { useRouter } from "next/router";
 import { Subscription } from "@/components/Subscription";
+import { toast } from "react-toastify";
 
 const Home = () => {
 	const router = useRouter();
@@ -50,8 +54,6 @@ const Home = () => {
 
 	const [modal, setModal] = useState(false)
 
-	const inteli1 = "https://imgur.com/dsBSU0e.png"
-
 	function shuffle(sponsors: ({ link: string; name: string; icon: any; blackBg?: undefined; } | { link: string; name: string; icon: any; blackBg: boolean; })[]) {
 		for (let i = sponsors.length - 1; i > 0; i--) {
 			const j = Math.floor(Math.random() * (i + 1));
@@ -65,7 +67,7 @@ const Home = () => {
 			{modal && process.env.allow_subscriptions ? <Modal setModal={setModal} /> : null}
 
 			{/* <div className="flex flex-col items-center justify-center bg1 bg-fixed bg-center bg-cover py-16 h-auto w-full mx-auto md:w-2/5"> */}
-			<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover py-32 h-auto w-full mx-auto z-50">
+			<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-24 h-auto w-full mx-auto z-50">
 				<Link href={"https://inteliblockchain.co/"} target="_blank">
 					<Image src={logo} alt="inteli-blockchain" />
 				</Link>
@@ -85,13 +87,23 @@ const Home = () => {
 
 
 			{/* carousel */}
-			<div className="grid grid-cols-10 h-auto">
+			<div className="flex h-auto items-center justify-center mx-auto border-border-red-500 bg-black py-16">
 				<div className="flex">
 					<Image className="ml-2" alt="arrow" src={arrowLeft}></Image>
 				</div>
-				<Carousel className="col-span-8" autoPlay={true} showArrows={false} showThumbs={false} showIndicators={false} showStatus={false} infiniteLoop={true} interval={3000} transitionTime={800} dynamicHeight={false}>
+				<Carousel className="w-full md:w-2/5" autoPlay={true} showArrows={false} showThumbs={false} showIndicators={false} showStatus={false} infiniteLoop={true} interval={3000} transitionTime={800} dynamicHeight={false}>
 					<div className="border-2 border-purple1 mx-2 rounded">
-						<img src={inteli1} alt="" />
+						<Image src={inteliblockchain} alt="Inteli Blockchain" />
+						<div className="bg-gray-900">
+							<p className=" text-2xl font-semibold text-left ml-2 pt-2">Inteli Blockchain</p>
+							<p className="text-left text-sm p-4 ">
+								Inteli Blockchain é um clube de estudos e pesquisa sobre tecnologias blockchain e criptomoedas. O clube é formado por alunos do Instituto de Tecnologia e Inteligência (Inteli), que se reúnem para discutir e desenvolver projetos relacionados a essas tecnologias.
+							</p>
+						</div>
+					</div>
+
+					<div className="border-2 border-purple1 mx-2 rounded">
+						<Image src={inteli1} alt="" />
 						<div className="bg-gray-900">
 							<p className=" text-2xl font-semibold text-left ml-2 pt-2">Infraestrutura</p>
 							<p className="text-left text-sm p-4 ">
@@ -106,19 +118,19 @@ const Home = () => {
 			</div >
 
 			{/* Empurraozinho */}
-			<div className="flex flex-col items-center justify-center bg2 bg-center bg-cover pt-10 pb-24 h-auto w-full mx-auto " >
-				<div className="w-4/5 flex flex-col items-center justify-center">
+			<div className="flex flex-col items-center justify-center bg2 bg-center bg-cover pt-10 pb-24 h-auto w-full mx-auto" >
+				<div className="w-full md:w-2/5 flex flex-col items-center justify-center">
 					<div className="flex flex-col items-center">
 						<p className="text-2xl text-center font-semibold mb-2" id="empurrao">Precisa de um empurrãozinho?</p>
 						<p className="text-md text-gray-300 text-center" id="empurrao">Aqui você pode conhecer todas as tecnologias que serão necessárias para se sair bem no hackathon!</p>
 					</div>
 
 					<div className="flex flex-col my-4 items-center">
-						<Link href={"/educacional"}>
+						<Link href={"/content"}>
 							<button className="items-center justify-center font-semibold text-lg mb-4 py-4 px-8 rounded-md flex bg-[#04d361] text-[#f1f1f1]">Acessar conteúdo <Image alt="content" width={24} src={right} className={"ml-2"} /></button>
 						</Link>
 
-						<button className="text-md flex justify-center items-center border-2 border-[#4863F7] rounded-lg p-2"><Image className={"mr-4"} src={document} alt={"document"} width={24} />Veja o regulamento</button>
+						<button className="text-md flex justify-center items-center border-2 border-[#4863F7] rounded-lg p-2" onClick={() => toast.info("Regulamento indisponivel por hora.")}><Image className={"mr-4"} src={document} alt={"document"} width={24} />Veja o regulamento</button>
 					</div>
 
 					<div className="flex flex-col my-4 items-center">

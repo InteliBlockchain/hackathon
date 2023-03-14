@@ -53,7 +53,7 @@ export const Subscription = ({ setModal }: {
 
                     <p className="mt-8 text-gray1 italic text-xl font-medium">Faltam</p>
 
-                    <button className="px-4 py-2 text-[#4863F7] text-md border-2 border-[#4863F7] rounded-lg font-medium my-2 w-2/3 cursor-not-allowed hover:bg-[#4863f7] hover:text-black">
+                    <button className="px-4 py-2 text-[#4863F7] text-md border-2 border-[#4863F7] rounded-lg font-medium my-2 w-full cursor-not-allowed hover:bg-[#4863f7] hover:text-black">
                         {`${daysLeft || "0"} dias, ${hoursLeft || "0"} horas, ${minutesLeft || "0"} minutos e ${secondsLeft || "0"} segundos`}
                     </button>
 

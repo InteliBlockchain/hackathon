@@ -6,3 +6,4 @@ package-lock.json
 .vercel
 
 **/Zone.Identifier
+assets/**.png:Zone.Identifier
