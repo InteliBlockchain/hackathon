@@ -18,19 +18,38 @@ import getToken from "@/utils/getToken";
 export const getServerSideProps: GetServerSideProps = async ctx => {
 	const { token, email } = ctx.query;
 
+	const validateToken = async () => {
+		try {
+			axios.post("/Sub/validateToken", { token }, {
+				headers: {
+					'frontend': getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
+				}
+			}).then((res: any) => {
+				return true
+			}).catch((err: any) => {
+				return false
+			})
+		} catch (err) {
+			return false
+		}
+	}
 
-	// if (token == "123456" && email) {
+	const validToken = await validateToken()
+
+	if (validToken && email) {
+		return {
+			props: {
+				validToken: true,
+				email: email
+			},
+		}
+	}
+
 	return {
 		props: {
-			validToken: true,
-			email: email
+			validToken: false,
 		},
 	}
-	// }
-
-	// return {
-	// 	props: { validToken: false },
-	// }
 }
 
 const Subscription = ({ validToken, email }: {
@@ -55,12 +74,12 @@ const Subscription = ({ validToken, email }: {
 	useEffect(() => {
 		process.env.allow_subscription ? toast.warn("Inscrições não estão abertas no momento") && router.push("/") : null
 
-		// !email ? router.push("/") : null
-		// !validToken ? setTimeout(() => router.push("/"), 1000) : toast.success("Token e email verificados com sucesso")
+		!email ? toast.error("Email inválido") && router.push("/") : null
+		!validToken ? toast.error("Token inválido") && router.push("/") : toast.success("Token e email verificados com sucesso")
 
 		setMathProblem(createMathProblem())
 
-		toast.info("Para se inscrever, preencha o formulário abaixo e resolva o problema matemático")
+		email && validToken ? toast.info("Para se inscrever, preencha o formulário abaixo e resolva o problema matemático") : null
 	}, [])
 
 	const createMathProblem = () => {
