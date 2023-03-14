@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
 
 	const validateToken = async () => {
 		try {
-			axios.post("/Sub/validateToken", { token }, {
+			axios.get("/Sub/validateToken/" + token, {
 				headers: {
 					'frontend': getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
 				}
