@@ -109,26 +109,24 @@ export const Modal = ({ setModal }: {
         }
 
         try {
-            await axios.post("/sendConfirmation", {
+            await axios.post("/Sub/sendConfirmation", {
                 email: data.email,
             }, {
                 headers: headers,
             }).then((res: any) => {
                 toast.success("Um email foi enviado para " + data.email + " com um link para confirmar seu cadastro")
-                console.log("Success")
 
                 // router.push("/success?email=" + data.email)
 
                 setLoading(false)
             }).catch(async (err: any) => {
                 try {
-                    await axios.post("/resendConfirmation", {
+                    await axios.post("/Sub/resendConfirmation", {
                         email: data.email,
                     }, {
                         headers: headers,
                     }).then((res: any) => {
                         toast.success("Um email foi enviado para " + data.email + " com um link para confirmar seu cadastro")
-                        console.log("Success")
 
                         // router.push("/success?email=" + data.email)
 
@@ -137,7 +135,6 @@ export const Modal = ({ setModal }: {
                         err?.message == "Request failed with status code 429" ? toast.error("Bloqueado por excesso de tentativas.") : toast.error("Ocorreu um erro e o email não pôde ser enviado para " + data.email + ". Tente novamente mais tarde ou cheque seu email")
 
 
-                        console.log("Request failed", err?.message)
                         setLoading(false)
                     })
                 } catch (err) {
@@ -146,7 +143,6 @@ export const Modal = ({ setModal }: {
             })
         } catch (err) {
             toast.error("Ocorreu um erro, tente novamente mais tarde")
-            console.log("Couldn't send request")
             setLoading(false)
         }
     }

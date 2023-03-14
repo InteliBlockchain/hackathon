@@ -15,7 +15,7 @@ export const Subscription = ({ setModal }: {
 
     useEffect(() => {
         setInterval(() => {
-            const openingDate = Math.floor(new Date('2023-03-17T18:00:00').getTime() / 1000)
+            const openingDate = Math.floor(new Date('2023-03-20T18:00:00').getTime() / 1000)
             const currentDate = Math.floor(new Date().getTime() / 1000)
 
             const timeLeft = openingDate - currentDate
@@ -34,7 +34,6 @@ export const Subscription = ({ setModal }: {
 
     const toggleModal = () => {
         setModal(true)
-        console.log("Teste")
     }
 
     return (
@@ -45,7 +44,7 @@ export const Subscription = ({ setModal }: {
                 </button>
             </div>
         ) : (
-            <div className="w-full md:w-2/5 flex flex-col items-center">
+            <div className="w-full md:w-2/5 flex flex-col items-center px-4">
                 <p className="text-gray1 text-3xl font-bold mb-4">5-7 de Maio</p>
 
                 <div className="flex flex-col items-center w-full cursor-not-allowed">
@@ -57,7 +56,7 @@ export const Subscription = ({ setModal }: {
                         {`${daysLeft || "0"} dias, ${hoursLeft || "0"} horas, ${minutesLeft || "0"} minutos e ${secondsLeft || "0"} segundos`}
                     </button>
 
-                    <p className="text-gray1 text-xl italic font-medium">Para o início das inscrições</p>
+                    <p className="text-gray1 text-xl italic font-medium">Para o início das inscrições!</p>
                 </div>
             </div>
         )

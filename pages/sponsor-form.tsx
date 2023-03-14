@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 
 import Link from "next/link";
 import { Layout } from "@/components/Layout"
@@ -7,6 +7,8 @@ import { Layout } from "@/components/Layout"
 import { useRouter } from "next/router";
 
 import axios from "@/axios"
+import { toast } from "react-toastify";
+import getToken from "@/utils/getToken";
 
 const Sponsor = () => {
   const router = useRouter();
@@ -19,37 +21,41 @@ const Sponsor = () => {
   const [data, setData] = useState({})
   const [loading, setLoading] = useState(false)
 
-  const submitHandler = async (data: any) => {
+  const submitHandler = async (
+    data: FieldValues
+  ) => {
     setLoading(true)
-    const { name, email } = data
+    setData(data)
 
-    setData({
-      name,
-      email
-    })
+    let token = getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
+
+    const headers = {
+      'frontend': token
+    }
 
     try {
-      await axios.get("https://api.github.com/users/marcelofeitoza").then((res: any) => {
-        console.log(res.data)
+      await axios.post("/contact/partner", { ...data }, {
+        headers: headers,
+      }).then((res: any) => {
+        toast.success("Sua mensagem foi enviada com sucesso. Entraremos em contato assim que possível.")
+
         setLoading(false)
       }).catch((err: any) => {
-        console.log(err)
+        toast.error(err.response.data)
+
         setLoading(false)
       })
-
-      console.log({
-        name,
-        email
-      })
     } catch (err) {
-      console.log(err)
+      toast.error("Ocorreu um erro ao enviar sua mensagem. Tente novamente mais tarde.")
+
+      setLoading(false)
     }
   }
 
   return (
     <Layout>
-      <div className="flex flex-col items-center md:bg-black bg-center bg-cover h-auto w-full mx-auto md:w-3/5 px-4">
-        <div className="flex flex-col md:bg-black bg-center bg-cover pt-32 pb-24 w-full mx-auto">
+      <div className="flex flex-col items-center bg-black bg-cover min-h-screen h-full mx-auto w-full px-4">
+        <div className="flex flex-col bg-black bg-cover pt-24 pb-24 w-full mx-auto md:w-3/5">
           <div className="md:h-32 lg:h-40">
             <div className="flex flex-col items-center">
               <h1 className="font-medium text-4xl text-center mb-2">
@@ -65,11 +71,11 @@ const Sponsor = () => {
                 <div className="mb-4">
                   <p className="text-md">Nome da empresa</p>
                   <input
-                    {...register("name", { required: true })}
+                    {...register("companyName", { required: true })}
                     placeholder="Nome da empresa"
                     className="w-full rounded-lg border-2 border-[#5A5A5A] bg-[#0e0e10] p-2 placeholder:text-[#5A5A5A]"
                   />
-                  {errors.name && <p className="text-sm text-red-500">Nome é obrigatório</p>}
+                  {errors.companyName && <p className="text-sm text-red-500">Nome é obrigatório</p>}
                 </div>
 
                 <div className="mb-4">

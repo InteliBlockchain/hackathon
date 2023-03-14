@@ -18,10 +18,8 @@ import getToken from "@/utils/getToken";
 export const getServerSideProps: GetServerSideProps = async ctx => {
 	const { token, email } = ctx.query;
 
-	console.log(token, email)
 
 	// if (token == "123456" && email) {
-	// 	console.log("Verified")
 	return {
 		props: {
 			validToken: true,
@@ -30,7 +28,6 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
 	}
 	// }
 
-	// console.log("Not verified")
 	// return {
 	// 	props: { validToken: false },
 	// }
@@ -91,28 +88,26 @@ const Subscription = ({ validToken, email }: {
 		}
 
 		try {
-			// await axios.post("/v1/sub/sendConfirmation", {
+			// await axios.post("/Sub/sendConfirmation", {
 			// 	email: data.email,
 			// }, {
 			// 	headers: headers,
 			// }).then((res: any) => {
 			// 	toast.success("Um email foi enviado para " + data.email + " com um link para confirmar seu cadastro")
-			// 	console.log("Success")
 
 			// 	// router.push("/success?email=" + data.email)
 
 			// 	setLoading(false)
 			// }).catch((err: any) => {
 			// 	toast.error("Ocorreu um erro e o email não pôde ser enviado para " + data.email + ". Tente novamente mais tarde ou cheque seu email")
-			// 	console.log("Request failed")
 			// 	setLoading(false)
 			// })
 
-			data.problemResult == mathProblem.result ? console.log({ ...data, email }) : toast.error("Resposta incorreta")
+			data.problemResult == mathProblem.result ? toast.success("Resposta correta")
+				: toast.error("Resposta incorreta")
 
 		} catch (err) {
 			toast.error("Ocorreu um erro, tente novamente mais tarde")
-			console.log("Couldn't send request")
 			setLoading(false)
 		}
 	}
@@ -130,128 +125,203 @@ const Subscription = ({ validToken, email }: {
 					</div>
 
 					<div className="w-full text-center flex flex-col">
-						<p className="text-sm text-[#c4c4c4]">Você está se inscrevendo com o email:</p>
+						<p className="text-md text-[#c4c4c4] mb-1">Você está se inscrevendo com o email:</p>
 						<p className="text-sm font-medium text-white">{email}</p>
-						<p className="font-thin text-sm text-blueText mt-2">* dados obrigatórios</p>
+						<p className="text-md text-red-400 mt-2">* dados obrigatórios</p>
 					</div>
 				</div>
 
-				<div className="w-full md:w-2/5 flex flex-col items-center justify-center pb-8 bg-black">
-					<p className="font-semibold text-2xl text-white">Dados pessoais</p>
-					<form className="flex flex-col items-center justify-center w-full px-4" onSubmit={handleSubmit(onSubmit)}>
+				<div className="w-full bg-black flex flex-col items-center justify-center">
+					<div className="w-full md:w-2/5 flex flex-col items-center justify-center pb-8 bg-black">
+						<p className="font-semibold text-2xl text-white">Dados pessoais</p>
+						<form className="flex flex-col items-center justify-center w-full px-4" onSubmit={handleSubmit(onSubmit)}>
 
-						<div className="w-full mt-4">
-							<p className="text-sm text-[#c4c4c4]">Nome completo: <span className="text-blueText">*</span></p>
-							<input placeholder="Seu nome" className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("fullName", { required: true })} />
-							{errors.fullName && <p className="text-red-500 text-xs">Insira seu nome completo</p>}
-						</div>
+							<div className="w-full mt-4">
+								<p className="text-md text-[#c4c4c4] mb-1">Nome completo: <span className="text-red-400">*</span></p>
+								<input placeholder="Seu nome" className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("fullName", { required: true })} />
+								{errors.fullName && <p className="text-red-500 text-xs">Insira seu nome completo</p>}
+							</div>
 
-						<div className="w-full mt-4">
-							<p className="text-sm text-[#c4c4c4]">Link relevante:</p>
-							<input placeholder="GitHub, LinkedIn, ..." className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("relevantLink")} />
-						</div>
+							<div className="w-full mt-4">
+								<p className="text-md text-[#c4c4c4] mb-1">Github:</p>
+								<input placeholder="" className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("github")} />
+							</div>
 
-						<div className="w-full mt-4">
-							<p className="text-sm text-[#c4c4c4]">Documento: <span className="text-blueText">*</span></p>
-							<div className="flex">
-								<select className="w-fit mr-2 p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("documentType", { required: true })} onChange={(e) => setDocumentType(e.target.value)}>
-									<option value="cpf">CPF</option>
-									<option value="rg">RG</option>
-								</select>
+							<div className="w-full mt-4">
+								<p className="text-md text-[#c4c4c4] mb-1">LinkedIn:</p>
+								<input placeholder="" className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("linkedin")} />
+							</div>
+
+							<div className="w-full mt-4">
+								<p className="text-md text-[#c4c4c4] mb-1">Instagram:</p>
+								<input placeholder="" className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("instagram")} />
+							</div>
+
+							<div className="w-full mt-4">
+								<p className="text-md text-[#c4c4c4] mb-1">Twitter:</p>
+								<input placeholder="" className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("twitter")} />
+							</div>
+
+							<div className="w-full mt-4">
+								<p className="text-md text-[#c4c4c4] mb-1">Documento: <span className="text-red-400">*</span></p>
+								<div className="flex">
+									<select className="w-fit mr-2 p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("documentType", { required: true })} onChange={(e) => setDocumentType(e.target.value)}>
+										<option value="cpf">CPF</option>
+										<option value="rg">RG</option>
+									</select>
+									<input
+										placeholder={`${documentType == "cpf" ? "000.000.000-00" : "00.000.000-00"}`}
+										className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex text-sm"
+										maxLength={documentType == "cpf" ? 14 : 13}
+										{...register("document", {
+											required: true,
+											maxLength: documentType == "cpf" ? 14 : 13,
+											minLength: documentType == "cpf" ? 14 : 13,
+											pattern: documentType == "cpf" ? /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/ : /^\d{2}\.\d{3}\.\d{3}\-\d{2}$/
+										})}
+									/>
+								</div>
+								{errors.document?.type == "required" && <p className="text-red-500 text-xs">
+									Insira seu {documentType == "cpf" ? "CPF" : "RG"}
+								</p>}
+								{errors.document?.type == "pattern" && <p className="text-red-500 text-xs">Formato inválido, insira "." e "-" se necessário</p>}
+
+								<div className="text-xs py-4 px-2 bg-[#4862f721] text-[#c4c4c4] flex flex-col items-center justify-center mt-4 rounded-lg">
+									<p className="text-base font-medium text-white">Atenção!</p>
+
+									<p className="text-center my-4">Para o credenciamento, será obrigatória a apresentação de documento <span className="font-semibold italic">COM FOTO</span> que <span className="font-semibold italic">CONTENHA O NÚMERO ACIMA</span> no dia do evento.</p>
+
+									<p className="text-center">Os dados acima serão utilizados única e exclusivamente para o credenciamento.</p>
+								</div>
+							</div>
+
+							<div className="w-full mt-4 text-sm">
+								<p className="text-base text-[#c4c4c4] mb-1">Instituição <span className="text-red-400">*</span></p>
 								<input
-									placeholder={`${documentType == "cpf" ? "000.000.000-00" : "00.000.000-00"}`}
-									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex text-sm"
-									maxLength={documentType == "cpf" ? 14 : 13}
-									{...register("document", {
-										required: true,
-										maxLength: documentType == "cpf" ? 14 : 13,
-										minLength: documentType == "cpf" ? 14 : 13,
-										pattern: documentType == "cpf" ? /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/ : /^\d{2}\.\d{3}\.\d{3}\-\d{2}$/
-									})}
+									placeholder="Ex.: Inteli, BTG Pactual, etc."
+									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
+									{...register("institution", { required: true })}
+								/>
+								{errors.document?.type == "required" && <p className="text-red-500 text-xs">
+									Insira sua instituição/empresa
+								</p>}
+							</div>
+
+							<div className="text-sm w-full mt-4">
+								<p className="text-base text-[#c4c4c4] mb-1">Tem alguma necessidade especial?</p>
+								<input
+									placeholder="Sua necessidade"
+									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
+									{...register("specialNeed")}
 								/>
 							</div>
-							{errors.document?.type == "required" && <p className="text-red-500 text-xs">
-								Insira seu {documentType == "cpf" ? "CPF" : "RG"}
-							</p>}
-							{errors.document?.type == "pattern" && <p className="text-red-500 text-xs">Formato inválido, insira "." e "-" se necessário</p>}
 
-							<div className="text-xs py-4 px-2 bg-[#4862f721] text-[#c4c4c4] flex flex-col items-center justify-center mt-4 rounded-lg">
-								<p className="text-base font-medium text-white">Atenção!</p>
-
-								<p className="text-center my-4">Para o credenciamento, será obrigatória a apresentação de documento <span className="font-semibold italic">COM FOTO</span> que <span className="font-semibold italic">CONTENHA O NÚMERO ACIMA</span> no dia do evento.</p>
-
-								<p className="text-center">Os dados acima serão utilizados única e exclusivamente para o credenciamento.</p>
+							<p className="font-semibold text-2xl text-white mt-8">Perguntas</p>
+							<div className="w-full mt-4 text-sm">
+								<p className="text-base text-[#c4c4c4] mb-1">Por que você quer participar do Challenge? <span className="text-red-400">*</span></p>
+								<textarea
+									minLength={200}
+									maxLength={4000}
+									rows={5}
+									placeholder=""
+									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
+									{...register("whyParticipate", { required: true, maxLength: 4000, minLength: 200 })}
+								/>
+								{/* add how much characters have been typed */}
+								{errors.whyParticipate?.type == "required" && <p className="text-red-500 text-xs">
+									Insira sua resposta
+								</p>}
+								{errors.whyParticipate?.type == "maxLength" && <p className="text-red-500 text-xs">
+									Insira no máximo 4000 caracteres
+								</p>}
 							</div>
-						</div>
 
-						<div className="w-full mt-4 text-sm">
-							<p className="text-[#c4c4c4]">De onde você é? <span className="text-blueText">*</span></p>
-							<input
-								placeholder="Ex.: Inteli, BTG Pactual, etc."
-								className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
-								{...register("institution", { required: true })}
-							/>
-							{errors.document?.type == "required" && <p className="text-red-500 text-xs">
-								Insira sua instituição/empresa
-							</p>}
-						</div>
-
-						<div className="text-sm w-full mt-4">
-							<p className="text-[#c4c4c4]">Tem alguma necessidade especial?</p>
-							<input
-								placeholder="Sua necessidade"
-								className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
-								{...register("specialNeed")}
-							/>
-						</div>
-
-						<div className="w-full mt-8 flex flex-col justify-center text-sm">
-							<p className="font-semibold text-2xl text-white mb-4 text-center">Contato</p>
-
-							<p className="text-[#c4c4c4]">Telefone (DDD + número) <span className="text-blueText">*</span></p>
-							<input placeholder="Número" className="p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight w-full" {...register("contact", {
-								required: true,
-								pattern: /^\(\d{2}\) \d \d{4}-\d{4}$/
-							})} />
-							{errors.fullName && <p className="text-red-500 text-xs">Insira sua forma de contato</p>}
-
-							<div className="text-xs py-4 px-2 bg-[#4862f721] text-[#c4c4c4] flex flex-col justify-center mt-4 rounded-lg">
-								<p className="text-sm text-[#c4c4c4]">Seu Discord (com apelido e número) <span className="text-blueText">*</span></p>
-
-								<input placeholder="nickname#1234" className="p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight w-full" {...register("discord", { required: true })} />
-								{errors.fullName && <p className="text-red-500 text-xs">Insira seu Discord</p>}
-
-								<p className="text-center my-4">O Discord será o principal meio de comunicação antes e durante o evento. Lá, você pode acessar conteúdos educacionais, conversar com os patrocinadores, se conectar com outros participantes e formar seu grupo!</p>
-
-								<p className="text-center">Ainda não tem uma conta? <Link className="text-green-500" href={"https://discord.com/register?email=marceloow147%40gmail.com"} target={"_blank"}>crie a sua aqui</Link></p>
+							<div className="w-full mt-4 text-sm">
+								<p className="text-base text-[#c4c4c4] mb-1">Conte um pouco da sua história <span className="text-red-400">*</span></p>
+								<textarea
+									minLength={200}
+									maxLength={4000}
+									rows={5}
+									placeholder=""
+									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
+									{...register("history", { required: true, maxLength: 4000, minLength: 200 })}
+								/>
+								{/* add how much characters have been typed */}
+								{errors.history?.type == "required" && <p className="text-red-500 text-xs">
+									Insira sua resposta
+								</p>}
+								{errors.history?.type == "maxLength" && <p className="text-red-500 text-xs">
+									Insira no máximo 4000 caracteres
+								</p>}
 							</div>
-						</div>
 
-						<div className="w-full mt-8 flex flex-col justify-center text-sm">
-							<div className="mb-2">
-								<div className="flex text-xs">
-									<input type={"checkbox"} {...register("acceptTerms", { required: true })} className={"mr-2 checked:bg-green-500"} />
-									<p className="text-[#c4c4c4]">Li e concordo com os <Link href={"/regulamento"} className="text-green-500">regulamento do evento</Link>. <span className="text-blueText">*</span></p>
+							<div className="w-full mt-4 text-sm">
+								<p className="text-base text-[#c4c4c4] mb-1">Habilidades que gostaria de destacar <span className="text-red-400">*</span></p>
+								<textarea
+									minLength={200}
+									maxLength={4000}
+									rows={5}
+									placeholder=""
+									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
+									{...register("skills", { required: true, maxLength: 4000, minLength: 200 })}
+								/>
+								{/* add how much characters have been typed */}
+								{errors.skills?.type == "required" && <p className="text-red-500 text-xs">
+									Insira sua resposta
+								</p>}
+								{errors.skills?.type == "maxLength" && <p className="text-red-500 text-xs">
+									Insira no máximo 4000 caracteres
+								</p>}
+							</div>
+
+							<div className="w-full mt-8 flex flex-col justify-center text-sm">
+								<p className="font-semibold text-2xl text-white mb-4 text-center">Contato</p>
+
+								<p className="text-md text-[#c4c4c4] mb-1">Telefone (DDD + número) <span className="text-red-400">*</span></p>
+								<input placeholder="Número" className="p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight w-full" {...register("contact", {
+									required: true,
+									pattern: /^\(\d{2}\) \d \d{4}-\d{4}$/
+								})} />
+								{errors.fullName && <p className="text-red-500 text-xs">Insira sua forma de contato</p>}
+
+								<div className="text-xs py-4 bg-[#4862f721] text-[#c4c4c4] flex flex-col justify-center mt-4 rounded-lg">
+									<p className="text-base text-[#c4c4c4] mb-1 font-medium">Seu Discord (com apelido e número) <span className="text-red-400">*</span></p>
+
+									<input placeholder="nickname#1234" className="p-2 text-base rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight w-full" {...register("discord", { required: true })} />
+									{errors.fullName && <p className="text-red-500 text-xs">Insira seu Discord</p>}
+
+									<p className="text-center my-4 text-base">O Discord será o principal meio de comunicação antes e durante o evento. Lá, você pode acessar conteúdos educacionais, conversar com os patrocinadores, se conectar com outros participantes e formar seu grupo!</p>
+
+									<p className="text-center text-base">Ainda não tem uma conta? <Link className="text-green-500" href={"https://discord.com/register"} target={"_blank"}>Crie a sua conta aqui</Link></p>
 								</div>
-								{errors.acceptTerms && <p className="text-red-500 text-xs">Você precisa aceitar os termos para se inscrever!</p>}
 							</div>
 
-							<div className="flex text-xs">
-								<input type={"checkbox"} {...register("receiveNotifications")} className={"mr-2 checked:bg-green-500"} />
-								<p className="text-[#c4c4c4]">Aceito receber emails sobre informações, prêmios e patrocinadores do evento.</p>
+							<div className="w-full mt-8 flex flex-col justify-center text-sm">
+								<div className="mb-2">
+									<div className="flex text-xs">
+										<input type={"checkbox"} {...register("acceptTerms", { required: true })} className={"mr-2 checked:bg-green-500"} />
+										<p className="text-base text-[#c4c4c4] mb-1">Li e concordo com os <Link target={"_blank"} href={"/regulamento"} className="text-green-500">regulamento do evento</Link>. <span className="text-red-400">*</span></p>
+									</div>
+									{errors.acceptTerms && <p className="text-red-500 text-xs">Você precisa aceitar os termos para se inscrever!</p>}
+								</div>
+
+								<div className="flex text-xs">
+									<input type={"checkbox"} {...register("receiveNotifications")} className={"mr-2 checked:bg-green-500"} />
+									<p className="text-base text-[#c4c4c4] mb-1">Aceito receber emails sobre informações, prêmios e patrocinadores do evento.</p>
+								</div>
 							</div>
-						</div>
 
-						<div className="text-sm w-fit mt-8">
-							<p className="text-[#c4c4c4]">{mathProblem.problem} <span className="text-blueText">*</span></p>
-							<input placeholder="Resposta" type="number" className="w-auto p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight" {...register("problemResult", { required: true })} />
-							{errors.problemResult && <p className="text-red-500 text-xs">Responda o problema!</p>}
-						</div>
+							<div className="text-sm w-fit mt-8">
+								<p className="text-md text-[#c4c4c4] mb-1">{mathProblem.problem} <span className="text-red-400">*</span></p>
+								<input placeholder="Resposta" type="number" className="w-auto p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight" {...register("problemResult", { required: true })} />
+								{errors.problemResult && <p className="text-red-500 text-xs">Responda o problema!</p>}
+							</div>
 
-						<div className="w-full px-8 flex flex-col justify-center mt-8">
-							<button type="submit" className={`${loading ? "bg-gray-500" : "bg-green-500"} py-2 px-8 rounded-lg font text-lg text-white`}>{loading ? "Enviando..." : "Enviar"}</button>
-						</div>
-					</form>
+							<div className="w-full px-8 flex flex-col justify-center mt-8">
+								<button type="submit" className={`${loading ? "bg-gray-500" : "bg-green-500"} py-2 px-8 rounded-lg font text-lg text-white`}>{loading ? "Enviando..." : "Enviar"}</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</Layout>

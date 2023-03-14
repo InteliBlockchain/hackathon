@@ -87,10 +87,10 @@ const Home = () => {
 
 
 			{/* carousel */}
-			<div className="flex h-auto items-center justify-center mx-auto border-border-red-500 bg-black py-16">
-				<div className="flex">
+			<div className="flex h-auto items-center justify-center mx-auto border-border-red-500 py-16">
+				{/* <div className="flex">
 					<Image className="ml-2" alt="arrow" src={arrowLeft}></Image>
-				</div>
+				</div> */}
 				<Carousel className="w-full md:w-2/5" autoPlay={true} showArrows={false} showThumbs={false} showIndicators={false} showStatus={false} infiniteLoop={true} interval={3000} transitionTime={800} dynamicHeight={false}>
 					<div className="border-2 border-purple1 mx-2 rounded">
 						<Image src={inteliblockchain} alt="Inteli Blockchain" />
@@ -112,9 +112,9 @@ const Home = () => {
 						</div>
 					</div>
 				</Carousel>
-				<div className="flex">
+				{/* <div className="flex">
 					<Image className="ml-2" alt="arrow" src={arrowRight}></Image>
-				</div>
+				</div> */}
 			</div >
 
 			{/* Empurraozinho */}
@@ -154,9 +154,10 @@ const Home = () => {
 						<p className="text-xl font-semibold">Apoio:</p>
 						<div className="w-full flex flex-col md:gap-4 md:grid-cols-2 md:grid">
 							{/* map the sponsor in a way they appear in a random order */}
-							{shuffle(sponsors).map(({ name, link, icon }, index) =>
+							{/* {shuffle(sponsors).map(({ name, link, icon }, index) =>
 								<Sponsor name={name} icon={icon} link={link} key={index} />
-							)}
+							)} */}
+							<p className="text-center text-grayText text-2xl mt-8">Em breve...</p>
 						</div>
 					</div>
 				</div>

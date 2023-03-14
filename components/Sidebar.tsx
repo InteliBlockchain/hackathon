@@ -91,11 +91,11 @@ export const Sidebar = ({ setSidebar }: {
                 </button>
 
                 <div className="flex flex-col px-4 justify-center h-full text-lg md:text-2xl">
-                    <Link href={"/hackathon"} className="text-[#cecece] mb-4 font-semibold text">Início</Link>
-                    <Link href={"/hackathon/educacional"} className="text-[#cecece] mb-4 font-semibold text">Aprenda</Link>
-                    <Link href={"/hackathon/q&a"} className="text-[#cecece] mb-4 font-semibold text">Q&A</Link>
-                    <Link href={"/hackathon/contact"} className="text-[#cecece] mb-4 font-semibold text">Entre em contato</Link>
-                    <Link href={"/hackathon/sponsor-form"} className="text-[#cecece] mb-4 font-semibold text">Seja um patrocinador</Link>
+                    <Link href={"/"} className="text-[#cecece] mb-4 font-semibold text">Início</Link>
+                    <Link href={"/educacional"} className="text-[#cecece] mb-4 font-semibold text">Aprenda</Link>
+                    <Link href={"/q&a"} className="text-[#cecece] mb-4 font-semibold text">Q&A</Link>
+                    <Link href={"/contact"} className="text-[#cecece] mb-4 font-semibold text">Entre em contato</Link>
+                    <Link href={"/sponsor-form"} className="text-[#cecece] mb-4 font-semibold text">Seja um patrocinador</Link>
                     <Link href={"https://inteliblockchain.co"} className="text-[#737373] text-xl font-semibold text">Voltar para https://inteliblockchain.co</Link>
                 </div>
             </div>

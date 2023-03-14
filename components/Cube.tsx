@@ -23,13 +23,13 @@ function Mesh() {
 export const Cube: React.FC = () => {
     return (
             <div style={{ height: '100%', width: "100%" }}>
-            <Canvas camera={{ position: [0, 0, 34] }}>
+            <Canvas camera={{ position: [0, 16, 32] }}>
                 <OrbitControls enableZoom={false} />
-                <pointLight color={'#4A92FF'} position={[0, 0, 0]} intensity={100} />
-                <pointLight position={[-10, 0, 20]} intensity={10} />
-                <pointLight position={[10, 0, 20]} intensity={10} />
-                <pointLight position={[-10, 0, -20]} intensity={10} />
-                <pointLight position={[10, 0, -20]} intensity={10} />
+                <pointLight color={'#76adff'} position={[0, 0, 0]} intensity={100} />
+                {/* <pointLight position={[-10, 0, 20]} intensity={1} />
+                <pointLight position={[10, 0, 20]} intensity={1} />
+                <pointLight position={[-10, 0, -20]} intensity={1} />
+                <pointLight position={[10, 0, -20]} intensity={1} /> */}
                 <Mesh />
             </Canvas>
         </div>

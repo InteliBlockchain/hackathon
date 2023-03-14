@@ -4,7 +4,7 @@ const getToken = (secret) => {
     const token = jwt.sign(
         { id: "testeDoVitin" },
         secret,
-        { expiresIn: '30m' },
+        { expiresIn: '30s' },
     );
 
     return token;
