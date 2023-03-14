@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // reactStrictMode: true,
-  reactStrictMode: false
+  reactStrictMode: false,
+  env: {
+    allow_subscriptions: false,
+    NEXT_PUBLIC_SERVER_URL: "http://hackton-alb-39395383.us-east-1.elb.amazonaws.com",
+    JWT_TOKEN_VALIDATION_FRONT: "fda185375967e0569363a5f061f0e1ae"
+  }
 }
 
 module.exports = nextConfig
