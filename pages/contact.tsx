@@ -32,21 +32,27 @@ const Contact = () => {
 			'frontend': token
 		}
 
-		
+
 		try {
 			await axios.post("/contact/contact", { ...data }, {
 				headers: headers,
 			}).then((res: any) => {
 				toast.success("Sua mensagem foi enviada com sucesso. Entraremos em contato assim que possível.")
-				
+
+				console.log(res)
+
 				setLoading(false)
 			}).catch((err: any) => {
 				toast.error(err.response.data)
+
+				console.log(err.response.data)
 
 				setLoading(false)
 			})
 		} catch (err) {
 			toast.error("Ocorreu um erro ao enviar sua mensagem. Tente novamente mais tarde.")
+
+			console.log(err)
 
 			setLoading(false)
 		}
