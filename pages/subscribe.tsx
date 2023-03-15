@@ -20,11 +20,12 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
 
 	const validateToken = async () => {
 		try {
-			axios.get("/Sub/validateToken/" + token, {
+			axios.get("/sub/validateToken/" + token, {
 				headers: {
 					'frontend': getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
 				}
 			}).then((res: any) => {
+				console.log(true)
 				return true
 			}).catch((err: any) => {
 				return false
@@ -34,27 +35,19 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
 		}
 	}
 
-	const validToken = await validateToken()
+	const isTokenValid = await validateToken();
+	console.log(isTokenValid, email)
 
-	if (validToken && email) {
-		return {
-			props: {
-				validToken: true,
-				email: email
-			},
-		}
-	}
-
-	return {
-		props: {
-			validToken: false,
-		},
+	return isTokenValid ? {
+		props: { validToken: true, email: email }
+	} : {
+		props: { validToken: false }
 	}
 }
 
 const Subscription = ({ validToken, email }: {
 	validToken: boolean;
-	email: string
+	email: string;
 }) => {
 	const router = useRouter();
 
@@ -74,8 +67,8 @@ const Subscription = ({ validToken, email }: {
 	useEffect(() => {
 		process.env.allow_subscription ? toast.warn("Inscrições não estão abertas no momento") && router.push("/") : null
 
-		!email ? toast.error("Email inválido") && router.push("/") : null
-		!validToken ? toast.error("Token inválido") && router.push("/") : toast.success("Token e email verificados com sucesso")
+		// !email ? toast.error("Email inválido") && router.push("/") : null
+		// !validToken ? toast.error("Token inválido") && router.push("/") : toast.success("Token e email verificados com sucesso")
 
 		setMathProblem(createMathProblem())
 

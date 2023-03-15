@@ -99,6 +99,13 @@ export const Modal = ({ setModal }: {
     const [loading, setLoading] = useState(false)
 
     const onSubmit = async (data: any) => {
+        // check if the date is after 19-03-2023 at 23:59
+        if (new Date(data.date) > new Date("2023-03-19T23:59:59") && !process.env.allow_subscriptions) {
+            toast.error("Inscrições ainda não estão abertas!")
+            return
+        }
+        
+
         setLoading(true)
         setData(data)
 
