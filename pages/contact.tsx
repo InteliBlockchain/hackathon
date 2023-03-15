@@ -32,7 +32,6 @@ const Contact = () => {
 			'frontend': token
 		}
 
-
 		try {
 			await axios.post("/contact/contact", { ...data }, {
 				headers: headers,
