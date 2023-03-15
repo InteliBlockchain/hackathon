@@ -41,9 +41,7 @@ export default function Document() {
 					`,
 				}}
 			/>
-			<Head>
-				<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
-			</Head>
+			<Head />
 			<body>
 				<Main />
 				<NextScript />
