@@ -4,7 +4,7 @@ const nextConfig = {
   reactStrictMode: false,
   env: {
     allow_subscriptions: false,
-    API_PUBLIC_URL: "http://hackton-alb-39395383.us-east-1.elb.amazonaws.com",
+    API_PUBLIC_URL: "https://hacktonapi.onrender.com", // "http://hackton-alb-39395383.us-east-1.elb.amazonaws.com",
     JWT_TOKEN_VALIDATION_FRONT: "fda185375967e0569363a5f061f0e1ae"
   }
 }
