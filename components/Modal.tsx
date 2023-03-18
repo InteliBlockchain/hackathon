@@ -187,7 +187,7 @@ export const Modal = ({ setModal }: {
 
                     <p className="my-4 text-md text-[#7D7D7D] text-center">Você receberá um email com um link para completar sua inscrição. O link é valido por uma hora.</p>
 
-                    <button className={`${loading ? "bg-[#7D7D7D]" : "bg-[#4863F7]"} font-semibold text-lg rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg}`} type={"submit"}>
+                    <button className={`${loading ? "bg-[#7D7D7D]" : "bg-[#4863F7]"} font-semibold text-lg rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg}`} type={"submit"} disabled={loading}>
                         {loading ? "Enviando..." : "Enviar"}
                     </button>
                 </form>

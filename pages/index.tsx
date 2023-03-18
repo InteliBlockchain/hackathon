@@ -32,7 +32,7 @@ import alexiaVentures from "@/assets/sponsors/alexia-ventures.svg"
 import sevenVisions from "@/assets/sponsors/7visions.svg"
 
 import inteli1 from "@/assets/inteli.png"
-import inteliblockchain from '@/assets/inteliblockchain.jpg'
+import inteliblockchain from '@/assets/inteliblockchain.png'
 
 import { useRouter } from "next/router";
 import { Subscription } from "@/components/Subscription";
@@ -66,8 +66,7 @@ const Home = () => {
 		<Layout modal={modal}>
 			{modal && process.env.allow_subscriptions ? <Modal setModal={setModal} /> : null}
 
-			{/* <div className="flex flex-col items-center justify-center bg1 bg-fixed bg-center bg-cover py-16 h-auto w-full mx-auto md:w-2/5"> */}
-			<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-24 h-auto w-full mx-auto z-50">
+			<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-24 h-auto w-full mx-auto z-50 px-2">
 				<Link href={"https://inteliblockchain.co/"} target="_blank">
 					<Image src={logo} alt="inteli-blockchain" />
 				</Link>
@@ -77,7 +76,7 @@ const Home = () => {
 						<Cube />
 					</div>
 					<div className="my-16 md:h-32 lg:h-40 absolute">
-						<Image src={challenge} alt="Challenge 2023" className="z-100 w-full h-full" />
+						<Image src={challenge} alt="Challenge 2023" className="z-100 w-full h-full left-auto right-auto" />
 					</div>
 				</div>
 
@@ -87,7 +86,7 @@ const Home = () => {
 
 
 			{/* carousel */}
-			<div className="flex h-auto items-center justify-center mx-auto border-border-red-500 py-16">
+			<div className="flex h-auto items-center justify-center mx-auto border-border-red-500 py-16 px-2">
 				{/* <div className="flex">
 					<Image className="ml-2" alt="arrow" src={arrowLeft}></Image>
 				</div> */}
@@ -118,7 +117,7 @@ const Home = () => {
 			</div >
 
 			{/* Empurraozinho */}
-			<div className="flex flex-col items-center justify-center bg2 bg-center bg-cover pt-10 pb-24 h-auto w-full mx-auto" >
+			<div className="flex flex-col items-center justify-center bg2 bg-center bg-cover pt-10 pb-24 h-auto w-full mx-auto px-2" >
 				<div className="w-full md:w-2/5 flex flex-col items-center justify-center">
 					<div className="flex flex-col items-center">
 						<p className="text-2xl text-center font-semibold mb-2" id="empurrao">Precisa de um empurrãozinho?</p>

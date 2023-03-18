@@ -330,7 +330,9 @@ const Subscription = ({ validToken, email }: {
 							</div>
 
 							<div className="w-full px-8 flex flex-col justify-center mt-8">
-								<button type="submit" className={`${loading ? "bg-gray-500" : "bg-green-500"} py-2 px-8 rounded-lg font text-lg text-white`}>{loading ? "Enviando..." : "Enviar"}</button>
+								<button type="submit" className={`${loading ? "bg-gray-500" : "bg-green-500"} py-2 px-8 rounded-lg font text-lg text-white`}
+									disabled={loading}
+								>{loading ? "Enviando..." : "Enviar"}</button>
 							</div>
 						</form>
 					</div>

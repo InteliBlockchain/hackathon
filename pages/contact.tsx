@@ -108,7 +108,9 @@ const Contact = () => {
 
 							<button type="submit" className={`
               ${loading ? "bg-gray-500" : "bg-green-500"} text-black font-semibold py-2 px-8 rounded-lg font text-lg
-              `}>{
+              `}
+								disabled={loading}
+							>{
 									loading ? "Enviando..." : "Enviar"
 								}</button>
 						</form>
