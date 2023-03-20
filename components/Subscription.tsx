@@ -15,7 +15,7 @@ export const Subscription = ({ setModal }: {
 
     useEffect(() => {
         setInterval(() => {
-            const openingDate = Math.floor(new Date('2023-03-21T20:00:00').getTime() / 1000)
+            const openingDate = Math.floor(new Date('2023-03-21T:00:00').getTime() / 1000)
             const currentDate = Math.floor(new Date().getTime() / 1000)
 
             const timeLeft = openingDate - currentDate
