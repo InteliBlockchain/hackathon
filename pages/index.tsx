@@ -67,13 +67,13 @@ const Home = () => {
 			{modal && process.env.NEXT_PUBLIC_allow_subscriptions ? <Modal setModal={setModal} /> : null}
 
 			<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-24 h-auto w-full mx-auto z-50 px-2">
-				<Link href={"https://inteliblockchain.co/"} target="_blank">
+				<Link href={"https://blockahain.inteli.edu.br/"} target="_blank">
 					<Image src={logo} alt="inteli-blockchain" />
 				</Link>
 
 				<div className="relative flex w-full h-64 md:h-80 items-center justify-center">
 					<div className="absolute h-80 md:h-96 left-auto right-auto">
-						<Cube />
+						{/* <Cube /> */}
 					</div>
 					<div className="my-16 md:h-32 lg:h-40 absolute">
 						<Image src={challenge} alt="Challenge 2023" className="z-100 w-full h-full left-auto right-auto" />
@@ -86,23 +86,26 @@ const Home = () => {
 
 
 			{/* carousel */}
-			<div className="flex h-auto items-center justify-center mx-auto border-border-red-500 py-16 px-2 bg-black">
-				<Carousel className="w-full md:w-2/5" autoPlay={true} showArrows={true} showThumbs={false} showIndicators={false} showStatus={false} infiniteLoop={true} interval={3000} transitionTime={800} dynamicHeight={false}>
-					<div className="border-2 border-purple1 mx-2 rounded">
-						<Image src={inteliblockchain} alt="Inteli Blockchain" />
-						<div className="bg-gray-900">
-							<p className=" text-2xl font-semibold text-left ml-2 pt-2">Inteli Blockchain</p>
-							<p className="text-left text-sm p-4 ">
+			<div className="flex h-auto items-center justify-center mx-auto border-border-red-500 py-8 pt-2 px-6 bg-black">
+				{/* <div className="flex">
+					<Image className="ml-2" alt="arrow" src={arrowLeft}></Image>
+				</div> */}
+				<Carousel className="w-full md:w-2/5 border-4 border-purple1 rounded" autoPlay={true} showArrows={true} showThumbs={true} showIndicators={false} showStatus={false} infiniteLoop={true} interval={3000} transitionTime={800} dynamicHeight={false}>
+					<div >
+						<Image className="p-8 rounded" src={inteliblockchain} alt="Inteli Blockchain" />
+						<div className="bg-black flex flex-col px-8">
+							<p className="text-2xl font-semibold text-left">Inteli Blockchain</p>
+							<p className="text-left text-sm">
 								Inteli Blockchain é um clube de estudos e pesquisa sobre tecnologias blockchain e criptomoedas. O clube é formado por alunos do Instituto de Tecnologia e Inteligência (Inteli), que se reúnem para discutir e desenvolver projetos relacionados a essas tecnologias.
 							</p>
 						</div>
 					</div>
 
-					<div className="border-2 border-purple1 mx-2 rounded">
-						<Image src={inteli1} alt="" />
-						<div className="bg-gray-900">
-							<p className=" text-2xl font-semibold text-left ml-2 pt-2">Infraestrutura</p>
-							<p className="text-left text-sm p-4 ">
+					<div>
+						<Image className="p-8 rounded" src={inteli1} alt="" />
+						<div className="bg-black flex flex-col px-8">
+							<p className=" text-2xl font-semibold text-left">Infraestrutura</p>
+							<p className="text-left text-sm">
 								O Hackathon será realizado no Instituto de Tecnologia e Inteligência (Inteli), localizado no Centro de São Paulo, com acesso fácil a transporte público e estacionamento. O local conta com uma estrutura completa para receber os participantes, com salas de aula, laboratórios, auditório, cantina, estacionamento e muito mais.
 							</p>
 						</div>
@@ -111,10 +114,10 @@ const Home = () => {
 			</div >
 
 			{/* Empurraozinho */}
-			<div className="flex flex-col items-center justify-center bg2 bg-center bg-cover pt-10 pb-24 h-auto w-full mx-auto px-2" >
+			<div className="flex flex-col items-center justify-center bg2 pt-10 pb-24 h-auto w-full mx-auto px-2" >
 				<div className="w-full md:w-2/5 flex flex-col items-center justify-center">
 					<div className="flex flex-col items-center">
-						<p className="text-2xl text-center font-semibold mb-2" id="empurrao">Precisa de um empurrãozinho?</p>
+						<p className="text-5xl text-center font-semibold mb-2" id="empurrao">Precisa de um empurrãozinho?</p>
 						<p className="text-md text-gray-300 text-center" id="empurrao">Aqui você pode conhecer todas as tecnologias que serão necessárias para se sair bem no hackathon!</p>
 					</div>
 
@@ -145,12 +148,12 @@ const Home = () => {
 				<div className="w-4/5 md:w-2/5 mt-8">
 					<div className="flex flex-col items-center w-full mb-8">
 						<p className="text-xl font-semibold">Apoio:</p>
-						<div className="w-full flex flex-col md:gap-4 md:grid-cols-2 md:grid">
+						<div className="w-full flex flex-col md:gap-4 md:grid">
 							{/* map the sponsor in a way they appear in a random order */}
-							{/* {shuffle(sponsors).map(({ name, link, icon }, index) =>
+							{shuffle(sponsors).map(({ name, link, icon }, index) =>
 								<Sponsor name={name} icon={icon} link={link} key={index} />
-							)} */}
-							<p className="text-center text-grayText text-2xl mt-8">Em breve...</p>
+							)}
+							{/* <p className="text-center text-grayText text-2xl mt-8">Em breve...</p> */}
 						</div>
 					</div>
 				</div>

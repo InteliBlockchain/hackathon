@@ -158,7 +158,7 @@ const Subscription = ({ token, validToken, email }: {
 		<Layout>
 			<div className="w-full flex flex-col items-center justify-center">
 				<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-16 pb-6 h-auto w-full mx-auto">
-					<Link href={"https://inteliblockchain.co/"} target="_blank">
+					<Link href={"https://blockahain.inteli.edu.br/"} target="_blank">
 						<Image src={logo} alt="inteli-blockchain" />
 					</Link>
 
