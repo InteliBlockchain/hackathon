@@ -37,7 +37,7 @@ export const Subscription = ({ setModal }: {
     }
 
     return (
-        process.env.allow_subscriptions ? (
+        process.env.NEXT_PUBLIC_allow_subscriptions ? (
             <div className="w-full md:w-2/5 flex flex-col items-center">
                 <button className="font-semibold text-xl bg-[#4863F7] rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg" onClick={() => toggleModal()}>
                     Inscreva-se!

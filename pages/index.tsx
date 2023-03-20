@@ -64,7 +64,7 @@ const Home = () => {
 
 	return (
 		<Layout modal={modal}>
-			{modal && process.env.allow_subscriptions ? <Modal setModal={setModal} /> : null}
+			{modal && process.env.NEXT_PUBLIC_allow_subscriptions ? <Modal setModal={setModal} /> : null}
 
 			<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-24 h-auto w-full mx-auto z-50 px-2">
 				<Link href={"https://inteliblockchain.co/"} target="_blank">
@@ -86,11 +86,8 @@ const Home = () => {
 
 
 			{/* carousel */}
-			<div className="flex h-auto items-center justify-center mx-auto border-border-red-500 py-16 px-2">
-				{/* <div className="flex">
-					<Image className="ml-2" alt="arrow" src={arrowLeft}></Image>
-				</div> */}
-				<Carousel className="w-full md:w-2/5" autoPlay={true} showArrows={false} showThumbs={false} showIndicators={false} showStatus={false} infiniteLoop={true} interval={3000} transitionTime={800} dynamicHeight={false}>
+			<div className="flex h-auto items-center justify-center mx-auto border-border-red-500 py-16 px-2 bg-black">
+				<Carousel className="w-full md:w-2/5" autoPlay={true} showArrows={true} showThumbs={false} showIndicators={false} showStatus={false} infiniteLoop={true} interval={3000} transitionTime={800} dynamicHeight={false}>
 					<div className="border-2 border-purple1 mx-2 rounded">
 						<Image src={inteliblockchain} alt="Inteli Blockchain" />
 						<div className="bg-gray-900">
@@ -111,9 +108,6 @@ const Home = () => {
 						</div>
 					</div>
 				</Carousel>
-				{/* <div className="flex">
-					<Image className="ml-2" alt="arrow" src={arrowRight}></Image>
-				</div> */}
 			</div >
 
 			{/* Empurraozinho */}
