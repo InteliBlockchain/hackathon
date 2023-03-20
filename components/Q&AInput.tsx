@@ -24,7 +24,7 @@ export const QeAInput = ({ id, question, answer }: {
                 { height: "fit-content" },
                 { height: "0" }
             ], {
-                duration: 1500,
+                duration: 400,
                 easing: "ease-in-out",
                 fill: "forwards"
             })
@@ -33,7 +33,7 @@ export const QeAInput = ({ id, question, answer }: {
                 { transform: "rotate(0deg)" },
                 { transform: "rotate(90deg)" }
             ], {
-                duration: 600,
+                duration: 400,
                 easing: "ease-in-out",
                 fill: "forwards"
             })
@@ -42,7 +42,7 @@ export const QeAInput = ({ id, question, answer }: {
                 { height: "0" },
                 { height: "fit-content" }
             ], {
-                duration: 1500,
+                duration: 400,
                 easing: "ease-in-out",
                 fill: "forwards"
             })
@@ -51,15 +51,13 @@ export const QeAInput = ({ id, question, answer }: {
                 { transform: "rotate(90deg)" },
                 { transform: "rotate(0deg)" }
             ], {
-                duration: 600,
+                duration: 400,
                 easing: "ease-in-out",
                 fill: "forwards"
             })
         }
 
-        setTimeout(() => {
             setIsOpen(!isOpen);
-        }, 200);
     }
 
     return (

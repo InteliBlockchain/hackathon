@@ -13,6 +13,8 @@ body {
 
 .bg2 {
     background-image: url(../assets/bg-mobile-2.png);
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 body::-webkit-scrollbar {

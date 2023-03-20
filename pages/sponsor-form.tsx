@@ -55,10 +55,10 @@ const Sponsor = () => {
   return (
     <Layout>
       <div className="flex flex-col items-center bg-black bg-cover min-h-screen h-full mx-auto w-full px-4">
-        <div className="flex flex-col bg-black bg-cover pt-24 pb-24 w-full mx-auto md:w-3/5">
+        <div className="flex flex-col bg-black bg-cover pt-60 pb-24 w-full mx-auto md:w-6/12">
           <div className="md:h-32 lg:h-40">
             <div className="flex flex-col items-center">
-              <h1 className="font-medium text-4xl text-center mb-2">
+              <h1 className="font-medium text-5xl text-center mb-2">
                 Traga sua empresa para o evento
               </h1>
               <p className="font-medium mt-2 text-center text-[#ABABAB] text-md">
@@ -69,7 +69,7 @@ const Sponsor = () => {
             <form onSubmit={handleSubmit(submitHandler)} className="flex flex-col justify-center md:items-center min-w-full items-center self-center mt-8">
               <div className="flex flex-col justify-center  w-full px-4">
                 <div className="mb-4">
-                  <p className="text-md">Nome da empresa</p>
+                  <p className="text-lg pb-1">Nome da empresa</p>
                   <input
                     {...register("companyName", { required: true })}
                     placeholder="Nome da empresa"
@@ -79,7 +79,7 @@ const Sponsor = () => {
                 </div>
 
                 <div className="mb-4">
-                  <p className="text-md">Email</p>
+                  <p className="text-lg pb-1">Email</p>
                   <input
                     {...register("email", { required: true })}
                     placeholder="contato@empresa.com" type="email"
@@ -91,7 +91,7 @@ const Sponsor = () => {
               <p className="text-grayText mb-8">Entraremos em contato assim que possível!</p>
 
               <button type="submit" className={`
-              ${loading ? "bg-gray-500" : "bg-green-500"} text-black font-semibold py-2 px-8 rounded-lg font text-lg
+              ${loading ? "bg-gray-500" : "bg-green-500"} transition-all hover:scale-105 text-black font-semibold py-2 px-8 rounded-lg font text-lg
               `}
                  disabled={loading}
               >{
