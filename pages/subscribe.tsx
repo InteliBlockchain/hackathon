@@ -17,35 +17,31 @@ import getToken from "@/utils/getToken";
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
 	const { token, email } = ctx.query;
+	let validToken: boolean = false;
 
-	const validateToken = async () => {
-		try {
-			axios.get("/sub/validateToken/" + token, {
-				headers: {
-					'frontend': getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
-				}
-			}).then((res: any) => {
-				console.log(true)
-				return true
-			}).catch((err: any) => {
-				return false
-			})
-		} catch (err) {
-			return false
-		}
+	const headers = {
+		'frontend': getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
 	}
 
-	const isTokenValid = await validateToken();
-	console.log(isTokenValid, email)
+	const validateToken = async () => {
+		await axios.get("sub/validateToken/" + token, headers).then((res: any) => {
+			return true
+		}).catch((err: any) => {
+			return false
+		})
 
-	return isTokenValid ? {
-		props: { validToken: true, email: email }
-	} : {
-		props: { validToken: false }
+		return false
+	}
+
+	validToken = await validateToken()
+
+	return {
+		props: { token, validToken, email }
 	}
 }
 
-const Subscription = ({ validToken, email }: {
+const Subscription = ({ token, validToken, email }: {
+	token: string,
 	validToken: boolean;
 	email: string;
 }) => {
@@ -66,6 +62,12 @@ const Subscription = ({ validToken, email }: {
 
 	useEffect(() => {
 		process.env.allow_subscription ? toast.warn("Inscrições não estão abertas no momento") && router.push("/") : null
+
+		console.log(
+			"token: " + token,
+			"\nvalidToken: " + validToken,
+			"\nemail: " + email
+		)
 
 		// !email ? toast.error("Email inválido") && router.push("/") : null
 		// !validToken ? toast.error("Token inválido") && router.push("/") : toast.success("Token e email verificados com sucesso")
@@ -93,27 +95,29 @@ const Subscription = ({ validToken, email }: {
 		setLoading(true)
 		setData(data)
 
-		let token = getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
+		console.log(data)
+
+		// let token = getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
 
 		const headers = {
-			'frontend': token
+			'frontend': getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
 		}
 
 		try {
-			// await axios.post("/Sub/sendConfirmation", {
-			// 	email: data.email,
-			// }, {
-			// 	headers: headers,
-			// }).then((res: any) => {
-			// 	toast.success("Um email foi enviado para " + data.email + " com um link para confirmar seu cadastro")
+			await axios.post(`/Sub/validateEmail/${token}`, {
+				...data, email
+			}, {
+				headers: headers,
+			}).then((res: any) => {
+				toast.success("Inscrição realizada com sucesso! Aguarde atualizações sobre a sua participação no evento!")
 
-			// 	// router.push("/success?email=" + data.email)
+				// router.push("/success?email=" + data.email)
 
-			// 	setLoading(false)
-			// }).catch((err: any) => {
-			// 	toast.error("Ocorreu um erro e o email não pôde ser enviado para " + data.email + ". Tente novamente mais tarde ou cheque seu email")
-			// 	setLoading(false)
-			// })
+				setLoading(false)
+			}).catch((err: any) => {
+				toast.error("Occorreu um erro, tente novamente mais tarde ou contate um administrador.")
+				setLoading(false)
+			})
 
 			data.problemResult == mathProblem.result ? toast.success("Resposta correta")
 				: toast.error("Resposta incorreta")
@@ -124,11 +128,37 @@ const Subscription = ({ validToken, email }: {
 		}
 	}
 
+	const cpfMask = (value: String) => {
+		return value
+			.replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
+			.replace(/(\d{3})(\d)/, '$1.$2') // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
+			.replace(/(\d{3})(\d)/, '$1.$2')
+			.replace(/(\d{3})(\d{1,2})/, '$1-$2')
+			.replace(/(-\d{2})\d+?$/, '$1') // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
+	}
+
+	const rgMask = (value: String) => {
+		return value
+			.replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
+			.replace(/(\d{2})(\d)/, '$1.$2') // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
+			.replace(/(\d{3})(\d)/, '$1.$2')
+			.replace(/(\d{3})(\d{1,2})/, '$1-$2')
+			.replace(/(-\d{1})\d+?$/, '$1') // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
+	}
+
+	const formatDocument = (value: String) => {
+		if (documentType == "cpf") {
+			return cpfMask(value)
+		} else {
+			return value
+		}
+	}
+
 	return (
 		<Layout>
 			<div className="w-full flex flex-col items-center justify-center">
 				<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-16 pb-6 h-auto w-full mx-auto">
-					<Link href={"https://inteliblockchain.co/"} target="_blank">
+					<Link href={"https://blockahain.inteli.edu.br/"} target="_blank">
 						<Image src={logo} alt="inteli-blockchain" />
 					</Link>
 
@@ -189,7 +219,10 @@ const Subscription = ({ validToken, email }: {
 											required: true,
 											maxLength: documentType == "cpf" ? 14 : 13,
 											minLength: documentType == "cpf" ? 14 : 13,
-											pattern: documentType == "cpf" ? /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/ : /^\d{2}\.\d{3}\.\d{3}\-\d{2}$/
+											pattern: documentType == "cpf" ? /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/ : /^\d{2}\.\d{3}\.\d{3}\-\d{2}$/,
+											onChange: (e) => {
+												e.target.value = formatDocument(e.target.value);
+											}
 										})}
 									/>
 								</div>
@@ -234,16 +267,16 @@ const Subscription = ({ validToken, email }: {
 								<textarea
 									minLength={200}
 									maxLength={4000}
-									rows={5}
+									rows={8}
 									placeholder=""
 									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
-									{...register("whyParticipate", { required: true, maxLength: 4000, minLength: 200 })}
+									{...register("why", { required: true, maxLength: 4000, minLength: 200 })}
 								/>
 								{/* add how much characters have been typed */}
-								{errors.whyParticipate?.type == "required" && <p className="text-red-500 text-xs">
+								{errors.why?.type == "required" && <p className="text-red-500 text-xs">
 									Insira sua resposta
 								</p>}
-								{errors.whyParticipate?.type == "maxLength" && <p className="text-red-500 text-xs">
+								{errors.why?.type == "maxLength" && <p className="text-red-500 text-xs">
 									Insira no máximo 4000 caracteres
 								</p>}
 							</div>
@@ -253,7 +286,7 @@ const Subscription = ({ validToken, email }: {
 								<textarea
 									minLength={200}
 									maxLength={4000}
-									rows={5}
+									rows={8}
 									placeholder=""
 									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
 									{...register("history", { required: true, maxLength: 4000, minLength: 200 })}
@@ -272,16 +305,16 @@ const Subscription = ({ validToken, email }: {
 								<textarea
 									minLength={200}
 									maxLength={4000}
-									rows={5}
+									rows={8}
 									placeholder=""
 									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
-									{...register("skills", { required: true, maxLength: 4000, minLength: 200 })}
+									{...register("habilities", { required: true, maxLength: 4000, minLength: 200 })}
 								/>
 								{/* add how much characters have been typed */}
-								{errors.skills?.type == "required" && <p className="text-red-500 text-xs">
+								{errors.habilities?.type == "required" && <p className="text-red-500 text-xs">
 									Insira sua resposta
 								</p>}
-								{errors.skills?.type == "maxLength" && <p className="text-red-500 text-xs">
+								{errors.habilities?.type == "maxLength" && <p className="text-red-500 text-xs">
 									Insira no máximo 4000 caracteres
 								</p>}
 							</div>
@@ -290,11 +323,17 @@ const Subscription = ({ validToken, email }: {
 								<p className="font-semibold text-2xl text-white mb-4 text-center">Contato</p>
 
 								<p className="text-md text-[#c4c4c4] mb-1">Telefone (DDD + número) <span className="text-red-400">*</span></p>
-								<input placeholder="Número" className="p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight w-full" {...register("contact", {
+								<input placeholder="Número" className="p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight w-full" type="text" {...register("contact", {
 									required: true,
-									pattern: /^\(\d{2}\) \d \d{4}-\d{4}$/
+									// pattern: /^\(\d{2}\) \d \d{4}-\d{4}$/,
+									onChange: (e) => {
+										e.target.value = e.target.value.replace(/\D/g, '').replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
+									}
 								})} />
 								{errors.fullName && <p className="text-red-500 text-xs">Insira sua forma de contato</p>}
+								{errors.contact?.type == "pattern" && <p className="text-red-500 text-xs">
+									Insira um número válido
+								</p>}
 
 								<div className="text-xs py-4 bg-[#4862f721] text-[#c4c4c4] flex flex-col justify-center mt-4 rounded-lg">
 									<p className="text-base text-[#c4c4c4] mb-1 font-medium">Seu Discord (com apelido e número) <span className="text-red-400">*</span></p>
@@ -318,7 +357,7 @@ const Subscription = ({ validToken, email }: {
 								</div>
 
 								<div className="flex text-xs">
-									<input type={"checkbox"} {...register("receiveNotifications")} className={"mr-2 checked:bg-green-500"} />
+									<input type={"checkbox"} {...register("mailing")} className={"mr-2 checked:bg-green-500"} />
 									<p className="text-base text-[#c4c4c4] mb-1">Aceito receber emails sobre informações, prêmios e patrocinadores do evento.</p>
 								</div>
 							</div>

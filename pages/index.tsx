@@ -64,10 +64,10 @@ const Home = () => {
 
 	return (
 		<Layout modal={modal}>
-			{modal && process.env.allow_subscriptions ? <Modal setModal={setModal} /> : null}
+			{modal && process.env.NEXT_PUBLIC_allow_subscriptions ? <Modal setModal={setModal} /> : null}
 
 			<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-24 h-auto w-full mx-auto z-50 px-2">
-				<Link href={"https://inteliblockchain.co/"} target="_blank">
+				<Link href={"https://blockahain.inteli.edu.br/"} target="_blank">
 					<Image src={logo} alt="inteli-blockchain" />
 				</Link>
 
@@ -92,7 +92,7 @@ const Home = () => {
 				</div> */}
 				<Carousel className="w-full md:w-2/5 border-4 border-purple1 rounded" autoPlay={true} showArrows={true} showThumbs={true} showIndicators={false} showStatus={false} infiniteLoop={true} interval={3000} transitionTime={800} dynamicHeight={false}>
 					<div >
-						  <Image className="p-8 rounded" src={inteliblockchain} alt="Inteli Blockchain" />
+						<Image className="p-8 rounded" src={inteliblockchain} alt="Inteli Blockchain" />
 						<div className="bg-black flex flex-col px-8">
 							<p className="text-2xl font-semibold text-left">Inteli Blockchain</p>
 							<p className="text-left text-sm">
@@ -102,7 +102,7 @@ const Home = () => {
 					</div>
 
 					<div>
-						  <Image className="p-8 rounded" src={inteli1} alt="" />
+						<Image className="p-8 rounded" src={inteli1} alt="" />
 						<div className="bg-black flex flex-col px-8">
 							<p className=" text-2xl font-semibold text-left">Infraestrutura</p>
 							<p className="text-left text-sm">
@@ -111,9 +111,6 @@ const Home = () => {
 						</div>
 					</div>
 				</Carousel>
-				{/* <div className="flex">
-					<Image className="ml-2" alt="arrow" src={arrowRight}></Image>
-				</div> */}
 			</div >
 
 			{/* Empurraozinho */}
