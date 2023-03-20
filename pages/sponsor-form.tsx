@@ -27,7 +27,7 @@ const Sponsor = () => {
     setLoading(true)
     setData(data)
 
-    let token = getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
+    let token = getToken(process.env.NEXT_PUBLIC_JWT_TOKEN_VALIDATION_FRONT)
 
     const headers = {
       'frontend': token
@@ -55,7 +55,7 @@ const Sponsor = () => {
   return (
     <Layout>
       <div className="flex flex-col items-center bg-black bg-cover min-h-screen h-full mx-auto w-full px-4">
-        <div className="flex flex-col bg-black bg-cover pt-60 pb-24 w-full mx-auto md:w-6/12">
+        <div className="flex flex-col bg-black bg-cover pt-24 w-full mx-auto md:w-6/12">
           <div className="md:h-32 lg:h-40">
             <div className="flex flex-col items-center">
               <h1 className="font-medium text-5xl text-center mb-2">
@@ -93,7 +93,7 @@ const Sponsor = () => {
               <button type="submit" className={`
               ${loading ? "bg-gray-500" : "bg-green-500"} transition-all hover:scale-105 text-black font-semibold py-2 px-8 rounded-lg font text-lg
               `}
-                 disabled={loading}
+                disabled={loading}
               >{
                   loading ? "Enviando..." : "Enviar"
                 }</button>

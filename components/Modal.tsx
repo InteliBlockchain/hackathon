@@ -109,7 +109,7 @@ export const Modal = ({ setModal }: {
         setLoading(true)
         setData(data)
 
-        let token = getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
+        let token = getToken(process.env.NEXT_PUBLIC_JWT_TOKEN_VALIDATION_FRONT)
 
         const headers = {
             'frontend': token

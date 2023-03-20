@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
 	let validToken: boolean = false;
 
 	const headers = {
-		'frontend': getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
+		'frontend': getToken(process.env.NEXT_PUBLIC_JWT_TOKEN_VALIDATION_FRONT)
 	}
 
 	const validateToken = async () => {
@@ -97,10 +97,10 @@ const Subscription = ({ token, validToken, email }: {
 
 		console.log(data)
 
-		// let token = getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
+		// let token = getToken(process.env.NEXT_PUBLIC_JWT_TOKEN_VALIDATION_FRONT)
 
 		const headers = {
-			'frontend': getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
+			'frontend': getToken(process.env.NEXT_PUBLIC_JWT_TOKEN_VALIDATION_FRONT)
 		}
 
 		try {

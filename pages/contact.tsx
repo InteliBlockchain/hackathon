@@ -26,7 +26,7 @@ const Contact = () => {
 		setLoading(true)
 		setData(data)
 
-		let token = getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
+		let token = getToken(process.env.NEXT_PUBLIC_JWT_TOKEN_VALIDATION_FRONT)
 
 		const headers = {
 			'frontend': token
@@ -60,8 +60,8 @@ const Contact = () => {
 	return (
 		<Layout>
 			<div className="flex flex-col items-center bg-black bg-cover min-h-screen h-full mx-auto w-full px-4">
-				<div className="flex flex-col bg-black bg-cover pt-60 pb-24 w-full mx-auto md:w-6/12">
-					<div className="md:h-32 lg:h-40">
+				<div className="flex flex-col bg-black bg-cover pt-24 w-full mx-auto md:w-6/12">
+					<div className="">
 						<div className="flex flex-col items-center">
 							<h1 className="font-medium text-5xl text-center mb-2">
 								Tem mais alguma dúvida?
