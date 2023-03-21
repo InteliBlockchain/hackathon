@@ -10,22 +10,32 @@ import ActionsTd from '@/components/actionsTd'
 import TableComponent from '@/components/table'
 import Modal from '@/components/styledModal'
 import SubscriptionModal from '@/components/subscriptionModal'
+import RequireAuthentication from '@/HOC/requireAuthentication'
 
 export interface Subscription {
     id: string
-    fullName: string
-    document: string
-    institution: string
+    email: string
+    acceptTerms: boolean
     contact: string
+    discord: string
     github?: string
     linkedin?: string
-    instagram?: string
-    twitter?: string
-    specialNeed?: string
-    whyParticipate: string
-    history: string
-    skills: string
-    discord: string
+    document: string
+    documentType: string
+    fullName: string
+    level: string
+    institution: string
+    gender: string
+    local: string
+    group: boolean
+    why: string
+    specialNeeds?: string
+    history?: string
+    habilities?: string
+    mailing: boolean
+    approved: boolean
+    createdAt: Date
+    updatedAt: Date
 }
 
 const Home = () => {
@@ -37,59 +47,25 @@ const Home = () => {
         setShowModal(false)
     }
 
-    const [subscriptions, setSubscriptions] = useState<Subscription[]>([
-        {
-            id: '#4901289',
-            fullName: 'Lyorrei Shono',
-            document: `MG-89.123.654`,
-            institution: `BTG Pactual`,
-            contact: '31 99374-5821',
-            discord: "ADIO#4321",
-            history: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est placeat sapiente eius ipsa? In, beatae itaque? Rerum, animi?",
-            skills: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est placeat sapiente eius ipsa? In, beatae itaque? Rerum, animi?",
-            whyParticipate: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est placeat sapiente eius ipsa? In, beatae itaque? Rerum, animi?",
-        },
-        {
-            id: '#4901289',
-            fullName: 'Lyorrei Shono',
-            document: `MG-89.123.654`,
-            institution: `BTG Pactual`,
-            contact: '31 99374-5821',
-            discord: "ADIO#4321",
-            history: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est placeat sapiente eius ipsa? In, beatae itaque? Rerum, animi?",
-            skills: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est placeat sapiente eius ipsa? In, beatae itaque? Rerum, animi?",
-            whyParticipate: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est placeat sapiente eius ipsa? In, beatae itaque? Rerum, animi?",
-        },
-        {
-            id: '#4901289',
-            fullName: 'Lyorrei Shono',
-            document: `MG-89.123.654`,
-            institution: `BTG Pactual`,
-            contact: '31 99374-5821',
-            discord: "ADIO#4321",
-            history: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est placeat sapiente eius ipsa? In, beatae itaque? Rerum, animi?",
-            skills: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est placeat sapiente eius ipsa? In, beatae itaque? Rerum, animi?",
-            whyParticipate: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est placeat sapiente eius ipsa? In, beatae itaque? Rerum, animi?",
-        },
-    ])
+    const [subscriptions, setSubscriptions] = useState<Subscription[]>([])
 
-    useEffect(() => {}, [selectedSubscription])
+    useEffect(() => {
+        // console.log(selectedSubscription)
+    }, [selectedSubscription])
 
     const { register, handleSubmit } = useForm()
 
     useEffect(() => {
-        // axios.get('')
-    })
+        axios.get('/Sub/allPreSubs').then((data: any) => {
+            console.log(data)
+        })
+    }, [])
 
     const columns = React.useMemo(
         () => [
             {
                 Header: ' ',
                 columns: [
-                    {
-                        Header: 'Id',
-                        accessor: 'id',
-                    },
                     {
                         Header: 'Nome completo',
                         accessor: 'fullName',
@@ -108,14 +84,18 @@ const Home = () => {
                     },
                     {
                         Header: 'Ações',
-                        accessor: '_id',
+                        accessor: 'id',
                         Cell: (props: any) => {
                             const actions = [
                                 {
                                     handler: () => {
-                                        console.log(props.row)
-                                        setShowModal(true)
-                                        setSelectedSubscription(props.row.values)
+                                        const subs = subscriptions.find(
+                                            (subscription) => subscription.id == props.row.values.id
+                                        )
+                                        if (subs) {
+                                            setSelectedSubscription(subs)
+                                            setShowModal(true)
+                                        }
                                     },
                                     icon: FaRegEye,
                                     color: '#02DE82',
@@ -132,7 +112,6 @@ const Home = () => {
     )
 
     const data = React.useMemo(() => [...subscriptions], [subscriptions])
-
     return (
         <Layout>
             <PageContainer>
@@ -141,10 +120,16 @@ const Home = () => {
 
                     <TableComponent columns={columns} data={data} />
                 </Container>
-                {selectedSubscription && <SubscriptionModal subscription={selectedSubscription} showModal={showModal} closeModal={closeModal}/>}
+                {selectedSubscription && (
+                    <SubscriptionModal
+                        subscription={selectedSubscription}
+                        showModal={showModal}
+                        closeModal={closeModal}
+                    />
+                )}
             </PageContainer>
         </Layout>
     )
 }
 
-export default Home
+export default RequireAuthentication (Home)

@@ -16,11 +16,11 @@ const Home = () => {
     const [emailSent, setEmailSent] = useState(false)
 
     const { register, handleSubmit } = useForm()
-    const onSubmit = async (data: any) => {
+    const onSubmit = async (data: any) =>  {
         let token = getToken(process.env.NEXT_PUBLIC_JWT_TOKEN_VALIDATION_FRONT)
-
-        const headers = {
-            'frontend': token,
+     
+		const headers = {
+			'frontend': token,
             'Authorization': `Bearer ${data.token}`
         }
         if (!emailSent) {
@@ -35,7 +35,7 @@ const Home = () => {
         }
 
         try {
-            const { data: result } = await axios.get('/sub/validateadmin', { headers })
+            const {data: result} = await axios.get('/sub/validateadmin/' + data.token, {headers})
             toast.success("Login realizado com sucesso!")
             router.push('/admin/subscriptions')
         } catch (err) {

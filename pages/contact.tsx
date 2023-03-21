@@ -25,7 +25,7 @@ const Contact = () => {
 	) => {
 		setLoading(true)
 		setData(data)
-
+		
 		let token = getToken(process.env.NEXT_PUBLIC_JWT_TOKEN_VALIDATION_FRONT)
 
 		const headers = {

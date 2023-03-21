@@ -40,17 +40,21 @@ import { toast } from "react-toastify";
 
 const Home = () => {
 	const router = useRouter();
-
 	const [sponsors] = useState([
 		{ link: "https://inteli.edu.br", name: "Inteli", icon: inteli },
 		{ link: "https://www.blockchainrio.com.br/", name: "BlockchainRio", icon: blockchain_rio },
 		{ link: "https://ethereum.org/en/foundation/", name: "Ethereum Foundation", icon: eth_foundation },
-		{ link: "https://ribus.com.br/", name: "Ribus", icon: ribus },
-		{ link: "https://www.mynt.com.br/", name: "Mynt", icon: mynt },
-		{ link: "", name: "Cartesi", icon: cartesi },
-		{ link: "https://www.alexia-ventures.com/", name: "Alexia Ventures", icon: alexiaVentures, blackBg: true },
-		{ link: "https://7visions.com.br/", name: "7Visions", icon: sevenVisions },
 	])
+	// const [sponsors] = useState([
+	// 	{ link: "https://inteli.edu.br", name: "Inteli", icon: inteli },
+	// 	{ link: "https://www.blockchainrio.com.br/", name: "BlockchainRio", icon: blockchain_rio },
+	// 	{ link: "https://ethereum.org/en/foundation/", name: "Ethereum Foundation", icon: eth_foundation },
+	// 	{ link: "https://ribus.com.br/", name: "Ribus", icon: ribus },
+	// 	{ link: "https://www.mynt.com.br/", name: "Mynt", icon: mynt },
+	// 	{ link: "", name: "Cartesi", icon: cartesi },
+	// 	{ link: "https://www.alexia-ventures.com/", name: "Alexia Ventures", icon: alexiaVentures, blackBg: true },
+	// 	{ link: "https://7visions.com.br/", name: "7Visions", icon: sevenVisions },
+	// ])
 
 	const [modal, setModal] = useState(false)
 
@@ -64,7 +68,7 @@ const Home = () => {
 
 	return (
 		<Layout modal={modal}>
-			{modal && process.env.NEXT_PUBLIC_allow_subscriptions ? <Modal setModal={setModal} /> : null}
+			{modal && process.env.NEXT_PUBLIC_ALLOW_SUBSCRIPTIONS ? <Modal setModal={setModal} /> : null}
 
 			<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-24 h-auto w-full mx-auto z-50 px-2">
 				<Link href={"https://blockchain.inteli.edu.br/"} target="_blank">
@@ -86,27 +90,45 @@ const Home = () => {
 
 
 			{/* carousel */}
-			<div className="flex h-auto items-center justify-center mx-auto border-border-red-500 py-8 pt-2 px-6 bg-black">
+			<div className="flex h-auto items-center justify-center mx-auto border-border-red-500 py-8 pt-2 px-6 desktop:bg-black bg-[#0e0e10]">
 				{/* <div className="flex">
 					<Image className="ml-2" alt="arrow" src={arrowLeft}></Image>
 				</div> */}
-				<Carousel className="w-full md:w-2/5 border-4 border-purple1 rounded" autoPlay={true} showArrows={true} showThumbs={true} showIndicators={false} showStatus={false} infiniteLoop={true} interval={3000} transitionTime={800} dynamicHeight={false}>
+				<Carousel className="w-full md:w-2/5 border-2 border-purple1 rounded" autoPlay={true} showArrows={true} showThumbs={true} showIndicators={false} showStatus={false} infiniteLoop={true} interval={3000} transitionTime={800} dynamicHeight={false}>
 					<div >
 						<Image className="p-8 rounded" src={inteliblockchain} alt="Inteli Blockchain" />
-						<div className="bg-black flex flex-col px-8">
-							<p className="text-2xl font-semibold text-left">Inteli Blockchain</p>
+						<div className=" flex flex-col px-8">
+							<p className="text-2xl font-semibold text-left">Premiações</p>
 							<p className="text-left text-sm">
-								Inteli Blockchain é um clube de estudos e pesquisa sobre tecnologias blockchain e criptomoedas. O clube é formado por alunos do Instituto de Tecnologia e Inteligência (Inteli), que se reúnem para discutir e desenvolver projetos relacionados a essas tecnologias.
+								O Challenge2023 traz um conceito diferente: As categorias. As empresas parceiras do evento trarão diversos temas diferentes de projeto, cada um com sua premiação. Fique de olho nas redes sociais para saber mais sobre as categorias e os prêmios.
 							</p>
 						</div>
 					</div>
 
 					<div>
 						<Image className="p-8 rounded" src={inteli1} alt="" />
-						<div className="bg-black flex flex-col px-8">
+						<div className=" flex flex-col px-8">
 							<p className=" text-2xl font-semibold text-left">Infraestrutura</p>
 							<p className="text-left text-sm">
 								O Hackathon será realizado no Instituto de Tecnologia e Inteligência (Inteli), localizado no Centro de São Paulo, com acesso fácil a transporte público e estacionamento. O local conta com uma estrutura completa para receber os participantes, com salas de aula, laboratórios, auditório, cantina, estacionamento e muito mais.
+							</p>
+						</div>
+					</div>
+					<div>
+						<Image className="p-8 rounded" src={inteli1} alt="" />
+						<div className=" flex flex-col px-8">
+							<p className=" text-2xl font-semibold text-left">Educacional</p>
+							<p className="text-left text-sm">
+								Ainda não está sabendo tudo de Blockchain? Não se preocupe! Você tem acesso à diversos links e materiais de estudo para que você possa se preparar para o evento. No discord, você pode trocar ideias com outros participantes e tirar suas dúvidas.
+							</p>
+						</div>
+					</div>
+					<div>
+						<Image className="p-8 rounded" src={inteli1} alt="" />
+						<div className=" flex flex-col px-8">
+							<p className=" text-2xl font-semibold text-left">Mentoria</p>
+							<p className="text-left text-sm">
+								Com todo projeto aparecem dúvidas e dificuldades. Para te ajudar, contaremos com profissionais e professores de diversas áreas para que estarão disponiveis para tirar suas dúvidas e te ajudar a desenvolver sua solução.
 							</p>
 						</div>
 					</div>
@@ -117,7 +139,7 @@ const Home = () => {
 			<div className="flex flex-col items-center justify-center bg2 pt-10 pb-24 h-auto w-full mx-auto px-2" >
 				<div className="w-full md:w-2/5 flex flex-col items-center justify-center">
 					<div className="flex flex-col items-center">
-						<p className="text-5xl text-center font-semibold mb-2" id="empurrao">Precisa de um empurrãozinho?</p>
+						<p className="text-4xl text-center font-semibold mb-2" id="empurrao">Precisa de um empurrãozinho?</p>
 						<p className="text-md text-gray-300 text-center" id="empurrao">Aqui você pode conhecer todas as tecnologias que serão necessárias para se sair bem no hackathon!</p>
 					</div>
 

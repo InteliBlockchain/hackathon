@@ -21,31 +21,26 @@ const modalVariant = {
         x: '-50%',
         y: '-50%',
         transition: {
-            duration: 0.6
-        }
+            duration: 0.6,
+        },
     },
 
     visible: {
         opacity: 1,
         scale: 1,
         transition: {
-            duration: 0.6
-        }
-    }
+            duration: 0.6,
+        },
+    },
 }
 
-const modal: React.FC<Props> = props => (
+const modal: React.FC<Props> = (props) => (
     <>
         <Backdrop show={props.show} click={props.closeModal} />
 
         <AnimatePresence>
             {props.show && (
-                <Modal
-                    variants={modalVariant}
-                    initial="hidden"
-                    animate="visible"
-                    exit="hidden"
-                >
+                <Modal variants={modalVariant} initial="hidden" animate="visible" exit="hidden">
                     <ModalHeader>
                         <h5>{props.title}</h5>
                         <AiOutlineClose onClick={props.closeModal} />
