@@ -15,13 +15,13 @@ const RequireAuthentication = (WrappedComponent: any) => {
 
             try {
                 if (ctx.req) {
-                    await axios.get('/admin', {
+                    await axios.get('/sub/admin', {
                         headers: {
                             Cookie: `token=${token};`,
                         },
                     })
                 } else {
-                    await axios.get('/admin')
+                    await axios.get('/sub/admin')
                 }
 
                 if (WrappedComponent.getInitialProps) {

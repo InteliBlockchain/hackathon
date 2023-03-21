@@ -40,7 +40,6 @@ import { toast } from "react-toastify";
 
 const Home = () => {
 	const router = useRouter();
-
 	const [sponsors] = useState([
 		{ link: "https://inteli.edu.br", name: "Inteli", icon: inteli },
 		{ link: "https://www.blockchainrio.com.br/", name: "BlockchainRio", icon: blockchain_rio },
@@ -69,7 +68,7 @@ const Home = () => {
 
 	return (
 		<Layout modal={modal}>
-			{modal && process.env.NEXT_PUBLIC_allow_subscriptions ? <Modal setModal={setModal} /> : null}
+			{modal && process.env.NEXT_PUBLIC_ALLOW_SUBSCRIPTIONS ? <Modal setModal={setModal} /> : null}
 
 			<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-24 h-auto w-full mx-auto z-50 px-2">
 				<Link href={"https://blockchain.inteli.edu.br/"} target="_blank">

@@ -1,6 +1,7 @@
 import { Subscription } from '@/pages/admin/subscriptions'
 import React from 'react'
 import Modal from '../styledModal'
+import { Container } from './style'
 
 interface Props {
     showModal: boolean
@@ -12,7 +13,7 @@ const SubscriptionModal: React.FC<Props> = ({ showModal, closeModal, subscriptio
     console.log(subscription)
     return (
         <Modal title="Inscrito" show={showModal} closeModal={closeModal}>
-            <>
+            <Container>
                 <div>
                     <label>Id</label>
                     <p>{subscription.id}</p>
@@ -20,6 +21,10 @@ const SubscriptionModal: React.FC<Props> = ({ showModal, closeModal, subscriptio
                 <div>
                     <label>Nome completo</label>
                     <p>{subscription.fullName}</p>
+                </div>
+                <div>
+                    <label>Email</label>
+                    <p>{subscription.email}</p>
                 </div>
                 <div>
                     <label>Contato</label>
@@ -30,46 +35,58 @@ const SubscriptionModal: React.FC<Props> = ({ showModal, closeModal, subscriptio
                     <p>{subscription.institution}</p>
                 </div>
                 <div>
+                    <label>Tipo de documento</label>
+                    <p>{subscription.documentType}</p>
+                </div>
+                <div>
                     <label>Documento</label>
                     <p>{subscription.document}</p>
                 </div>
                 <div>
+                    <label>Nível</label>
+                    <p>{subscription.level}</p>
+                </div>
+                <div>
                     <label>Motivo de participação</label>
-                    <p>{subscription.whyParticipate}</p>
+                    <p>{subscription.why}</p>
                 </div>
                 <div>
                     <label>Habilidades</label>
-                    <p>{subscription.skills}</p>
+                    <p>{subscription.habilities}</p>
                 </div>
                 <div>
                     <label>História</label>
                     <p>{subscription.history}</p>
                 </div>
                 <div>
+                    <label>Gênero</label>
+                    <p>{subscription.gender}</p>
+                </div>
+                <div>
+                    <label>Cidade/Estado</label>
+                    <p>{subscription.local}</p>
+                </div>
+                <div>
+                    <label>Possui grupo</label>
+                    <p>{subscription.group}</p>
+                </div>
+                <div>
                     <label>Discord</label>
                     <p>{subscription.discord}</p>
                 </div>
-                {subscription.instagram && <div>
-                    <label>Instagram</label>
-                    <p>{subscription.instagram}</p>
-                </div>}
                 {subscription.linkedin && <div>
                     <label>Linkedin</label>
                     <p>{subscription.linkedin}</p>
-                </div>}
-                {subscription.twitter && <div>
-                    <label>Twitter</label>
-                    <p>{subscription.twitter}</p>
                 </div>}
                 {subscription.github && <div>
                     <label>Github</label>
                     <p>{subscription.github}</p>
                 </div>}
-                {subscription.specialNeed && <div>
+                {subscription.specialNeeds && <div>
                     <label>Necessidade especial</label>
-                    <p>{subscription.specialNeed}</p>
+                    <p>{subscription.specialNeeds}</p>
                 </div>}
-            </>
+            </Container>
         </Modal>
     )
 }

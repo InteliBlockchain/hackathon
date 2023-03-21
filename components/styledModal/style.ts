@@ -14,6 +14,8 @@ export const Modal = styled(motion.div)`
     background-color: white;
     border-radius: 3px;
     z-index: 150;
+    max-height: 80vh;
+    overflow-y: auto;
 `
 
 export const ModalHeader = styled.div`
@@ -41,4 +43,5 @@ export const ModalHeader = styled.div`
 
 export const ModalBody = styled.div`
     padding-top: 30px;
+    color: black;
 `

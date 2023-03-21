@@ -100,7 +100,7 @@ export const Modal = ({ setModal }: {
 
     const onSubmit = async (data: any) => {
         // check if the date is after 19-03-2023 at 23:59
-        if (new Date(data.date) > new Date("2023-03-19T23:59:59") && !process.env.NEXT_PUBLIC_allow_subscriptions) {
+        if (new Date(data.date) > new Date("2023-03-19T23:59:59") && !process.env.NEXT_PUBLIC_ALLOW_SUBSCRIPTIONS) {
             toast.error("Inscrições ainda não estão abertas!")
             return
         }
