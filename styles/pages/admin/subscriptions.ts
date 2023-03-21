@@ -2,7 +2,10 @@ import styled from 'styled-components'
 
 export const PageContainer = styled.div`
     position: relative;
-    min-height: 100vh;
+    height: 100vh;
+    /* background-image: url(../../../assets/admin-background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat; */
 `
 
 export const Container = styled.div`
@@ -16,6 +19,18 @@ export const Container = styled.div`
     background-color: white;
     padding: 60px;
     border-radius: 10px;
+
+    &> svg {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        transition: all .2s;
+        float: right;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
 
     h1 {
         text-align: center;

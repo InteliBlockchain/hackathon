@@ -20,32 +20,23 @@ const Success = () => {
                     <Image src={challenge} alt="Challenge 2023" className="w-full h-full" />
                 </div>
                 <div className="text-center mt-10">
-                    <h1 className="font-bold text-[#04D361] text-6xl italic">Sucesso!</h1>
+                    <h1 className="font-bold text-[#04D361] text-6xl italic">Quase lá!</h1>
                     <p className="text-2xl font-normal italic">Sua inscrição foi registrada</p>
                 </div>
             </div>
             <div className="flex flex-col items-center mt-4 mb-16">
-                <div className="flex flex-col w-10/12 bg-[#4863F7] bg-opacity-10 items-center rounded-xl">
+                <div className="flex flex-col w-10/12 md:w-3/5 bg-[#4863F7] bg-opacity-10 px-4 items-center rounded-xl">
                     <div className="text-center mt-8">
                         <label className="font-ligth text-sm md:text-lg text-white">Fique atento ao seu email!
                             Assim que a sua inscrição for confirmada, você receberá um email com a confirmação de participação e o acesso ao Discord do evento.</label>
                     </div>
-                    <div className="mt-4 text-center">
-                        <label className="font-ligth text-sm md:text-lg text-white">Esse email deve chegar em, no máximo, 24 horas.</label>
-                    </div>
                     <div className="mt-4 mb-8 text-center">
                         <label className="font-ligth text-sm md:text-lg text-white">Caso necessário, entre em contato conosco:</label>
                         <br />
-                        <label className="font-ligth text-sm md:text-lg text-[#04D361]">blockchain+inscricao@inteli.edu.br</label>
+                        <Link className="block mt-2 text-lg underline" href={"/contact"}>Página de contato</Link>
                     </div>
                 </div>
-                <div className="flex flex-col w-10/12 items-center mt-8 text-center">
-                    <label className="font-normal text-md">Enquanto o dia não chega, que tal se preparar para arrebenta no Challenge?</label>
-                    <button className="items-center justify-center font-semibold text-lg mt-8 mb-4 py-4 px-8 rounded-md flex bg-[#4863F7] text-[#f1f1f1]">Acessar conteúdo <Image alt="content" width={24} src={right} className={"ml-2"} /></button>
-                </div>
             </div>
-
-
         </Layout>
     )
 

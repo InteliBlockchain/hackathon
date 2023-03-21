@@ -11,6 +11,9 @@ import TableComponent from '@/components/table'
 import SubscriptionModal from '@/components/subscriptionModal'
 import { useAdmin } from '@/contexts/admin'
 import { useRouter } from 'next/router'
+import { BiRefresh } from 'react-icons/bi'
+import Background from '../../assets/admin-background.jpg'
+import Image from 'next/image'
 
 export interface Subscription {
     id: string
@@ -59,15 +62,17 @@ const Home = () => {
 
     const { register, handleSubmit } = useForm()
 
+    const getSubscriptions = async () => {
+        try {
+            const { data } = await axios.get('/Sub/allPreSubs', { headers: { Authorization: `Bearer ${token}` } })
+            setSubscriptions(data)
+        } catch (err) {
+            router.replace('/admin/auth')
+        }
+    }
+
     useEffect(() => {
-        axios
-            .get('/Sub/allPreSubs', { headers: { Authorization: `Bearer ${token}` } })
-            .then((data: any) => {
-                console.log(data)
-            })
-            .catch((err: any) => {
-                router.replace('/admin/auth')
-            })
+        getSubscriptions()
     }, [])
 
     const columns = React.useMemo(
@@ -101,6 +106,7 @@ const Home = () => {
                                         const subs = subscriptions.find(
                                             (subscription) => subscription.id == props.row.values.id
                                         )
+                                        console.log(subs)
                                         if (subs) {
                                             setSelectedSubscription(subs)
                                             setShowModal(true)
@@ -124,9 +130,10 @@ const Home = () => {
     return (
         <Layout>
             <PageContainer>
+                <Image src={Background} alt="Background"  />
                 <Container>
                     <h1>Inscrições</h1>
-
+                    <BiRefresh onClick={getSubscriptions} />
                     <TableComponent columns={columns} data={data} />
                 </Container>
                 {selectedSubscription && (

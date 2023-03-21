@@ -10,7 +10,6 @@ interface Props {
 }
 
 const SubscriptionModal: React.FC<Props> = ({ showModal, closeModal, subscription }) => {
-    console.log(subscription)
     return (
         <Modal title="Inscrito" show={showModal} closeModal={closeModal}>
             <Container>
@@ -50,14 +49,18 @@ const SubscriptionModal: React.FC<Props> = ({ showModal, closeModal, subscriptio
                     <label>Motivo de participação</label>
                     <p>{subscription.why}</p>
                 </div>
-                <div>
-                    <label>Habilidades</label>
-                    <p>{subscription.habilities}</p>
-                </div>
-                <div>
-                    <label>História</label>
-                    <p>{subscription.history}</p>
-                </div>
+                {subscription.habilities && (
+                    <div>
+                        <label>Habilidades</label>
+                        <p>{subscription.habilities}</p>
+                    </div>
+                )}
+                {subscription.history && (
+                    <div>
+                        <label>História</label>
+                        <p>{subscription.history}</p>
+                    </div>
+                )}
                 <div>
                     <label>Gênero</label>
                     <p>{subscription.gender}</p>
@@ -68,24 +71,30 @@ const SubscriptionModal: React.FC<Props> = ({ showModal, closeModal, subscriptio
                 </div>
                 <div>
                     <label>Possui grupo</label>
-                    <p>{subscription.group}</p>
+                    <p>{subscription.group ? "Sim" : "Não"}</p>
                 </div>
                 <div>
                     <label>Discord</label>
                     <p>{subscription.discord}</p>
                 </div>
-                {subscription.linkedin && <div>
-                    <label>Linkedin</label>
-                    <p>{subscription.linkedin}</p>
-                </div>}
-                {subscription.github && <div>
-                    <label>Github</label>
-                    <p>{subscription.github}</p>
-                </div>}
-                {subscription.specialNeeds && <div>
-                    <label>Necessidade especial</label>
-                    <p>{subscription.specialNeeds}</p>
-                </div>}
+                {subscription.linkedin && (
+                    <div>
+                        <label>Linkedin</label>
+                        <p>{subscription.linkedin}</p>
+                    </div>
+                )}
+                {subscription.github && (
+                    <div>
+                        <label>Github</label>
+                        <p>{subscription.github}</p>
+                    </div>
+                )}
+                {subscription.specialNeeds && (
+                    <div>
+                        <label>Necessidade especial</label>
+                        <p>{subscription.specialNeeds}</p>
+                    </div>
+                )}
             </Container>
         </Modal>
     )
