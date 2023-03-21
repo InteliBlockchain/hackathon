@@ -17,32 +17,14 @@ import getToken from "@/utils/getToken";
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
 	const { token, email } = ctx.query;
-	let validToken: boolean = false;
-
-	const headers = {
-		'frontend': getToken(process.env.NEXT_PUBLIC_JWT_TOKEN_VALIDATION_FRONT)
-	}
-
-	const validateToken = async () => {
-		await axios.get("sub/validateToken/" + token, headers).then((res: any) => {
-			return true
-		}).catch((err: any) => {
-			return false
-		})
-
-		return false
-	}
-
-	validToken = await validateToken()
 
 	return {
-		props: { token, validToken, email }
+		props: { token, email }
 	}
 }
 
-const Subscription = ({ token, validToken, email }: {
+const Subscription = ({ token, email }: {
 	token: string,
-	validToken: boolean;
 	email: string;
 }) => {
 	const router = useRouter();
@@ -51,6 +33,8 @@ const Subscription = ({ token, validToken, email }: {
 		register,
 		handleSubmit,
 		formState: { errors },
+		watch,
+		reset
 	} = useForm();
 
 	const [documentType, setDocumentType] = useState("cpf")
@@ -61,11 +45,8 @@ const Subscription = ({ token, validToken, email }: {
 	});
 
 	useEffect(() => {
-		process.env.allow_subscription ? toast.warn("Inscrições não estão abertas no momento") && router.push("/") : null
-
 		console.log(
 			"token: " + token,
-			"\nvalidToken: " + validToken,
 			"\nemail: " + email
 		)
 
@@ -74,8 +55,62 @@ const Subscription = ({ token, validToken, email }: {
 
 		setMathProblem(createMathProblem())
 
-		email && validToken ? toast.info("Para se inscrever, preencha o formulário abaixo e resolva o problema matemático") : null
+		email ? toast.info("Para se inscrever, preencha o formulário abaixo e resolva o problema matemático") : null
+
+		const validateToken = async () => {
+			let frontendToken = getToken("fda185375967e0569363a5f061f0e1ae")
+
+			const headers = {
+				'frontend': frontendToken,
+			}
+
+			try {
+				await axios.get(`/sub/validateToken/${token}`, {
+					headers: headers,
+				})
+
+				toast.success("Token verificado com sucesso")
+			} catch (err) {
+				toast.error("Token inválido")
+				setTimeout(() => {
+					router.push("/")
+				}, 1500)
+			}
+		}
+
+		validateToken()
+
+		const defaultForm = {
+			fullName: "",
+			local: "",
+			github: "",
+			linkedIn: "",
+			documentType: "cpf",
+			document: "",
+			genre: "",
+			level: "",
+			institution: "",
+			specialNeeds: "",
+			why: "",
+			history: "",
+			habilities: "",
+			contact: "",
+			discord: "",
+			acceptTerms: "",
+			mailing: "",
+		};
+
+		if (localStorage.getItem('form')) {
+			const form = JSON.parse(
+				localStorage.getItem('form') || JSON.stringify(defaultForm)
+			);
+			reset(form);
+		}
 	}, [])
+
+	useEffect(() => {
+		localStorage.setItem('form', JSON.stringify(watch()));
+	}, [watch()]);
 
 	const createMathProblem = () => {
 		const firstNumber = Math.floor(Math.random() * 10);
@@ -97,10 +132,10 @@ const Subscription = ({ token, validToken, email }: {
 
 		console.log(data)
 
-		// let token = getToken(process.env.NEXT_PUBLIC_JWT_TOKEN_VALIDATION_FRONT)
+		let frontendToken = getToken("fda185375967e0569363a5f061f0e1ae")
 
 		const headers = {
-			'frontend': getToken(process.env.NEXT_PUBLIC_JWT_TOKEN_VALIDATION_FRONT)
+			'frontend': frontendToken
 		}
 
 		try {
@@ -126,6 +161,8 @@ const Subscription = ({ token, validToken, email }: {
 			data.problemResult == mathProblem.result ? toast.success("Resposta correta")
 				: toast.error("Resposta incorreta")
 
+			console.log(data)
+			setLoading(false)
 		} catch (err) {
 			toast.error("Ocorreu um erro, tente novamente mais tarde")
 			setLoading(false)
@@ -151,11 +188,9 @@ const Subscription = ({ token, validToken, email }: {
 	}
 
 	const formatDocument = (value: String) => {
-		if (documentType == "cpf") {
-			return cpfMask(value)
-		} else {
-			return value
-		}
+		const mask = documentType === 'cpf' ? cpfMask : rgMask
+
+		return mask(value)
 	}
 
 	return (
@@ -189,6 +224,13 @@ const Subscription = ({ token, validToken, email }: {
 							</div>
 
 							<div className="w-full mt-4">
+								<p className="text-md text-[#c4c4c4] mb-1">Cidade/Estado: <span className="text-red-400">*</span></p>
+
+								<input placeholder="São Paulo/SP" className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("local", { required: true })} />
+								{errors.cityState && <p className="text-red-500 text-xs">Insira sua cidade/estado</p>}
+							</div>
+
+							<div className="w-full mt-4">
 								<p className="text-md text-[#c4c4c4] mb-1">Github:</p>
 								<input placeholder="" className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("github")} />
 							</div>
@@ -196,16 +238,6 @@ const Subscription = ({ token, validToken, email }: {
 							<div className="w-full mt-4">
 								<p className="text-md text-[#c4c4c4] mb-1">LinkedIn:</p>
 								<input placeholder="" className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("linkedin")} />
-							</div>
-
-							<div className="w-full mt-4">
-								<p className="text-md text-[#c4c4c4] mb-1">Instagram:</p>
-								<input placeholder="" className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("instagram")} />
-							</div>
-
-							<div className="w-full mt-4">
-								<p className="text-md text-[#c4c4c4] mb-1">Twitter:</p>
-								<input placeholder="" className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm" {...register("twitter")} />
 							</div>
 
 							<div className="w-full mt-4">
@@ -245,13 +277,47 @@ const Subscription = ({ token, validToken, email }: {
 							</div>
 
 							<div className="w-full mt-4 text-sm">
+								<p className="text-base text-[#c4c4c4] mb-1">Gênero <span className="text-red-400">*</span></p>
+								<select
+									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
+									{...register("gender", { required: true })}
+								>
+									<option></option>
+									<option value="masculino">Masculino</option>
+									<option value="feminino">Feminino</option>
+									<option value="outro">Outro</option>
+								</select>
+								{errors.genre?.type == "required" && <p className="text-red-500 text-xs">
+									Insira seu gênero
+								</p>}
+							</div>
+
+							<div className="w-full mt-4 text-sm">
+								<p className="text-base text-[#c4c4c4] mb-1">
+									Nível na carreira <span className="text-red-400">*</span></p>
+								<select
+									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
+									{...register("level", { required: true })}
+								>
+									<option></option>
+									<option value="ensino-medio">Ensino médio</option>
+									<option value="graduacao">Graduação</option>
+									<option value="pos-graduacao">Pós-graduação</option>
+									<option value="mestrado">Mercado de trabalho</option>
+								</select>
+								{errors.level?.type == "required" && <p className="text-red-500 text-xs">
+									Selecione seu nível de carreira
+								</p>}
+							</div>
+
+							<div className="w-full mt-4 text-sm">
 								<p className="text-base text-[#c4c4c4] mb-1">Instituição <span className="text-red-400">*</span></p>
 								<input
 									placeholder="Ex.: Inteli, BTG Pactual, etc."
 									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
 									{...register("institution", { required: true })}
 								/>
-								{errors.document?.type == "required" && <p className="text-red-500 text-xs">
+								{errors.institution?.type == "required" && <p className="text-red-500 text-xs">
 									Insira sua instituição/empresa
 								</p>}
 							</div>
@@ -261,7 +327,7 @@ const Subscription = ({ token, validToken, email }: {
 								<input
 									placeholder="Sua necessidade"
 									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
-									{...register("specialNeed")}
+									{...register("specialNeeds")}
 								/>
 							</div>
 
@@ -269,12 +335,12 @@ const Subscription = ({ token, validToken, email }: {
 							<div className="w-full mt-4 text-sm">
 								<p className="text-base text-[#c4c4c4] mb-1">Por que você quer participar do Challenge? <span className="text-red-400">*</span></p>
 								<textarea
-									minLength={200}
+									minLength={0}
 									maxLength={4000}
 									rows={8}
 									placeholder=""
 									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
-									{...register("why", { required: true, maxLength: 4000, minLength: 200 })}
+									{...register("why", { required: true, maxLength: 4000, minLength: 0 })}
 								/>
 								{/* add how much characters have been typed */}
 								{errors.why?.type == "required" && <p className="text-red-500 text-xs">
@@ -286,40 +352,35 @@ const Subscription = ({ token, validToken, email }: {
 							</div>
 
 							<div className="w-full mt-4 text-sm">
-								<p className="text-base text-[#c4c4c4] mb-1">Conte um pouco da sua história <span className="text-red-400">*</span></p>
+								<p className="text-base text-[#c4c4c4] mb-1">Conte um pouco da sua história</p>
 								<textarea
-									minLength={200}
-									maxLength={4000}
 									rows={8}
 									placeholder=""
 									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
-									{...register("history", { required: true, maxLength: 4000, minLength: 200 })}
+									{...register("history")}
 								/>
-								{/* add how much characters have been typed */}
-								{errors.history?.type == "required" && <p className="text-red-500 text-xs">
-									Insira sua resposta
-								</p>}
-								{errors.history?.type == "maxLength" && <p className="text-red-500 text-xs">
-									Insira no máximo 4000 caracteres
-								</p>}
 							</div>
 
 							<div className="w-full mt-4 text-sm">
-								<p className="text-base text-[#c4c4c4] mb-1">Habilidades que gostaria de destacar <span className="text-red-400">*</span></p>
+								<p className="text-base text-[#c4c4c4] mb-1">Habilidades que gostaria de destacar</p>
 								<textarea
-									minLength={200}
-									maxLength={4000}
 									rows={8}
 									placeholder=""
 									className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex"
-									{...register("habilities", { required: true, maxLength: 4000, minLength: 200 })}
+									{...register("habilities")}
 								/>
-								{/* add how much characters have been typed */}
-								{errors.habilities?.type == "required" && <p className="text-red-500 text-xs">
-									Insira sua resposta
-								</p>}
-								{errors.habilities?.type == "maxLength" && <p className="text-red-500 text-xs">
-									Insira no máximo 4000 caracteres
+							</div>
+
+							<div className="w-full mt-4">
+								<p className="text-md text-[#c4c4c4] mb-1">Tem grupo? <span className="text-red-400">*</span></p>
+
+								<select className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex" {...register("group", { required: true })}>
+									<option></option>
+									<option value={"true"}>Sim</option>
+									<option value={"false"}>Não</option>
+								</select>
+								{errors.group?.type == "required" && <p className="text-red-500 text-xs">
+									Selecione uma opção
 								</p>}
 							</div>
 
@@ -339,7 +400,7 @@ const Subscription = ({ token, validToken, email }: {
 									Insira um número válido
 								</p>}
 
-								<div className="text-xs py-4 bg-[#4862f721] text-[#c4c4c4] flex flex-col justify-center mt-4 rounded-lg">
+								<div className="text-xs p-4 bg-[#4862f721] text-[#c4c4c4] flex flex-col justify-center mt-4 rounded-lg">
 									<p className="text-base text-[#c4c4c4] mb-1 font-medium">Seu Discord (com apelido e número) <span className="text-red-400">*</span></p>
 
 									<input placeholder="nickname#1234" className="p-2 text-base rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight w-full" {...register("discord", { required: true })} />

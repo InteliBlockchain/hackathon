@@ -1,4 +1,4 @@
-import {  useState } from 'react'
+import { useState } from 'react'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
 import { Layout } from '@/components/Layout'
@@ -13,19 +13,19 @@ import getToken from '@/utils/getToken'
 const Home = () => {
     const router = useRouter()
 
-    const [emailSent, setEmailSent ] = useState(false)
+    const [emailSent, setEmailSent] = useState(false)
 
     const { register, handleSubmit } = useForm()
-    const onSubmit = async (data: any) =>  {
-        let token = getToken(process.env.JWT_TOKEN_VALIDATION_FRONT)
-     
-		const headers = {
-			'frontend': token,
+    const onSubmit = async (data: any) => {
+        let token = getToken(process.env.NEXT_PUBLIC_JWT_TOKEN_VALIDATION_FRONT)
+
+        const headers = {
+            'frontend': token,
             'Authorization': `Bearer ${data.token}`
-		}
+        }
         if (!emailSent) {
             try {
-                const {data: result} = await axios.post('/sub/callAdm', data, {headers})
+                const { data: result } = await axios.post('/sub/callAdm', data, { headers })
                 toast.success("Cheque o seu email!")
                 setEmailSent(true)
             } catch (err) {
@@ -35,20 +35,20 @@ const Home = () => {
         }
 
         try {
-            const {data: result} = await axios.get('/sub/validateadmin', {headers})
+            const { data: result } = await axios.get('/sub/validateadmin', { headers })
             toast.success("Login realizado com sucesso!")
             router.push('/admin/subscriptions')
         } catch (err) {
             toast.error("Não foi possível fazer o login!")
         }
-        
+
     }
 
     return (
         <Layout>
             <PageContainer>
                 <Container>
-                    <form  onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                         <input placeholder='Email' type="text" {...register('email')} />
                         {emailSent && <input placeholder='Token' type="text" {...register('token')} />}
                         <button type='submit'>Login</button>

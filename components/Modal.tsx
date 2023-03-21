@@ -92,11 +92,13 @@ export const Modal = ({ setModal }: {
     const {
         handleSubmit,
         register,
+        watch,
         formState: { errors },
     } = useForm();
 
     const [data, setData] = useState({})
     const [loading, setLoading] = useState(false)
+    const [resendLoading, setResendLoading] = useState(true)
 
     const onSubmit = async (data: any) => {
         // check if the date is after 19-03-2023 at 23:59
@@ -123,34 +125,51 @@ export const Modal = ({ setModal }: {
             }).then((res: any) => {
                 toast.success("Um email foi enviado para " + data.email + " com um link para confirmar seu cadastro")
 
-                // router.push("/success?email=" + data.email)
-
                 setLoading(false)
             }).catch(async (err: any) => {
-                try {
-                    await axios.post("/Sub/resendConfirmation", {
-                        email: data.email,
-                    }, {
-                        headers: headers,
-                    }).then((res: any) => {
-                        toast.success("Um email foi enviado para " + data.email + " com um link para confirmar seu cadastro")
-
-                        // router.push("/success?email=" + data.email)
-
-                        setLoading(false)
-                    }).catch((err: any) => {
-                        err?.message == "Request failed with status code 429" ? toast.error("Bloqueado por excesso de tentativas.") : toast.error("Ocorreu um erro e o email não pôde ser enviado para " + data.email + ". Tente novamente mais tarde ou cheque seu email")
-
-
-                        setLoading(false)
-                    })
-                } catch (err) {
-                    toast.error("Ocorreu um erro e o email não pôde ser enviado para " + data.email + ". Tente novamente mais tarde ou cheque seu email")
-                }
+                setLoading(false)
+                toast.error("Ocorreu um erro e o email não pôde ser enviado para " + data.email + ". Tente novamente mais tarde ou cheque seu email")
             })
         } catch (err) {
             toast.error("Ocorreu um erro, tente novamente mais tarde")
             setLoading(false)
+        }
+
+        setTimeout(() => {
+            setResendLoading(false)
+        }, 3000)
+    }
+
+    const resendConfirmation = async () => {
+        let token = getToken(process.env.NEXT_PUBLIC_JWT_TOKEN_VALIDATION_FRONT)
+
+        const headers = {
+            'frontend': token
+        }
+
+        if (!watch("email")) {
+            toast.error("Insira um email para reenviar o email de confirmação")
+            return
+        }
+
+        try {
+            await axios.post("/Sub/resendConfirmation", {
+                email: watch("email"),
+            }, {
+                headers: headers,
+            }).then((res: any) => {
+                toast.success("Email reenviado para " + watch("email"))
+                // router.push("/success?email=" + data.email)
+
+                setLoading(false)
+            }).catch((err: any) => {
+                err?.message == "Request failed with status code 429" ? toast.error("Bloqueado por excesso de tentativas.") : toast.error("Ocorreu um erro e o email não pôde ser enviado para " + watch("email") + ". Tente novamente mais tarde ou cheque seu email")
+
+
+                setLoading(false)
+            })
+        } catch (err) {
+            toast.error("Ocorreu um erro e o email não pôde ser enviado para " + watch("email") + ". Tente novamente mais tarde ou cheque seu email")
         }
     }
 
@@ -191,6 +210,10 @@ export const Modal = ({ setModal }: {
                         {loading ? "Enviando..." : "Enviar"}
                     </button>
                 </form>
+
+                <button className="text-[#4863f7] font-semibold text-md mt-4 disabled:text-gray-600" onClick={resendConfirmation} disabled={resendLoading}>
+                    Reenviar email
+                </button>
             </div>
         </div>
     )
