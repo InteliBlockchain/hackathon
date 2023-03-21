@@ -104,7 +104,7 @@ const Subscription = ({ token, validToken, email }: {
 		}
 
 		try {
-			await axios.post(`/Sub/validateEmail/${token}`, {
+			await axios.post(`sub/validateEmail/${token}`, {
 				...data, email
 			}, {
 				headers: headers,
@@ -112,10 +112,14 @@ const Subscription = ({ token, validToken, email }: {
 				toast.success("Inscrição realizada com sucesso! Aguarde atualizações sobre a sua participação no evento!")
 
 				// router.push("/success?email=" + data.email)
+				console.log(res)
 
 				setLoading(false)
 			}).catch((err: any) => {
 				toast.error("Occorreu um erro, tente novamente mais tarde ou contate um administrador.")
+
+				console.log(err)
+
 				setLoading(false)
 			})
 
@@ -158,7 +162,7 @@ const Subscription = ({ token, validToken, email }: {
 		<Layout>
 			<div className="w-full flex flex-col items-center justify-center">
 				<div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-16 pb-6 h-auto w-full mx-auto">
-					<Link href={"https://blockahain.inteli.edu.br/"} target="_blank">
+					<Link href={"https://blockchain.inteli.edu.br/"} target="_blank">
 						<Image src={logo} alt="inteli-blockchain" />
 					</Link>
 

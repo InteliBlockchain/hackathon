@@ -10,7 +10,7 @@ const Faq = () => {
     return (
         <Layout>
             <div className="flex flex-col items-center justify-center bg1 md:bg-black bg-center bg-cover pt-16 pb-24 h-auto w-full mx-auto">
-                <Link href={"https://blockahain.inteli.edu.br/"} target="_blank">
+                <Link href={"https://blockchain.inteli.edu.br/"} target="_blank">
                     <Image src={logo} alt="inteli-blockchain" />
                 </Link>
 
