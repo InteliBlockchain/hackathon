@@ -101,7 +101,7 @@ const Home = () => {
 						<div className=" flex flex-col px-8">
 							<p className="text-2xl font-semibold text-left">Premiações</p>
 							<p className="text-left text-sm">
-								AAAAAAAAAAAAAAAAAAAAA
+								O Challenge2023 traz um conceito diferente: As categorias. As empresas parceiras do evento trarão diversos temas diferentes de projeto, cada um com sua premiação. Fique de olho nas redes sociais para saber mais sobre as categorias e os prêmios.
 							</p>
 						</div>
 					</div>
@@ -118,9 +118,9 @@ const Home = () => {
 					<div>
 						<Image className="p-8 rounded" src={inteli1} alt="" />
 						<div className=" flex flex-col px-8">
-							<p className=" text-2xl font-semibold text-left">O evento</p>
+							<p className=" text-2xl font-semibold text-left">Educacional</p>
 							<p className="text-left text-sm">
-								Durante os 3 dias do evento, você desenvolverá
+								Ainda não está sabendo tudo de Blockchain? Não se preocupe! Você tem acesso à diversos links e materiais de estudo para que você possa se preparar para o evento. No discord, você pode trocar ideias com outros participantes e tirar suas dúvidas.
 							</p>
 						</div>
 					</div>
@@ -129,7 +129,7 @@ const Home = () => {
 						<div className=" flex flex-col px-8">
 							<p className=" text-2xl font-semibold text-left">Mentoria</p>
 							<p className="text-left text-sm">
-								mentores!
+								Com todo projeto aparecem dúvidas e dificuldades. Para te ajudar, contaremos com profissionais e professores de diversas áreas para que estarão disponiveis para tirar suas dúvidas e te ajudar a desenvolver sua solução.
 							</p>
 						</div>
 					</div>
