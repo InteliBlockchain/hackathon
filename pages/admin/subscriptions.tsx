@@ -106,7 +106,6 @@ const Home = () => {
                                         const subs = subscriptions.find(
                                             (subscription) => subscription.id == props.row.values.id
                                         )
-                                        console.log(subs)
                                         if (subs) {
                                             setSelectedSubscription(subs)
                                             setShowModal(true)
@@ -123,7 +122,7 @@ const Home = () => {
                 ],
             },
         ],
-        []
+        [subscriptions]
     )
 
     const data = React.useMemo(() => [...subscriptions], [subscriptions])
