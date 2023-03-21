@@ -21,6 +21,10 @@ module.exports = {
       textColor: {
         blueText: "#4863F7",
       },
+      screens: {
+          'mobile': '640px',
+          'desktop': '566px',
+      }
     },
   },
   plugins: [],
