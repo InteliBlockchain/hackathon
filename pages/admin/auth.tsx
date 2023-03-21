@@ -9,9 +9,11 @@ import { Container, PageContainer } from '@/styles/pages/admin/auth'
 import { useForm } from 'react-hook-form'
 import axios from '../../axios'
 import getToken from '@/utils/getToken'
+import { useAdmin } from '@/contexts/admin'
 
 const Home = () => {
     const router = useRouter()
+    const {setToken} = useAdmin()
 
     const [emailSent, setEmailSent] = useState(false)
 
@@ -25,7 +27,7 @@ const Home = () => {
         }
         if (!emailSent) {
             try {
-                const { data: result } = await axios.post('/sub/callAdm', data, { headers })
+                await axios.post('/sub/callAdm', data, { headers })
                 toast.success("Cheque o seu email!")
                 setEmailSent(true)
             } catch (err) {
@@ -36,12 +38,13 @@ const Home = () => {
 
         try {
             const {data: result} = await axios.get('/sub/validateadmin/' + data.token, {headers})
+            setToken(result.token)
+            
             toast.success("Login realizado com sucesso!")
             router.push('/admin/subscriptions')
         } catch (err) {
             toast.error("Não foi possível fazer o login!")
         }
-
     }
 
     return (

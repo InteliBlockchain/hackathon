@@ -8,9 +8,9 @@ import { useEffect, useState } from 'react'
 import { FaRegEye } from 'react-icons/fa'
 import ActionsTd from '@/components/actionsTd'
 import TableComponent from '@/components/table'
-import Modal from '@/components/styledModal'
 import SubscriptionModal from '@/components/subscriptionModal'
-import RequireAuthentication from '@/HOC/requireAuthentication'
+import { useAdmin } from '@/contexts/admin'
+import { useRouter } from 'next/router'
 
 export interface Subscription {
     id: string
@@ -41,6 +41,8 @@ export interface Subscription {
 const Home = () => {
     const [showModal, setShowModal] = useState(false)
     const [selectedSubscription, setSelectedSubscription] = useState<Subscription | null>(null)
+    const { token } = useAdmin()
+    const router = useRouter()
 
     const closeModal = () => {
         setSelectedSubscription(null)
@@ -50,15 +52,22 @@ const Home = () => {
     const [subscriptions, setSubscriptions] = useState<Subscription[]>([])
 
     useEffect(() => {
-        // console.log(selectedSubscription)
-    }, [selectedSubscription])
+        if (token == null) {
+            router.replace('/admin/auth')
+        }
+    }, [token])
 
     const { register, handleSubmit } = useForm()
 
     useEffect(() => {
-        axios.get('/Sub/allPreSubs').then((data: any) => {
-            console.log(data)
-        })
+        axios
+            .get('/Sub/allPreSubs', { headers: { Authorization: `Bearer ${token}` } })
+            .then((data: any) => {
+                console.log(data)
+            })
+            .catch((err: any) => {
+                router.replace('/admin/auth')
+            })
     }, [])
 
     const columns = React.useMemo(
@@ -132,4 +141,4 @@ const Home = () => {
     )
 }
 
-export default RequireAuthentication (Home)
+export default Home
