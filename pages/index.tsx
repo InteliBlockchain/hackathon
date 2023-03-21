@@ -44,16 +44,6 @@ const Home = () => {
   const router = useRouter();
   const [sponsors] = useState([
     { link: "https://inteli.edu.br", name: "Inteli", icon: inteli },
-    {
-      link: "https://www.blockchainrio.com.br/",
-      name: "BlockchainRio",
-      icon: blockchain_rio,
-    },
-    {
-      link: "https://ethereum.org/en/foundation/",
-      name: "Ethereum Foundation",
-      icon: eth_foundation,
-    },
   ]);
   // const [sponsors] = useState([
   // 	{ link: "https://inteli.edu.br", name: "Inteli", icon: inteli },
