@@ -354,9 +354,9 @@
   integrity sha512-POu8Mk0hIU3lRXB3bGIGe4VHIwwDsQyoD1F394OK7STTiX9w4dG3cTLljjYswkQN+hDSHRrj4O36kuVa7KPU8Q==
 
 "@react-three/drei@^9.57.1":
-  version "9.57.3"
-  resolved "https://registry.npmjs.org/@react-three/drei/-/drei-9.57.3.tgz"
-  integrity sha512-zkkrIrd3kuKkRlT0IUg6y8dBppZiv2KXrS6IzUIOKAAwbsNAotAQT//0u6Z242q0WdSfxiQgPFi3WApKpbENPw==
+  version "9.58.1"
+  resolved "https://registry.npmjs.org/@react-three/drei/-/drei-9.58.1.tgz"
+  integrity sha512-CguVIYFX26VG0P31CekUTgQz0MrZb7G2YGiFbkl1BFHZbTYDAPuIZWY5kFT3Q1S8bhcFueDY61nT4tf5t0iI5A==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "~9.6.1"
@@ -846,9 +846,9 @@ camera-controls@^2.3.1:
   integrity sha512-7OhbH0FyzpZtNKpxU9+NFMz9OeaQFWLVgrzotvpDnCCnAjaKhU8InTJZ9sMzfLYzfUbwBJ/ee6jXvWYwvgjuFA==
 
 caniuse-lite@^1.0.30001406, caniuse-lite@^1.0.30001449, caniuse-lite@^1.0.30001464:
-  version "1.0.30001467"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001467.tgz"
-  integrity sha512-cEdN/5e+RPikvl9AHm4uuLXxeCNq8rFsQ+lPHTfe/OtypP3WwnVVbjn+6uBV7PaFL6xUFzTh+sSCOz1rKhcO+Q==
+  version "1.0.30001469"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001469.tgz"
+  integrity sha512-Rcp7221ScNqQPP3W+lVOYDyjdR6dC+neEQCttoNr5bAyz54AboB4iwpnWgyi8P4YUsPybVzT4LgWiBbI3drL4g==
 
 chalk@^2.0.0:
   version "2.4.2"
@@ -1059,9 +1059,9 @@ delayed-stream@~1.0.0:
   integrity sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==
 
 detect-gpu@^5.0.14:
-  version "5.0.15"
-  resolved "https://registry.npmjs.org/detect-gpu/-/detect-gpu-5.0.15.tgz"
-  integrity sha512-ImImgPRhTvo/bmtotR1KG534ZE+L6yIV9sMe4y3zOUzeInnYk/9KOBqxz9M5hKkHXhGKKjY04pMrLMb+rp3FWw==
+  version "5.0.16"
+  resolved "https://registry.npmjs.org/detect-gpu/-/detect-gpu-5.0.16.tgz"
+  integrity sha512-6+o6Sy+FzgQJG7Ray0fN7B4kRGGPuyaM5FHXJ4N3sLcQhsUO9+NEw9emM7vxN7DroZGG16ZydCX6kpgDmNXyKQ==
   dependencies:
     webgl-constants "^1.1.1"
 
@@ -1550,9 +1550,9 @@ fraction.js@^4.2.0:
   integrity sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==
 
 framer-motion@^10.6.1:
-  version "10.6.1"
-  resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-10.6.1.tgz"
-  integrity sha512-e1o4JKJ98/pfUkYkze+23A+r5SW6JujDSAEzIKWq6jsrVIE+QSwpu4U7L8+maOXcTnfAZlI930MfpvA/+zaa5g==
+  version "10.8.3"
+  resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-10.8.3.tgz"
+  integrity sha512-Nd6Fgi7KEArJUsWhS/95dKbAyC1S03mrWKG1rO4pNyDgg0k5+Y9UjJ18z5z6kouic2UxzE6u6mU0tNQ7mJCrdg==
   dependencies:
     tslib "^2.4.0"
   optionalDependencies:
