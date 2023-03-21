@@ -92,7 +92,7 @@ export const Sidebar = ({ setSidebar }: {
 
                 <div className="flex flex-col px-4 justify-center h-full text-lg md:text-2xl">
                     <Link href={"/"} className="text-[#cecece] mb-4 font-semibold text">Início</Link>
-                    <Link href={"/content"} className="text-[#cecece] mb-4 font-semibold text">Aprenda</Link>
+                    {/* <Link href={"/content"} className="text-[#cecece] mb-4 font-semibold text">Aprenda</Link> */}
                     <Link href={"/q&a"} className="text-[#cecece] mb-4 font-semibold text">Q&A</Link>
                     <Link href={"/contact"} className="text-[#cecece] mb-4 font-semibold text">Entre em contato</Link>
                     <Link href={"/sponsor-form"} className="text-[#cecece] mb-4 font-semibold text">Seja um patrocinador</Link>
