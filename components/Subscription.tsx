@@ -15,7 +15,7 @@ export const Subscription = ({ setModal }: {
 
     useEffect(() => {
         setInterval(() => {
-            const openingDate = Math.floor(new Date('2023-03-21T00:00:00').getTime() / 1000)
+            const openingDate = Math.floor(new Date('2023-03-21T20:00:00').getTime() / 1000)
             const currentDate = Math.floor(new Date().getTime() / 1000)
 
             const timeLeft = openingDate - currentDate
@@ -38,7 +38,7 @@ export const Subscription = ({ setModal }: {
 
     return (
         process.env.NEXT_PUBLIC_allow_subscriptions ? (
-            <div className="w-full md:w-2/5 flex flex-col items-center">
+            <div className="w-full md:w-2/5 flex flex-col items-center mb-16">
                 <button className="font-semibold text-xl bg-[#4863F7] rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg" onClick={() => toggleModal()}>
                     Inscreva-se!
                 </button>
