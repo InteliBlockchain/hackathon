@@ -23,7 +23,7 @@ const Companies = () => {
 
     const getCompanies = async () => {
         try {
-            const { data } = await axios.get('/Company/getAllPartners', {
+            const { data } = await axios.get('/Contact/getAllPartners', {
                 headers: { Authorization: `Bearer ${token}` },
             })
             setCompanies(data)
