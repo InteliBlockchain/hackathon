@@ -1,8 +1,6 @@
-import { Layout } from '@/components/Layout'
 import React from 'react'
 
-import { Container, PageContainer } from '@/styles/pages/admin/subscriptions'
-import { useForm } from 'react-hook-form'
+import { Container } from '@/styles/pages/admin/subscriptions'
 import axios from '../../axios'
 import { useEffect, useState } from 'react'
 import { FaRegEye } from 'react-icons/fa'
@@ -12,8 +10,7 @@ import SubscriptionModal from '@/components/subscriptionModal'
 import { useAdmin } from '@/contexts/admin'
 import { useRouter } from 'next/router'
 import { BiRefresh } from 'react-icons/bi'
-import Background from '../../assets/admin-background.jpg'
-import Image from 'next/image'
+import { AdminLayout } from '@/components/adminLayout'
 
 export interface Subscription {
     id: string
@@ -41,10 +38,11 @@ export interface Subscription {
     updatedAt: Date
 }
 
-const Home = () => {
+const Subscriptions = () => {
     const [showModal, setShowModal] = useState(false)
     const [selectedSubscription, setSelectedSubscription] = useState<Subscription | null>(null)
     const { token } = useAdmin()
+
     const router = useRouter()
 
     const closeModal = () => {
@@ -53,14 +51,6 @@ const Home = () => {
     }
 
     const [subscriptions, setSubscriptions] = useState<Subscription[]>([])
-
-    useEffect(() => {
-        if (token == null) {
-            router.replace('/admin/auth')
-        }
-    }, [token])
-
-    const { register, handleSubmit } = useForm()
 
     const getSubscriptions = async () => {
         try {
@@ -127,24 +117,17 @@ const Home = () => {
 
     const data = React.useMemo(() => [...subscriptions], [subscriptions])
     return (
-        <Layout>
-            <PageContainer>
-                <Image src={Background} alt="Background"  />
-                <Container>
-                    <h1>Inscrições</h1>
-                    <BiRefresh onClick={getSubscriptions} />
-                    <TableComponent columns={columns} data={data} />
-                </Container>
-                {selectedSubscription && (
-                    <SubscriptionModal
-                        subscription={selectedSubscription}
-                        showModal={showModal}
-                        closeModal={closeModal}
-                    />
-                )}
-            </PageContainer>
-        </Layout>
+        <AdminLayout>
+            <Container>
+                <h1>Inscrições</h1>
+                <BiRefresh onClick={getSubscriptions} />
+                <TableComponent columns={columns} data={data} />
+            </Container>
+            {selectedSubscription && (
+                <SubscriptionModal subscription={selectedSubscription} showModal={showModal} closeModal={closeModal} />
+            )}
+        </AdminLayout>
     )
 }
 
-export default Home
+export default Subscriptions

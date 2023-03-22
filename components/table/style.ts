@@ -98,3 +98,10 @@ export const PreviousPage = styled(PaginationButtons)``
 export const NextPage = styled(PaginationButtons)``
 
 export const GotoPage = styled(PaginationButtons)``
+
+export const NoData = styled.div`
+  text-align: center;
+  margin: 20px 0;
+  font-size: 20px;
+  font-weight: 500;
+`;

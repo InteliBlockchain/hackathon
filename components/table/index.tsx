@@ -12,6 +12,7 @@ import {
 import {
     GotoPage,
     NextPage,
+    NoData,
     Pagination,
     PreviousPage,
     Table
@@ -91,7 +92,7 @@ const TableComponent: React.FC<Props> = ({ columns, data }) => {
                 <tbody {...getTableBodyProps()}>
                     {
                         // Loop over the table rows
-                        page.map((row: Row<{}>) => {
+                       data.length > 0 ? page.map((row: Row<{}>) => {
                             // Prepare the row for display
                             prepareRow(row)
                             return (
@@ -113,7 +114,7 @@ const TableComponent: React.FC<Props> = ({ columns, data }) => {
                                     }
                                 </tr>
                             )
-                        })
+                        }) : <NoData>No data</NoData>
                     }
                 </tbody>
             </Table>
