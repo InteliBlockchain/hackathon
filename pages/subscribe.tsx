@@ -117,10 +117,10 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
     const [loading, setLoading] = useState(false)
 
     const onSubmit = async (data: any) => {
-		if (data.problemResult != mathProblem.result) {
-			toast.error("Resposta do prompt incorreta!")
-			return
-		}
+        if (data.problemResult != mathProblem.result) {
+            toast.error("Resposta do prompt incorreta!")
+            return
+        }
 
         setLoading(true)
 
@@ -142,15 +142,15 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
                 }
             )
             toast.success('Inscrição realizada com sucesso! Aguarde atualizações sobre a sua participação no evento!')
-			localStorage.removeItem('form')
+            localStorage.removeItem('form')
 
             router.push('/success')
-        } catch (err:any) {
-			if (err.response.data == "Invalid Document") {
-				toast.error("Documento inválido!")
-			} else {
-				toast.error('Occorreu um erro, tente novamente mais tarde ou contate um administrador.')
-			}
+        } catch (err: any) {
+            if (err.response.data == "Invalid Document") {
+                toast.error("Documento inválido!")
+            } else {
+                toast.error('Occorreu um erro, tente novamente mais tarde ou contate um administrador.')
+            }
             setLoading(false)
         }
     }
@@ -195,6 +195,16 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
                         <p className="text-md text-[#c4c4c4] mb-1">Você está se inscrevendo com o email:</p>
                         <p className="text-sm font-medium text-white">{email}</p>
                         <p className="text-md text-red-400 mt-2">* dados obrigatórios</p>
+
+                        <p className="text-md text-[#c4c4c4] mt-4">
+                            Você tem 2 horas a partir do recebimento do email para realizar a inscrição. Caso não consiga realizar a inscrição dentro do prazo, volte para <Link
+                                className='text-green-400'
+                                href="/">aqui</Link> e tente novamente.
+                        </p>
+
+                        <p className="text-md text-[#c4c4c47d] mb-1">
+                            OBS.: Seus dados estão sendo salvos automaticamente, caso você saia do site e volte ou atualize, seus dados estarão salvos.
+                        </p>
                     </div>
                 </div>
 
@@ -512,9 +522,8 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
                             <div className="w-full px-8 flex flex-col justify-center mt-8">
                                 <button
                                     type="submit"
-                                    className={`${
-                                        loading ? 'bg-gray-500' : 'bg-green-500'
-                                    } py-2 px-8 rounded-lg font text-lg text-white`}
+                                    className={`${loading ? 'bg-gray-500' : 'bg-green-500'
+                                        } py-2 px-8 rounded-lg font text-lg text-white`}
                                     disabled={loading}>
                                     {loading ? 'Enviando...' : 'Enviar'}
                                 </button>
