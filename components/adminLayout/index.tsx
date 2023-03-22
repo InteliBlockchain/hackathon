@@ -3,7 +3,6 @@ import Head from 'next/head'
 import 'react-toastify/dist/ReactToastify.css'
 import { Content, PageContainer } from './style'
 import AdminNavbar from '../adminNavbar'
-import { useAdmin } from '@/contexts/admin'
 import { useRouter } from 'next/router'
 
 type Props = {
@@ -14,13 +13,13 @@ type Props = {
 
 export const AdminLayout = ({ children, title, modal }: Props) => {
     const router = useRouter()
-    const { token } = useAdmin()
 
     useEffect(() => {
-        if (token == null) {
+        const adminToken = localStorage.getItem('adminToken')
+        if (!adminToken) {
             router.replace('/admin/auth')
         }
-    }, [token])
+    }, [])
 
     return (
         <>

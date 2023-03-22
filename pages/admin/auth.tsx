@@ -9,11 +9,9 @@ import { Container, PageContainer } from '@/styles/pages/admin/auth'
 import { useForm } from 'react-hook-form'
 import axios from '../../axios'
 import getToken from '@/utils/getToken'
-import { useAdmin } from '@/contexts/admin'
 
 const Home = () => {
     const router = useRouter()
-    const {setToken} = useAdmin()
 
     const [emailSent, setEmailSent] = useState(false)
 
@@ -38,7 +36,7 @@ const Home = () => {
 
         try {
             const {data: result} = await axios.get('/sub/validateadmin/' + data.token, {headers})
-            setToken(result.token)
+            localStorage.setItem('adminToken', result.token)
             
             toast.success("Login realizado com sucesso!")
             router.push('/admin/subscriptions')

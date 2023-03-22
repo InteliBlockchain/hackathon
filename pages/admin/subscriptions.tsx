@@ -7,7 +7,6 @@ import { FaRegEye } from 'react-icons/fa'
 import ActionsTd from '@/components/actionsTd'
 import TableComponent from '@/components/table'
 import SubscriptionModal from '@/components/subscriptionModal'
-import { useAdmin } from '@/contexts/admin'
 import { useRouter } from 'next/router'
 import { BiRefresh } from 'react-icons/bi'
 import { AdminLayout } from '@/components/adminLayout'
@@ -41,7 +40,6 @@ export interface Subscription {
 const Subscriptions = () => {
     const [showModal, setShowModal] = useState(false)
     const [selectedSubscription, setSelectedSubscription] = useState<Subscription | null>(null)
-    const { token } = useAdmin()
 
     const router = useRouter()
 
@@ -54,6 +52,7 @@ const Subscriptions = () => {
 
     const getSubscriptions = async () => {
         try {
+            const token = localStorage.getItem('adminToken')
             const { data } = await axios.get('/Sub/allPreSubs', { headers: { Authorization: `Bearer ${token}` } })
             setSubscriptions(data)
         } catch (err) {
