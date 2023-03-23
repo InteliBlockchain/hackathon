@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { Content, PageContainer } from './style'
 import AdminNavbar from '../adminNavbar'
 import { useRouter } from 'next/router'
+import { ToastContainer } from 'react-toastify'
 
 type Props = {
     children?: ReactNode
@@ -33,6 +34,18 @@ export const AdminLayout = ({ children, title, modal }: Props) => {
 
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={true}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
             <PageContainer>
                 <AdminNavbar />
                 <Content>{children}</Content>
