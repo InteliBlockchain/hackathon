@@ -108,7 +108,8 @@ export const Modal = ({ setModal }: { setModal: React.Dispatch<React.SetStateAct
 
     const [data, setData] = useState({})
     const [loading, setLoading] = useState(false)
-    const [resendLoading, setResendLoading] = useState(true)
+    const [resendLoading, setResendLoading] = useState(false)
+    const [emailSent, setEmailSent] = useState(false)
 
     const onSubmit = async (data: any) => {
         // check if the date is after 19-03-2023 at 23:59
@@ -139,12 +140,11 @@ export const Modal = ({ setModal }: { setModal: React.Dispatch<React.SetStateAct
 
             toast.success('Um email foi enviado para ' + data.email + ' com um link para confirmar seu cadastro')
             setLoading(false)
+            setEmailSent(true)
         } catch (err: any) {
             setLoading(false)
             toast.error(err.response.data)
         }
-
-        setResendLoading(false)
     }
 
     const resendConfirmation = async () => {
@@ -158,6 +158,8 @@ export const Modal = ({ setModal }: { setModal: React.Dispatch<React.SetStateAct
             toast.error('Insira um email para reenviar o email de confirmação')
             return
         }
+
+        setResendLoading(true)
 
         try {
             await axios
@@ -188,6 +190,8 @@ export const Modal = ({ setModal }: { setModal: React.Dispatch<React.SetStateAct
                     '. Tente novamente mais tarde ou cheque seu email'
             )
         }
+
+        setResendLoading(false)
     }
 
     return (
@@ -219,8 +223,9 @@ export const Modal = ({ setModal }: { setModal: React.Dispatch<React.SetStateAct
                                 required: 'Campo obrigatório',
                                 pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                             })}
+                            disabled={emailSent}
                         />
-                        {errors.email?.type === 'required' && <p className="text-red-500 text-sm">Campo obrigatório</p>}
+                        {errors.email?.type === 'required' && <p className="text-red-500 text-sm  mt-2 block">Campo obrigatório</p>}
                         {errors.email?.type === 'pattern' && (
                             <p className="text-red-500 text-sm">Por favor, insira um email válido</p>
                         )}
@@ -230,7 +235,7 @@ export const Modal = ({ setModal }: { setModal: React.Dispatch<React.SetStateAct
                         Você receberá um email com um link para completar sua inscrição. O link é valido por uma hora.
                     </p>
 
-                    {resendLoading && (
+                    {!emailSent && (
                         <button
                             className={`${
                                 loading ? 'bg-[#7D7D7D]' : 'bg-[#4863F7]'
@@ -242,13 +247,14 @@ export const Modal = ({ setModal }: { setModal: React.Dispatch<React.SetStateAct
                     )}
                 </form>
 
-                {!resendLoading &&
+                {emailSent && (
                     <button
                         className="text-[#4863f7] font-semibold text-md mt-4 disabled:text-gray-600"
-                        onClick={resendConfirmation}>
-                        Reenviar email
+                        onClick={resendConfirmation}
+                        disabled={resendLoading}>
+                        {resendLoading ? 'Enviando...' : 'Reenviar email'}
                     </button>
-                }
+                )}
             </div>
         </div>
     )
