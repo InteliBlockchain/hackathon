@@ -4,12 +4,15 @@ import { Container } from '@/styles/pages/admin/subscriptions'
 import axios from '../../axios'
 import { useEffect, useState } from 'react'
 import { FaRegEye } from 'react-icons/fa'
+import { BsFillTrashFill } from 'react-icons/bs'
 import ActionsTd from '@/components/actionsTd'
 import TableComponent from '@/components/table'
 import SubscriptionModal from '@/components/subscriptionModal'
 import { useRouter } from 'next/router'
 import { BiRefresh } from 'react-icons/bi'
 import { AdminLayout } from '@/components/adminLayout'
+import ConfirmModal from '@/components/confirmModal'
+import { toast } from 'react-toastify'
 
 export interface Subscription {
     id: string
@@ -40,6 +43,9 @@ export interface Subscription {
 const Subscriptions = () => {
     const [showModal, setShowModal] = useState(false)
     const [selectedSubscription, setSelectedSubscription] = useState<Subscription | null>(null)
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [deleteId, setDeleteId] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     const router = useRouter()
 
@@ -63,6 +69,26 @@ const Subscriptions = () => {
     useEffect(() => {
         getSubscriptions()
     }, [])
+
+    const confirmDeleteHandler = async () => {
+        setLoading(true)
+        try {
+            const token = localStorage.getItem('adminToken')
+            await axios.delete('/sub/deletePreSub/' + deleteId, { headers: { Authorization: `Bearer ${token}` } })
+            await getSubscriptions()
+            toast.success('Usuário deletado com sucesso!')
+        } catch (err) {
+            toast.error('Erro ao deletar usuário!')
+        }
+
+        closeDeleteModal()
+        setLoading(false)
+    }
+
+    const closeDeleteModal = () => {
+        setDeleteId(null)
+        setShowDeleteModal(false)
+    }
 
     const columns = React.useMemo(
         () => [
@@ -103,6 +129,14 @@ const Subscriptions = () => {
                                     icon: FaRegEye,
                                     color: '#02DE82',
                                 },
+                                {
+                                    handler: () => {
+                                        setDeleteId(props.row.values.id)
+                                        setShowDeleteModal(true)
+                                    },
+                                    icon: BsFillTrashFill,
+                                    color: 'red',
+                                },
                             ]
 
                             return <ActionsTd actions={actions} />
@@ -125,6 +159,14 @@ const Subscriptions = () => {
             {selectedSubscription && (
                 <SubscriptionModal subscription={selectedSubscription} showModal={showModal} closeModal={closeModal} />
             )}
+
+            <ConfirmModal
+                title="Tem certeza que deseja deletar o usuário?"
+                show={showDeleteModal}
+                closeModal={closeDeleteModal}
+                confirmHandler={confirmDeleteHandler}
+                loading={loading}
+            />
         </AdminLayout>
     )
 }
