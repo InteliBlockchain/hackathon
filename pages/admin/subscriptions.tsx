@@ -74,9 +74,9 @@ const Subscriptions = () => {
         setLoading(true)
         try {
             const token = localStorage.getItem('adminToken')
-            await axios.delete('/sub/deletePreSub/' + deleteId, { headers: { Authorization: `Bearer ${token}` } })
+            const {data} = await axios.delete('/sub/deletePreSub/' + deleteId, { headers: { Authorization: `Bearer ${token}` } })
             await getSubscriptions()
-            toast.success('Usuário deletado com sucesso!')
+            toast.success(data)
         } catch (err) {
             toast.error('Erro ao deletar usuário!')
         }
