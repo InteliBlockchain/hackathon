@@ -165,13 +165,7 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
     }
 
     const rgMask = (value: String) => {
-        // accept both 99.999.999-99 and 99.999.999-9
         return value
-            .replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada 
-            .replace(/(\d{2})(\d)/, '$1.$2') // captura 2 grupos de numero o primeiro de 2 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
-            .replace(/(\d{3})(\d)/, '$1.$2')
-            .replace(/(\d{3})(\d{1,2})/, '$1-$2')
-            .replace(/(-\d{1})\d+?$/, '$1') // captura 1 numero seguido de um traço e não deixa ser digitado mais nada
     }
 
     const formatDocument = (value: String) => {
@@ -283,7 +277,7 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
                                             pattern:
                                                 documentType == 'cpf'
                                                     ? /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/
-                                                    : /^\d{2}\.\d{3}\.\d{3}\-\d{1,2}$/,
+                                                    : null,
                                             onChange: (e) => {
                                                 e.target.value = formatDocument(e.target.value)
                                             },
