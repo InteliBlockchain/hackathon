@@ -31,6 +31,7 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
         handleSubmit,
         formState: { errors },
         watch,
+        resetField,
         reset,
     } = useForm()
 
@@ -103,6 +104,10 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
         localStorage.setItem('form', JSON.stringify(watch()))
     }, [watch()])
 
+    useEffect(() => {
+        resetField('document', {defaultValue: null, keepError: false, })
+    }, [documentType])
+
     const createMathProblem = () => {
         const firstNumber = Math.floor(Math.random() * 10)
         const secondNumber = Math.floor(Math.random() * 10)
@@ -118,7 +123,7 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
 
     const onSubmit = async (data: any) => {
         if (data.problemResult != mathProblem.result) {
-            toast.error("Resposta do prompt incorreta!")
+            toast.error('Resposta do prompt incorreta!')
             return
         }
 
@@ -146,8 +151,8 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
 
             router.push('/success')
         } catch (err: any) {
-            if (err.response.data == "Invalid Document") {
-                toast.error("Documento inválido!")
+            if (err.response.data == 'Invalid Document') {
+                toast.error('Documento inválido!')
             } else {
                 toast.error('Occorreu um erro, tente novamente mais tarde ou contate um administrador.')
             }
@@ -162,16 +167,6 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
             .replace(/(\d{3})(\d)/, '$1.$2')
             .replace(/(\d{3})(\d{1,2})/, '$1-$2')
             .replace(/(-\d{2})\d+?$/, '$1') // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
-    }
-
-    const rgMask = (value: String) => {
-        return value
-    }
-
-    const formatDocument = (value: String) => {
-        const mask = documentType === 'cpf' ? cpfMask : rgMask
-
-        return mask(value)
     }
 
     return (
@@ -192,13 +187,17 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
                         <p className="text-md text-red-400 mt-2">* dados obrigatórios</p>
 
                         <p className="text-md text-[#c4c4c4] mt-4">
-                            Você tem 2 horas a partir do recebimento do email para realizar a inscrição. Caso não consiga realizar a inscrição dentro do prazo, volte para <Link
-                                className='text-green-400'
-                                href="/">aqui</Link> e tente novamente.
+                            Você tem 2 horas a partir do recebimento do email para realizar a inscrição. Caso não
+                            consiga realizar a inscrição dentro do prazo, volte para{' '}
+                            <Link className="text-green-400" href="/">
+                                aqui
+                            </Link>{' '}
+                            e tente novamente.
                         </p>
 
                         <p className="text-md text-[#c4c4c47d] mb-1">
-                            OBS.: Seus dados estão sendo salvos automaticamente, caso você saia do site e volte ou atualize, seus dados estarão salvos.
+                            OBS.: Seus dados estão sendo salvos automaticamente, caso você saia do site e volte ou
+                            atualize, seus dados estarão salvos.
                         </p>
                     </div>
                 </div>
@@ -262,24 +261,29 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
                                     <select
                                         className="w-fit mr-2 p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight text-sm"
                                         {...register('documentType', { required: true })}
-                                        onChange={(e) => setDocumentType(e.target.value)}>
+                                        onChange={(e) => {
+                                            setDocumentType(e.target.value)
+                                        }}>
                                         <option value="cpf">CPF</option>
                                         <option value="rg">RG</option>
                                     </select>
                                     <input
                                         placeholder={`${documentType == 'cpf' ? '000.000.000-00' : '00.000.000-00'}`}
+                                        id="document"
                                         className="w-full p-2 rounded-lg border-2 border-blue bg-[#0e0e10] font-extralight flex text-sm"
                                         maxLength={documentType == 'cpf' ? 14 : 13}
                                         {...register('document', {
                                             required: true,
                                             maxLength: documentType == 'cpf' ? 14 : 13,
-                                            minLength: documentType == 'cpf' ? 14 : 12,
+                                            minLength: documentType == 'cpf' ? 14 : 10,
                                             pattern:
                                                 documentType == 'cpf'
                                                     ? /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/
-                                                    : /([A-Za-z0-9]+(\.[A-Za-z0-9]+)+)-[A-Za-z0-9]+/,
+                                                    : undefined,
                                             onChange: (e) => {
-                                                e.target.value = formatDocument(e.target.value)
+                                                if (documentType == 'cpf') {
+                                                e.target.value = cpfMask(e.target.value)
+                                            }
                                             },
                                         })}
                                     />
@@ -287,6 +291,16 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
                                 {errors.document?.type == 'required' && (
                                     <p className="text-red-500 text-xs mt-2">
                                         Insira seu {documentType == 'cpf' ? 'CPF' : 'RG'}
+                                    </p>
+                                )}
+                                {errors.document?.type == 'minLength' && (
+                                    <p className="text-red-500 text-xs mt-2">
+                                        O documento deve ter no mínimo {documentType == 'cpf' ? '13' : '10'} caracteres
+                                    </p>
+                                )}
+                                {errors.document?.type == 'maxLength' && (
+                                    <p className="text-red-500 text-xs mt-2">
+                                        O documento deve ter no máximo 14 caracteres
                                     </p>
                                 )}
                                 {errors.document?.type == 'pattern' && (
@@ -517,8 +531,9 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
                             <div className="w-full px-8 flex flex-col justify-center mt-8">
                                 <button
                                     type="submit"
-                                    className={`${loading ? 'bg-gray-500' : 'bg-green-500'
-                                        } py-2 px-8 rounded-lg font text-lg text-white`}
+                                    className={`${
+                                        loading ? 'bg-gray-500' : 'bg-green-500'
+                                    } py-2 px-8 rounded-lg font text-lg text-white`}
                                     disabled={loading}>
                                     {loading ? 'Enviando...' : 'Enviar'}
                                 </button>
