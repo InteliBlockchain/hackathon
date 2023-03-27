@@ -277,7 +277,7 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
                                             pattern:
                                                 documentType == 'cpf'
                                                     ? /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/
-                                                    : null,
+                                                    : /([A-Za-z0-9]+(\.[A-Za-z0-9]+)+)-[A-Za-z0-9]+/,
                                             onChange: (e) => {
                                                 e.target.value = formatDocument(e.target.value)
                                             },
