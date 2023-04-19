@@ -9,6 +9,7 @@ import {
     useGlobalFilter,
     Row
 } from 'react-table'
+
 import {
     GotoPage,
     NextPage,
@@ -97,7 +98,9 @@ const TableComponent: React.FC<Props> = ({ columns, data }) => {
                             prepareRow(row)
                             return (
                                 // Apply the row props
-                                <tr {...row.getRowProps()}>
+                                <tr {...row.getRowProps()} style={{
+                                    backgroundColor: row.original.approved ? '#02DE8225' : '#f51d3d25'
+                                }}>
                                     {
                                         // Loop over the rows cells
                                         row.cells.map(cell => {
@@ -105,7 +108,6 @@ const TableComponent: React.FC<Props> = ({ columns, data }) => {
                                             return (
                                                 <td {...cell.getCellProps()}>
                                                     {
-                                                        // Render the cell contents
                                                         cell.render('Cell')
                                                     }
                                                 </td>

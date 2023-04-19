@@ -45,7 +45,9 @@ export const Subscription = ({ setModal }: {
                     <button className="font-semibold text-xl bg-[#4863F740] rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg" disabled={true}>
                         Manutenção...
                     </button>
-                ) : (<button className="font-semibold text-xl bg-[#4863F7] rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg" onClick={() => toggleModal()}>
+                ) : process.env.NEXT_PUBLIC_SUBSCRIPTIONS_ENDED ? (<button className="font-semibold text-xl bg-[#4863F740] rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg" disabled={true}>
+                    Inscrções encerradas!
+                </button>) : (<button className="font-semibold text-xl bg-[#4863F7] rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg" onClick={() => toggleModal()}>
                     Inscreva-se!
                 </button>)}
             </div>

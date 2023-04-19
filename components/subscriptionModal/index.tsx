@@ -2,6 +2,10 @@ import { Subscription } from '@/pages/admin/subscriptions'
 import React from 'react'
 import Modal from '../styledModal'
 import { Container } from './style'
+import { useForm } from 'react-hook-form'
+import getToken from '@/utils/getToken'
+import axios from "@/axios"
+import { toast } from 'react-toastify'
 
 interface Props {
     showModal: boolean
@@ -10,9 +14,53 @@ interface Props {
 }
 
 const SubscriptionModal: React.FC<Props> = ({ showModal, closeModal, subscription }) => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
+
+    const onSubmit = async (data: {
+        invite?: string
+    }) => {
+        const {
+            invite
+        } = data;
+
+        try {
+            await axios.post(
+                `sub/approve`, {
+                link: invite,
+                id: subscription.id
+            }, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('adminToken')}`
+                }
+            }
+            )
+
+            toast.success('Inscrito aprovado com sucesso!')
+
+            localStorage.removeItem('form')
+        } catch (err: any) {
+            if (err.response.data == 'ACCESS DENIED') {
+                toast.error('Você não tem permissão para fazer isso!')
+            } else {
+                toast.error('Erro ao aprovar inscrito!')
+            }
+        }
+    }
+
     return (
         <Modal title="Inscrito" show={showModal} closeModal={closeModal}>
             <Container>
+                <div className='text-center'>
+                    <h1 className={`text-3xl font-semibold ${subscription.approved ? "text-green-500" : "text-red-500"
+                        }`}>{
+                            subscription.approved ? "Inscrito aprovado" : "Inscrito não aprovado"
+                        }</h1>
+                </div>
+
                 <div>
                     <label>Id</label>
                     <p>{subscription.id}</p>
@@ -96,24 +144,18 @@ const SubscriptionModal: React.FC<Props> = ({ showModal, closeModal, subscriptio
                     </div>
                 )}
 
-                <div>
-                    <label>Aprovado</label>
-                    <p>{subscription.approved ? "Sim" : "Não"}</p>
-                </div>
-
-                <div className='w-full flex flex-row justify-between'>
-                    <button className="p-2 rounded-lg bg-green-500 text-white">Aprovar membro</button>
-
-                    <button className="p-2 rounded-lg bg-red-500 text-white">Reprovar membro</button>
-                </div>
-
-                <div className='flex flex-col w-full justify-center items-end'>
+                {!subscription.approved ? (<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col w-full justify-center items-end'>
                     <div className='flex flex-col w-full'>
                         <label>Invite para o Discord:</label>
-                        <input type="text" placeholder='Invite...' className='border border-gray-400 p-2' />
+                        <input type="text" placeholder='Invite...' className='border border-gray-400 p-2 rounded-lg' {...register("invite", {
+                            required: true
+                        })} />
+
+                        {errors.invite && <span className='text-red-500 text-sm'>Campo obrigatório para aprovar candidato</span>}
                     </div>
-                    <button className='bg-blue text-white p-2 mt-2 rounded-lg'>Enviar email</button>
-                </div>
+
+                    <button className='bg-green-600 text-white p-2 mt-2 rounded-lg' type='submit'>Enviar email e aprovar candidato</button>
+                </form>) : null}
             </Container>
         </Modal>
     )

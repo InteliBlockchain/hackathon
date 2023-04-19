@@ -60,7 +60,19 @@ const Subscriptions = () => {
         try {
             const token = localStorage.getItem('adminToken')
             const { data } = await axios.get('/Sub/allPreSubs', { headers: { Authorization: `Bearer ${token}` } })
-            setSubscriptions(data)
+
+            setSubscriptions(
+                // sorts from not approved to approved
+                data.sort((a: Subscription, b: Subscription) => {
+                    if (a.approved == true && b.approved == false) {
+                        return 1
+                    } else if (a.approved == false && b.approved == true) {
+                        return -1
+                    } else {
+                        return 0
+                    }
+                })
+            )
         } catch (err) {
             router.replace('/admin/auth')
         }
@@ -112,6 +124,13 @@ const Subscriptions = () => {
                         accessor: 'contact',
                     },
                     {
+                        Header: "Aprovado",
+                        accessor: "approved",
+                        Cell: (props: any) => {
+                            return props.row.values.approved ? <span style={{ color: 'green', fontSize: 16, fontWeight: 500 }}>Sim</span> : <span style={{ color: 'red', fontSize: 16, fontWeight: 500 }}>Não</span>
+                        }
+                    },
+                    {
                         Header: 'Ações',
                         accessor: 'id',
                         Cell: (props: any) => {
@@ -149,7 +168,7 @@ const Subscriptions = () => {
     )
 
     const data = React.useMemo(() => [...subscriptions], [subscriptions])
-    
+
     return (
         <AdminLayout>
             <Container>
