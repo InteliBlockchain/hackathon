@@ -11,7 +11,7 @@ interface Props {
 
 const SubscriptionModal: React.FC<Props> = ({ showModal, closeModal, subscription }) => {
     return (
-        <Modal className={subscription.approved ? 'border-2 border-green-400' : 'border-2 border-red-400'} title="Inscrito" show={showModal} closeModal={closeModal}>
+        <Modal title="Inscrito" show={showModal} closeModal={closeModal}>
             <Container>
                 <div>
                     <label>Id</label>
