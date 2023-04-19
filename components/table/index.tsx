@@ -1,14 +1,14 @@
 /* eslint-disable react/jsx-key */
-import React from 'react'
-import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai'
+import React from "react";
+import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import {
     Column,
     useTable,
     useSortBy,
     usePagination,
     useGlobalFilter,
-    Row
-} from 'react-table'
+    Row,
+} from "react-table";
 
 import {
     GotoPage,
@@ -16,14 +16,14 @@ import {
     NoData,
     Pagination,
     PreviousPage,
-    Table
-} from './style'
+    Table,
+} from "./style";
 
-import GlobalFilter from '../globalFilter'
+import GlobalFilter from "../globalFilter";
 
 interface Props {
-    columns: Column<any>[]
-    data: {}[] | any
+    columns: Column<any>[];
+    data: {}[] | any;
 }
 
 const TableComponent: React.FC<Props> = ({ columns, data }) => {
@@ -42,10 +42,15 @@ const TableComponent: React.FC<Props> = ({ columns, data }) => {
         setGlobalFilter,
         gotoPage,
         pageCount,
-        setPageSize
-    }: any = useTable({ columns, data }, useGlobalFilter, useSortBy, usePagination)
+        setPageSize,
+    }: any = useTable(
+        { columns, data },
+        useGlobalFilter,
+        useSortBy,
+        usePagination
+    );
 
-    const { pageIndex, pageSize, globalFilter } = state
+    const { pageIndex, pageSize, globalFilter } = state;
 
     return (
         <>
@@ -68,7 +73,7 @@ const TableComponent: React.FC<Props> = ({ columns, data }) => {
                                         >
                                             {
                                                 // Render the header
-                                                column.render('Header')
+                                                column.render("Header")
                                             }
                                             {/* Add a sort direction indicator */}
                                             <span>
@@ -79,7 +84,7 @@ const TableComponent: React.FC<Props> = ({ columns, data }) => {
                                                         <AiOutlineArrowDown />
                                                     )
                                                 ) : (
-                                                    ''
+                                                    ""
                                                 )}
                                             </span>
                                         </th>
@@ -93,30 +98,43 @@ const TableComponent: React.FC<Props> = ({ columns, data }) => {
                 <tbody {...getTableBodyProps()}>
                     {
                         // Loop over the table rows
-                        data.length > 0 ? page.map((row: Row<{}>) => {
-                            // Prepare the row for display
-                            prepareRow(row)
-                            return (
-                                // Apply the row props
-                                <tr {...row.getRowProps()} style={{
-                                    backgroundColor: row.original.approved ? '#02DE8225' : '#f51d3d25'
-                                }}>
-                                    {
-                                        // Loop over the rows cells
-                                        row.cells.map(cell => {
-                                            // Apply the cell props
-                                            return (
-                                                <td {...cell.getCellProps()}>
-                                                    {
-                                                        cell.render('Cell')
-                                                    }
-                                                </td>
-                                            )
-                                        })
-                                    }
-                                </tr>
-                            )
-                        }) : <NoData>No data</NoData>
+                        data.length > 0 ? (
+                            page.map((row: Row<{}>) => {
+                                // Prepare the row for display
+                                prepareRow(row);
+
+                                const isApproved = (row.original as { approved?: boolean }).approved || false;
+
+                                return (
+                                    // Apply the row props
+
+                                    <tr
+                                        {...row.getRowProps()}
+                                        style={{
+                                            backgroundColor: isApproved
+                                                ? "#02DE8225"
+                                                : "#FF000025",
+                                        }}
+                                    >
+                                        {
+                                            // Loop over the rows cells
+                                            row.cells.map((cell) => {
+                                                // Apply the cell props
+                                                return (
+                                                    <td
+                                                        {...cell.getCellProps()}
+                                                    >
+                                                        {cell.render("Cell")}
+                                                    </td>
+                                                );
+                                            })
+                                        }
+                                    </tr>
+                                );
+                            })
+                        ) : (
+                            <NoData>No data</NoData>
+                        )
                     }
                 </tbody>
             </Table>
@@ -128,7 +146,7 @@ const TableComponent: React.FC<Props> = ({ columns, data }) => {
                     onClick={() => gotoPage(0)}
                     disabled={!canPreviousPage}
                 >
-                    {'<<'}
+                    {"<<"}
                 </GotoPage>
                 <PreviousPage
                     onClick={() => previousPage()}
@@ -143,11 +161,11 @@ const TableComponent: React.FC<Props> = ({ columns, data }) => {
                     onClick={() => gotoPage(pageCount - 1)}
                     disabled={!canNextPage}
                 >
-                    {'>>'}
+                    {">>"}
                 </GotoPage>
             </Pagination>
         </>
-    )
-}
+    );
+};
 
-export default TableComponent
+export default TableComponent;
