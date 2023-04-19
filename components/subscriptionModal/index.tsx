@@ -19,7 +19,7 @@ const SubscriptionModal: React.FC<Props> = ({ showModal, closeModal, subscriptio
                 </div>
                 <div>
                     <label>Nome completo</label>
-                    <p>{subscription.fullName}</p>
+                    <p>{subscription.fullName} - <span className='text-red-500 text-sm'>{subscription.approved}</span></p>
                 </div>
                 <div>
                     <label>Email</label>
