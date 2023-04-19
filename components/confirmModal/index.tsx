@@ -14,7 +14,6 @@ interface Props {
     loading: boolean
     obs?: string
     error?: string
-    className: string
 }
 
 const ConfirmModal: React.FC<Props> = ({
@@ -24,7 +23,6 @@ const ConfirmModal: React.FC<Props> = ({
     confirmHandler,
     obs,
     loading,
-    className
 }) => {
     let modalContent = (
         <>
@@ -47,7 +45,7 @@ const ConfirmModal: React.FC<Props> = ({
     }
 
     return (
-        <Modal className={className} title={title} show={show} closeModal={closeModal}>
+        <Modal title={title} show={show} closeModal={closeModal}>
             {modalContent}
         </Modal>
     )
