@@ -12,6 +12,7 @@ interface Props {
     show: boolean
     closeModal: () => void
     children: JSX.Element
+    className: string
 }
 
 const modalVariant = {
@@ -40,7 +41,7 @@ const modal: React.FC<Props> = (props) => (
 
         <AnimatePresence>
             {props.show && (
-                <Modal variants={modalVariant} initial="hidden" animate="visible" exit="hidden">
+                <Modal variants={modalVariant} initial="hidden" animate="visible" exit="hidden" className={props.className}>
                     <ModalHeader>
                         <h5>{props.title}</h5>
                         <AiOutlineClose onClick={props.closeModal} />

@@ -92,7 +92,7 @@ const TableComponent: React.FC<Props> = ({ columns, data }) => {
                 <tbody {...getTableBodyProps()}>
                     {
                         // Loop over the table rows
-                       data.length > 0 ? page.map((row: Row<{}>) => {
+                        data.length > 0 ? page.map((row: Row<{}>) => {
                             // Prepare the row for display
                             prepareRow(row)
                             return (

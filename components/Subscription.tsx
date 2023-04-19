@@ -39,11 +39,15 @@ export const Subscription = ({ setModal }: {
     return (
         process.env.NEXT_PUBLIC_ALLOW_SUBSCRIPTIONS ? (
             <div className="w-full md:w-2/5 flex flex-col items-center mb-16">
-		<p className="text-gray1 text-3xl font-bold mb-4">5 - 7 de Maio</p>
+                <p className="text-gray1 text-3xl font-bold mb-4">5 - 7 de Maio</p>
 
-                <button className="font-semibold text-xl bg-[#4863F7] rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg" onClick={() => toggleModal()}>
+                {process.env.NEXT_PUBLIC_MAINTANANCE_MODE ? (
+                    <button className="font-semibold text-xl bg-[#4863F740] rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg" disabled={true}>
+                        Manutenção...
+                    </button>
+                ) : (<button className="font-semibold text-xl bg-[#4863F7] rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg" onClick={() => toggleModal()}>
                     Inscreva-se!
-                </button>
+                </button>)}
             </div>
         ) : (
             <div className="w-full md:w-2/5 mb-8 flex flex-col items-center px-4">

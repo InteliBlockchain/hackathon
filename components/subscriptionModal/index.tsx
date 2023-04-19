@@ -6,12 +6,12 @@ import { Container } from './style'
 interface Props {
     showModal: boolean
     closeModal(): void
-    subscription: Subscription
+    subscription: Subscription,
 }
 
 const SubscriptionModal: React.FC<Props> = ({ showModal, closeModal, subscription }) => {
     return (
-        <Modal title="Inscrito" show={showModal} closeModal={closeModal}>
+        <Modal className={subscription.approved ? 'border-2 border-green-400' : 'border-2 border-red-400'} title="Inscrito" show={showModal} closeModal={closeModal}>
             <Container>
                 <div>
                     <label>Id</label>
@@ -95,6 +95,25 @@ const SubscriptionModal: React.FC<Props> = ({ showModal, closeModal, subscriptio
                         <p>{subscription.specialNeeds}</p>
                     </div>
                 )}
+
+                <div>
+                    <label>Aprovado</label>
+                    <p>{subscription.approved ? "Sim" : "Não"}</p>
+                </div>
+
+                <div className='w-full flex flex-row justify-between'>
+                    <button className="p-2 rounded-lg bg-green-500 text-white">Aprovar membro</button>
+
+                    <button className="p-2 rounded-lg bg-red-500 text-white">Reprovar membro</button>
+                </div>
+
+                <div className='flex flex-col w-full justify-center items-end'>
+                    <div className='flex flex-col w-full'>
+                        <label>Invite para o Discord:</label>
+                        <input type="text" placeholder='Invite...' className='border border-gray-400 p-2' />
+                    </div>
+                    <button className='bg-blue text-white p-2 mt-2 rounded-lg'>Enviar email</button>
+                </div>
             </Container>
         </Modal>
     )
