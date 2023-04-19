@@ -2,7 +2,7 @@ import React from 'react'
 
 import Modal from '../styledModal'
 import Loader from '../loader'
-import {Button} from '../button'
+import { Button } from '../button'
 
 import { ButtonContainer, Paragraph } from './style'
 
@@ -14,6 +14,7 @@ interface Props {
     loading: boolean
     obs?: string
     error?: string
+    className: string
 }
 
 const ConfirmModal: React.FC<Props> = ({
@@ -22,7 +23,8 @@ const ConfirmModal: React.FC<Props> = ({
     closeModal,
     confirmHandler,
     obs,
-    loading
+    loading,
+    className
 }) => {
     let modalContent = (
         <>
@@ -31,7 +33,7 @@ const ConfirmModal: React.FC<Props> = ({
                     <strong>Observação:</strong> {obs}
                 </Paragraph>
             )}
-           
+
             <ButtonContainer>
                 <Button inline light onClick={closeModal}>
                     Cancelar
@@ -45,7 +47,7 @@ const ConfirmModal: React.FC<Props> = ({
     }
 
     return (
-        <Modal title={title} show={show} closeModal={closeModal}>
+        <Modal className={className} title={title} show={show} closeModal={closeModal}>
             {modalContent}
         </Modal>
     )
