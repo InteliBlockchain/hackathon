@@ -24,13 +24,12 @@ import calendar from "@/assets/calendar.svg";
 import telegram from "@/assets/telegram.svg";
 
 import inteli from "@/assets/sponsors/inteli.svg";
-import eth_foundation from "@/assets/sponsors/eth_foundation.svg";
-import blockchain_rio from "@/assets/sponsors/blockchain_rio.svg";
-import ribus from "@/assets/sponsors/ribus.svg";
-import mynt from "@/assets/sponsors/mynt.svg";
 import cartesi from "@/assets/sponsors/cartesi.svg";
-import alexiaVentures from "@/assets/sponsors/alexia-ventures.svg";
+import titaniumAsset from "@/assets/sponsors/titanium.svg";
+import alexia from "@/assets/sponsors/alexia.svg";
 import sevenVisions from "@/assets/sponsors/7visions.svg";
+import mynt from "@/assets/sponsors/mynt.svg";
+import eth_foundation from "@/assets/sponsors/eth_foundation.svg";
 
 import inteli1 from "@/assets/inteli.png";
 import inteliblockchain from "@/assets/inteliblockchain.png";
@@ -48,13 +47,12 @@ const Home = () => {
 
   const [sponsors] = useState([
     { link: "https://inteli.edu.br", name: "Inteli", icon: inteli },
-    { link: "https://www.blockchainrio.com.br/", name: "BlockchainRio", icon: blockchain_rio },
-    { link: "https://ethereum.org/en/foundation/", name: "Ethereum Foundation", icon: eth_foundation },
-    { link: "https://ribus.com.br/", name: "Ribus", icon: ribus },
-    { link: "https://www.mynt.com.br/", name: "Mynt", icon: mynt },
-    { link: "", name: "Cartesi", icon: cartesi },
-    { link: "https://www.alexia-ventures.com/", name: "Alexia Ventures", icon: alexiaVentures, blackBg: true },
-    { link: "https://7visions.com.br/", name: "7Visions", icon: sevenVisions },
+    { link: "https://cartesi.io/", name: "Cartesi", icon: cartesi },
+    { link: "https://7visions.com.br/", name: "7Visions", icon: sevenVisions, whiteBg: true },
+    { link: "https://titaniumasset.com.br/", name: "Titanium Asset", icon: titaniumAsset },
+    { link: "https://www.alexia.vc/", name: "Alexia Ventures", icon: alexia, whiteBg: true },
+    { link: "https://mynt.com.br/", name: "Mynt", icon: mynt },
+    { link: "https://ethereum.org/en/", name: "ETH Foundation", icon: eth_foundation },
   ])
 
   const [modal, setModal] = useState(false);
@@ -65,55 +63,6 @@ const Home = () => {
     minute,
     second,
   } = useTimer();
-
-  {/* <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">07:30 ~ 08:00</p>
-                            <p className="text-md  ml-2">{">_"} Abertura do campus</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">08:00 ~ 09:30</p>
-                            <p className="text-md  ml-2">{">_"} Café da manhã</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">10:00 ~ 10:30</p>
-                            <p className="text-md  ml-2">{">_"} Submissão final dos projetos às 10:30h</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">11:00 ~ 12:00</p>
-                            <p className="text-md  ml-2">{">_"} Pitch parte 1</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">12:00 ~ 13:00</p>
-                            <p className="text-md  ml-2">{">_"} Almoço</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">13:00 ~ 15:00</p>
-                            <p className="text-md  ml-2">{">_"} Pitch parte 2</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">15:00 ~ 18:00</p>
-                            <p className="text-md  ml-2">{">_"} Correção dos códigos dos projetos</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">18:30 ~ 20:00</p>
-                            <p className="text-md  ml-2">{">_"} Cerimônia de encerramento</p>
-                          </div>
-                        </li> */}
 
   const [cronogram] = useState([
     {
@@ -680,8 +629,8 @@ const Home = () => {
             <p className="text-xl font-semibold">Apoio:</p>
             <div className="w-full flex flex-col md:gap-4 md:grid md:grid-cols-2">
               {/* map the sponsor in a way they appear in a random order */}
-              {sponsors.map(({ name, link, icon }, index) => (
-                <Sponsor name={name} icon={icon} link={link} key={index} />
+              {sponsors.map((item, index) => (
+                <Sponsor {...item} key={index} />
               ))}
               {/* <p className="text-center text-grayText text-2xl mt-8">Em breve...</p> */}
             </div>
