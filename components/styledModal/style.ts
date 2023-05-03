@@ -7,7 +7,7 @@ export const Modal = styled(motion.div)`
     left: 50%;
     opacity: 1;
     /* transform: translate(-50%, -50%); */
-    min-width: 60%;
+    min-width: 40%;
 
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
     padding: 20px;

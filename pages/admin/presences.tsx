@@ -19,39 +19,100 @@ enum checkType {
     out = 'out'
 }
 
-export interface PresenceCheck {
-    id: string
-    type: checkType
-    hacker_id: string
+export interface Subscription {
+    document: string
+    fullName: string
 }
 
+export interface PresenceCheck {
+    id: number
+    date: Date
+    type: checkType
+    hacker: Subscription
+}
 
-// TODO: página de listar presenças
+const Presences = () => {
+    const [presences, setPresences] = useState<PresenceCheck[]>([]);
 
-const Subscriptions = () => {
+    const router = useRouter(); 
+
+    const getPresences = async () => {
+        try {
+            const token = localStorage.getItem('adminToken')
+            // const { data } = await axios.get('/Sub/checkPresences', { headers: { Authorization: `Bearer ${token}` } })
+
+            const data : PresenceCheck[] = [
+                {
+                    id: 1,
+                    date: new Date(),
+                    type: 'in' as checkType,
+                    hacker: {
+                        fullName: 'Rafa',
+                        document: 'adsasd'
+                    }
+                },
+                {
+                    id: 2,
+                    date: new Date(),
+                    type: 'out' as checkType,
+                    hacker: {
+                        fullName: 'Lyo',
+                        document: '132901230'
+                    }
+                }
+            ]
+
+            setPresences(data);
+        } catch (err) {
+            router.replace('/admin/auth')
+        }
+    }
+
+
+    const columns = React.useMemo(
+        () => [
+            {
+                Header: ' ',
+                columns: [
+                    {
+                        Header: 'Nome completo',
+                        accessor: 'hacker.fullName',
+                    },
+                    {
+                        Header: 'Documento',
+                        accessor: 'hacker.document',
+                    },
+                    {
+                        Header: 'data',
+                        accessor: 'date',
+                    },
+                    {
+                        Header: 'Tipo',
+                        accessor: 'type',
+                        Cell: (props: any) => {
+                            return props.row.values.type == 'in' ? <span style={{ color: 'green', fontSize: 16, fontWeight: 500 }}>Entrada</span> : <span style={{ color: 'red', fontSize: 16, fontWeight: 500 }}>Saída</span>
+                        }
+                    },
+                ],
+            },
+        ],
+        [presences]
+    )
+
+    const data = React.useMemo(() => [...presences], [presences])
+
     return (
         <AdminLayout>
             <Container>
                 <div className='flex flex-row w-full items-center justify-between'>
-                    <h1>Inscrições</h1>
-                    <p className='text-2xl'>{subscriptions.length}</p>
+                    <h1>Presenças</h1>
+                    <p className='text-2xl'>{presences.length}</p>
                 </div>
-                <BiRefresh onClick={getSubscriptions} />
+                <BiRefresh onClick={getPresences} />
                 <TableComponent columns={columns} data={data} />
             </Container>
-            {selectedSubscription && (
-                <SubscriptionModal subscription={selectedSubscription} showModal={showModal} closeModal={closeModal} />
-            )}
-
-            <ConfirmModal
-                title="Tem certeza que deseja deletar o usuário?"
-                show={showDeleteModal}
-                closeModal={closeDeleteModal}
-                confirmHandler={confirmDeleteHandler}
-                loading={loading}
-            />
         </AdminLayout>
     )
 }
 
-export default Subscriptions
+export default Presences

@@ -23,6 +23,10 @@ const items = [
         text: 'Marcar Presença',
         link: '/admin/subscriptionsPresences',
     },
+    {
+        text: 'Ver todas as Presenças',
+        link: '/admin/presences',
+    },
 ]
 
 const AdminNavbar: React.FC<Props> = (props) => {
