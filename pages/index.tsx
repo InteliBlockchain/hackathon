@@ -66,116 +66,139 @@ const Home = () => {
 
   const [cronogram] = useState([
     {
+      id: 0,
       date: "03/05",
       time: "17:30 ~ 18:30",
       title: "Mynt"
     },
     {
+      id: 1,
       date: "03/05",
       time: "19:00 ~ 20:00",
       title: "Titanium Asset"
     },
     {
+      id: 2,
       date: "03/05",
       time: "20:00 ~ 20:30",
       title: "ETH Foundation"
     },
     {
+      id: 3,
       date: "03/05",
       time: "20:30 ~ 21:30",
       title: "Cartesi"
     },
     {
+      id: 0,
       date: "04/05",
       time: "17:30 ~ 18:30",
       title: "7Visions"
     },
     {
+      id: 1,
       date: "04/05",
       time: "19:00 ~ 20:00",
       title: "Hathor"
     },
     {
+      id: 0,
       date: "05/05",
       time: "16:30 ~ 18:30",
       title: "Credenciamento"
     },
     {
+      id: 1,
       date: "05/05",
       time: "18:30 ~ 20:30",
       title: "Abertura do evento"
     },
     {
+      id: 2,
       date: "05/05",
       time: "20:30 ~ 21:30",
       title: "Jantar"
     },
     {
+      id: 3,
       date: "05/05",
       time: "21:30 ~ 22:00",
       title: "Fechamento do campus"
     },
     {
+      id: 0,
       date: "06/05",
       time: "07:30 ~ 08:00",
       title: "Abertura do campus"
     },
     {
+      id: 1,
       date: "06/05",
       time: "08:00 ~ 09:30",
       title: "Café da manhã"
     },
     {
+      id: 2,
       date: "06/05",
       time: "12:00 ~ 13:30",
       title: "Almoço"
     },
     {
+      id: 3,
       date: "06/05",
       time: "20:00 ~ 21:00",
       title: "Jantar"
     },
     {
+      id: 4,
       date: "06/05",
       time: "21:30 ~ 22:00",
       title: "Fechamento do campus"
     },
     {
+      id: 0,
       date: "07/05",
       time: "07:30 ~ 08:00",
       title: "Abertura do campus"
     },
     {
+      id: 1,
       date: "07/05",
       time: "08:00 ~ 09:30",
       title: "Café da manhã"
     },
     {
+      id: 2,
       date: "07/05",
       time: "10:00 ~ 10:30",
       title: "Submissão final dos projetos às 10:30h"
     },
     {
+      id: 3,
       date: "07/05",
       time: "11:00 ~ 12:00",
       title: "Pitch parte 1"
     },
     {
+      id: 4,
       date: "07/05",
       time: "12:00 ~ 13:00",
       title: "Almoço"
     },
     {
+      id: 5,
       date: "07/05",
       time: "13:00 ~ 15:00",
       title: "Pitch parte 2"
     },
     {
+      id: 6,
       date: "07/05",
       time: "15:00 ~ 18:00",
       title: "Correção dos códigos dos projetos"
     },
     {
+      id: 7,
       date: "07/05",
       time: "18:30 ~ 20:00",
       title: "Cerimônia de encerramento"
@@ -345,31 +368,9 @@ const Home = () => {
 
                     <div className="px-2 mt-2">
                       <ul className="w-full">
-                        {/* <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">17:30 ~ 18:30</p>
-                            <p className="text-md  ml-2">{">_"} Mynt</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">19:00 ~ 20:00</p>
-                            <p className="text-md  ml-2">{">_"} Titanium Asset</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">20:00 ~ 20:30</p>
-                            <p className="text-md  ml-2">{">_"} ETH Foundation</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">20:30 ~ 21:30</p>
-                            <p className="text-md  ml-2">{">_"} Cartesi</p>
-                          </div>
-                        </li> */}
-                        {cronogram.filter((item) => item.date === "03/05").map((item) => (
+                        {cronogram.sort(
+                          (a, b) => a.id - b.id
+                        ).filter((item) => item.date === "03/05").map((item) => (
                           <li>
                             <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
                               <p className="text-md font-semibold">{item.time}</p>
@@ -388,19 +389,9 @@ const Home = () => {
 
                     <div className="px-2 mt-2">
                       <ul className="w-full">
-                        {/* <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">17:30 ~ 18:30</p>
-                            <p className="text-md  ml-2">{">_"} 7Visions</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">19:00 ~ 20:00</p>
-                            <p className="text-md  ml-2">{">_"} Hathor</p>
-                          </div>
-                        </li> */}
-                        {cronogram.filter((item) => item.date === "04/05").map((item) => (
+                        {cronogram.sort(
+                          (a, b) => a.id - b.id
+                        ).filter((item) => item.date === "04/05").map((item) => (
                           <li>
                             <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
                               <p className="text-md font-semibold">{item.time}</p>
@@ -426,31 +417,9 @@ const Home = () => {
 
                     <div className="px-2 mt-2">
                       <ul className="w-full">
-                        {/* <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">16:30 ~ 18:30</p>
-                            <p className="text-md  ml-2">{">_"} Credenciamento</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">18:30 ~ 20:30</p>
-                            <p className="text-md  ml-2">{">_"} Abertura do evento</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">20:30 ~ 21:30</p>
-                            <p className="text-md  ml-2">{">_"} Jantar</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">21:30 ~ 22:00</p>
-                            <p className="text-md  ml-2">{">_"} Fechamento do campus</p>
-                          </div>
-                        </li> */}
-                        {cronogram.filter((item) => item.date === "05/05").map((item) => (
+                        {cronogram.sort(
+                          (a, b) => a.id - b.id
+                        ).filter((item) => item.date === "05/05").map((item) => (
                           <li>
                             <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
                               <p className="text-md font-semibold">{item.time}</p>
@@ -469,37 +438,9 @@ const Home = () => {
 
                     <div className="px-2 mt-2">
                       <ul className="w-full">
-                        {/* <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">07:30 ~ 08:00</p>
-                            <p className="text-md  ml-2">{">_"} Abertura do campus</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">08:00 ~ 09:30</p>
-                            <p className="text-md  ml-2">{">_"} Café da manhã</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">12:00 ~ 13:30</p>
-                            <p className="text-md  ml-2">{">_"} Almoço</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">20:00 ~ 21:00</p>
-                            <p className="text-md  ml-2">{">_"} Jantar</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">21:30 ~ 22:00</p>
-                            <p className="text-md  ml-2">{">_"} Fechamento do campus</p>
-                          </div>
-                        </li> */}
-                        {cronogram.filter((item) => item.date === "06/05").map((item) => (
+                        {cronogram.sort(
+                          (a, b) => a.id - b.id
+                        ).filter((item) => item.date === "06/05").map((item) => (
                           <li>
                             <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
                               <p className="text-md font-semibold">{item.time}</p>
@@ -518,55 +459,9 @@ const Home = () => {
 
                     <div className="px-2 mt-2">
                       <ul className="w-full">
-                        {/* <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">07:30 ~ 08:00</p>
-                            <p className="text-md  ml-2">{">_"} Abertura do campus</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">08:00 ~ 09:30</p>
-                            <p className="text-md  ml-2">{">_"} Café da manhã</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">10:00 ~ 10:30</p>
-                            <p className="text-md  ml-2">{">_"} Submissão final dos projetos às 10:30h</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">11:00 ~ 12:00</p>
-                            <p className="text-md  ml-2">{">_"} Pitch parte 1</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">12:00 ~ 13:00</p>
-                            <p className="text-md  ml-2">{">_"} Almoço</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">13:00 ~ 15:00</p>
-                            <p className="text-md  ml-2">{">_"} Pitch parte 2</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">15:00 ~ 18:00</p>
-                            <p className="text-md  ml-2">{">_"} Correção dos códigos dos projetos</p>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
-                            <p className="text-md font-semibold">18:30 ~ 20:00</p>
-                            <p className="text-md  ml-2">{">_"} Cerimônia de encerramento</p>
-                          </div>
-                        </li> */}
-                        {cronogram.filter((item) => item.date === "07/05").map((item) => (
+                        {cronogram.sort(
+                          (a, b) => a.id - b.id
+                        ).filter((item) => item.date === "07/05").map((item) => (
                           <li>
                             <div className="mt-2 transition-all hover:ml-2 hover:text-green-400">
                               <p className="text-md font-semibold">{item.time}</p>
