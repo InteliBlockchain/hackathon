@@ -19,6 +19,10 @@ const items = [
         text: 'Empresas',
         link: '/admin/companies',
     },
+    {
+        text: 'Marcar Presença',
+        link: '/admin/subscriptionsPresences',
+    },
 ]
 
 const AdminNavbar: React.FC<Props> = (props) => {
