@@ -19,6 +19,6 @@
       "@/*": ["./*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/getToken.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/getToken.js", "components/TimerBoxComp.tsx"],
   "exclude": ["node_modules"]
 }
