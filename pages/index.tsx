@@ -104,13 +104,13 @@ const Home = () => {
     {
       id: 0,
       date: "05/05",
-      time: "16:30 ~ 18:30",
+      time: "16:30 ~ 18:00",
       title: "Credenciamento e Café da tarde"
     },
     {
       id: 1,
       date: "05/05",
-      time: "18:30 ~ 20:30",
+      time: "18:00 ~ 20:30",
       title: "Abertura do evento"
     },
     {
