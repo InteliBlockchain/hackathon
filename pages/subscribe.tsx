@@ -140,6 +140,7 @@ const Subscription = ({ token, email }: { token: string; email: string }) => {
                 `sub/validateEmail/${token}`,
                 {
                     ...data,
+                    group: data.group == 'true' ? true : false,
                     email,
                 },
                 {

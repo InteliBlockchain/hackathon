@@ -3,8 +3,8 @@ import React from "react";
 import { Container } from "@/styles/pages/admin/subscriptions";
 import axios from "../../axios";
 import { useEffect, useState } from "react";
-import { IoEnterSharp } from "react-icons/all";
-import { AiOutlineArrowRight } from "react-icons/all";
+import {  RxEnter} from "react-icons/rx";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import ActionsTd from "@/components/actionsTd";
 import TableComponent from "@/components/table";
 import SubscriptionModal from "@/components/subscriptionModal";
@@ -13,6 +13,7 @@ import { BiRefresh } from "react-icons/bi";
 import { AdminLayout } from "@/components/adminLayout";
 import ConfirmModal from "@/components/confirmModal";
 import { toast } from "react-toastify";
+import Loader from "../../components/loader";
 
 export interface Subscription {
     id: string;
@@ -51,6 +52,7 @@ interface HackerPresenceCheck {
 }
 
 const Subscriptions = () => {
+    const [modalLoading, setModalLoading] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const [hackerPresenceCheck, setHackerPresenceCheck] =
@@ -63,27 +65,17 @@ const Subscriptions = () => {
     const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
 
     const getSubscriptions = async () => {
+        setLoading(true)
         try {
             const token = localStorage.getItem("adminToken");
-            const { data } = await axios.get("/Sub/allPreSubs", {
+            const { data } = await axios.get("/Sub/getAllApproved", {
                 headers: { Authorization: `Bearer ${token}` },
             });
-
-            setSubscriptions(
-                // sorts from not approved to approved
-                data.sort((a: Subscription, b: Subscription) => {
-                    if (a.approved == true && b.approved == false) {
-                        return 1;
-                    } else if (a.approved == false && b.approved == true) {
-                        return -1;
-                    } else {
-                        return 0;
-                    }
-                })
-            );
+            setSubscriptions(data);
         } catch (err) {
             router.replace("/admin/auth");
         }
+        setLoading(false)
     };
 
     useEffect(() => {
@@ -91,18 +83,22 @@ const Subscriptions = () => {
     }, []);
 
     const sendHackerPresenceCheckHandler = async () => {
-        setLoading(true);
+        setModalLoading(true);
         try {
             if (hackerPresenceCheck) {
                 const token = localStorage.getItem("adminToken");
                 const { data } = await axios.post(
-                    "/sub/checkPresence/" + hackerPresenceCheck.id,
+                    "/entries/checkPresence/" + hackerPresenceCheck.id,
                     {
                         type: hackerPresenceCheck.type,
+                    },
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
                     }
                 );
+                toast.success('Entrada/Saída registrada com sucesso!')
             } else {
-                throw new Error("Erro interno - sem id");
+                toast.error("Erro interno - sem id")
             }
         } catch (err) {
             toast.error("Erro ao marcar check de usuário");
@@ -110,7 +106,7 @@ const Subscriptions = () => {
 
         closeHackerPresenceCheckModal();
         setHackerPresenceCheck(null);
-        setLoading(false);
+        setModalLoading(false);
     };
 
     const closeHackerPresenceCheckModal = () => {
@@ -140,33 +136,6 @@ const Subscriptions = () => {
                         accessor: "contact",
                     },
                     {
-                        Header: "Aprovado",
-                        accessor: "approved",
-                        Cell: (props: any) => {
-                            return props.row.values.approved ? (
-                                <span
-                                    style={{
-                                        color: "green",
-                                        fontSize: 16,
-                                        fontWeight: 500,
-                                    }}
-                                >
-                                    Sim
-                                </span>
-                            ) : (
-                                <span
-                                    style={{
-                                        color: "red",
-                                        fontSize: 16,
-                                        fontWeight: 500,
-                                    }}
-                                >
-                                    Não
-                                </span>
-                            );
-                        },
-                    },
-                    {
                         Header: "Ações",
                         accessor: "id",
                         Cell: (props: any) => {
@@ -189,7 +158,7 @@ const Subscriptions = () => {
                                             );
                                         }
                                     },
-                                    icon: IoEnterSharp,
+                                    icon: RxEnter,
                                     color: "#02DE82",
                                 },
                                 {
@@ -229,11 +198,15 @@ const Subscriptions = () => {
         <AdminLayout>
             <Container>
                 <div className="flex flex-row w-full items-center justify-between">
-                    <h1>Inscrições</h1>
+                    <h1>Marcar presença</h1>
                     <p className="text-2xl">{subscriptions.length}</p>
                 </div>
                 <BiRefresh onClick={getSubscriptions} />
-                <TableComponent columns={columns} data={data} />
+                {loading ? (
+                    <Loader />
+                ) : (
+                    <TableComponent columns={columns} data={data} />
+                )}
             </Container>
             <ConfirmModal
                 title={`Tem certeza que deseja registrar a ${
@@ -244,7 +217,7 @@ const Subscriptions = () => {
                 show={showHackerPresenceCheckModal}
                 closeModal={closeHackerPresenceCheckModal}
                 confirmHandler={sendHackerPresenceCheckHandler}
-                loading={loading}
+                loading={modalLoading}
             />
         </AdminLayout>
     );

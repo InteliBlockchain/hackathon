@@ -49,6 +49,7 @@ const SubscriptionModal: React.FC<Props> = ({ showModal, closeModal, subscriptio
                 toast.error('Erro ao aprovar inscrito!')
             }
         }
+        closeModal()
     }
 
     return (
