@@ -33,10 +33,10 @@ const ConfirmModal: React.FC<Props> = ({
             )}
 
             <ButtonContainer>
-                <Button inline light onClick={closeModal}>
+                <Button noMargin inline light onClick={closeModal}>
                     Cancelar
                 </Button>
-                <Button inline onClick={confirmHandler}>Confirmar</Button>
+                <Button noMargin inline onClick={confirmHandler}>Confirmar</Button>
             </ButtonContainer>
         </>
     )
