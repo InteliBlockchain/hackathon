@@ -105,7 +105,7 @@ const Home = () => {
       id: 0,
       date: "05/05",
       time: "16:30 ~ 18:30",
-      title: "Credenciamento"
+      title: "Credenciamento e Café da tarde"
     },
     {
       id: 1,
@@ -195,7 +195,7 @@ const Home = () => {
       id: 6,
       date: "07/05",
       time: "15:00 ~ 18:00",
-      title: "Correção dos códigos dos projetos"
+      title: "Correção dos códigos dos projetos e café da tarde"
     },
     {
       id: 7,
