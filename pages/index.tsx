@@ -116,11 +116,17 @@ const Home = () => {
     {
       id: 2,
       date: "05/05",
+      time: "20:00",
+      title: "Início do Hackathon e desenvolvimento das soluções"
+    },
+    {
+      id: 3,
+      date: "05/05",
       time: "20:30 ~ 21:30",
       title: "Jantar"
     },
     {
-      id: 3,
+      id: 4,
       date: "05/05",
       time: "21:30 ~ 22:00",
       title: "Fechamento do campus"

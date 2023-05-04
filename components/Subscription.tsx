@@ -37,7 +37,7 @@ export const Subscription = ({ setModal }: {
     }
 
     return (
-        process.env.NEXT_PUBLIC_ALLOW_SUBSCRIPTIONS ? (
+        process.env.NEXT_PUBLIC_ALLOW_SUBSCRIPTIONS && !process.env.NEXT_PUBLIC_SUBSCRIPTIONS_ENDED ? (
             <div className="w-full md:w-2/5 flex flex-col items-center mb-16">
                 <p className="text-gray1 text-3xl font-bold mb-4">5 - 7 de Maio</p>
 
@@ -51,22 +51,30 @@ export const Subscription = ({ setModal }: {
                     Inscreva-se!
                 </button>)}
             </div>
-        ) : (
+        ) : process.env.NEXT_PUBLIC_SUBSCRIPTIONS_ENDED ? (
             <div className="w-full md:w-2/5 mb-8 flex flex-col items-center px-4">
                 <p className="text-gray1 text-3xl font-bold mb-4">5-7 de Maio</p>
 
                 <div className="flex flex-col items-center w-full">
-                    <p className="text-gray1 text-lg font-medium">Inscrições: 21.03.2023</p>
-
-                    <p className="mt-8 text-gray1 italic text-xl font-medium">Faltam</p>
-
-                    <button className="px-4 py-2 text-[#4863F7] text-md border-2 border-[#4863F7] rounded-lg font-medium my-2 w-full hover:bg-[#4863f7] hover:text-black  cursor-not-allowed">
-                        {`${daysLeft || "0"} dias, ${hoursLeft || "0"} horas, ${minutesLeft || "0"} minutos e ${secondsLeft || "0"} segundos`}
+                    <button className="font-semibold text-xl bg-[#4863F740] rounded-lg my-2 px-8 w-3/5 py-4 text-[#f1f1f1] shadow-lg" disabled={true}>
+                        Inscrções encerradas!
                     </button>
-
-                    <p className="text-gray1 text-xl italic font-medium">Para o início das inscrições!</p>
                 </div>
             </div>
-        )
+        ) : (<div className="w-full md:w-2/5 mb-8 flex flex-col items-center px-4">
+            <p className="text-gray1 text-3xl font-bold mb-4">5- 7 de Maio</p >
+
+            <div className="flex flex-col items-center w-full">
+                <p className="text-gray1 text-lg font-medium">Inscrições: 21.03.2023</p>
+
+                <p className="mt-8 text-gray1 italic text-xl font-medium">Faltam</p>
+
+                <button className="px-4 py-2 text-[#4863F7] text-md border-2 border-[#4863F7] rounded-lg font-medium my-2 w-full hover:bg-[#4863f7] hover:text-black  cursor-not-allowed">
+                    {`${daysLeft || "0"} dias, ${hoursLeft || "0"} horas, ${minutesLeft || "0"} minutos e ${secondsLeft || "0"} segundos`}
+                </button>
+
+                <p className="text-gray1 text-xl italic font-medium">Para o início das inscrições!</p>
+            </div>
+        </div >)
     )
 }
