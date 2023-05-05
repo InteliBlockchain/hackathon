@@ -63,7 +63,6 @@ const Subscriptions = () => {
         try {
             const token = localStorage.getItem('adminToken')
             const { data } = await axios.get('/Sub/allPreSubs', { headers: { Authorization: `Bearer ${token}` } })
-
             setSubscriptions(
                 // sorts from not approved to approved
                 data.sort((a: Subscription, b: Subscription) => {
