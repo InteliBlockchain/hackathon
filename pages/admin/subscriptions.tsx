@@ -13,6 +13,7 @@ import { BiRefresh } from 'react-icons/bi'
 import { AdminLayout } from '@/components/adminLayout'
 import ConfirmModal from '@/components/confirmModal'
 import { toast } from 'react-toastify'
+import Loader from "../../components/loader";
 
 export interface Subscription {
     id: string
@@ -45,7 +46,8 @@ const Subscriptions = () => {
     const [selectedSubscription, setSelectedSubscription] = useState<Subscription | null>(null)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [deleteId, setDeleteId] = useState(null)
-    const [loading, setLoading] = useState(false)
+    const [modalLoading, setModalLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const router = useRouter()
 
@@ -57,6 +59,7 @@ const Subscriptions = () => {
     const [subscriptions, setSubscriptions] = useState<Subscription[]>([])
 
     const getSubscriptions = async () => {
+        setLoading(true)
         try {
             const token = localStorage.getItem('adminToken')
             const { data } = await axios.get('/Sub/allPreSubs', { headers: { Authorization: `Bearer ${token}` } })
@@ -76,6 +79,7 @@ const Subscriptions = () => {
         } catch (err) {
             router.replace('/admin/auth')
         }
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -83,7 +87,7 @@ const Subscriptions = () => {
     }, [])
 
     const confirmDeleteHandler = async () => {
-        setLoading(true)
+        setModalLoading(true)
         try {
             const token = localStorage.getItem('adminToken')
             const { data } = await axios.delete('/sub/deletePreSub/' + deleteId, { headers: { Authorization: `Bearer ${token}` } })
@@ -94,7 +98,7 @@ const Subscriptions = () => {
         }
 
         closeDeleteModal()
-        setLoading(false)
+        setModalLoading(false)
     }
 
     const closeDeleteModal = () => {
@@ -177,7 +181,11 @@ const Subscriptions = () => {
                     <p className='text-2xl'>{subscriptions.length}</p>
                 </div>
                 <BiRefresh onClick={getSubscriptions} />
-                <TableComponent columns={columns} data={data} />
+                {loading ? (
+                    <Loader />
+                ) : (
+                    <TableComponent columns={columns} data={data} />
+                )}
             </Container>
             {selectedSubscription && (
                 <SubscriptionModal subscription={selectedSubscription} showModal={showModal} closeModal={closeModal} />
@@ -188,7 +196,7 @@ const Subscriptions = () => {
                 show={showDeleteModal}
                 closeModal={closeDeleteModal}
                 confirmHandler={confirmDeleteHandler}
-                loading={loading}
+                loading={modalLoading}
             />
         </AdminLayout>
     )

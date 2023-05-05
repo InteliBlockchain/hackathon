@@ -103,18 +103,12 @@ const TableComponent: React.FC<Props> = ({ columns, data }) => {
                                 // Prepare the row for display
                                 prepareRow(row);
 
-                                const isApproved = (row.original as { approved?: boolean }).approved || false;
 
                                 return (
                                     // Apply the row props
 
                                     <tr
                                         {...row.getRowProps()}
-                                        style={{
-                                            backgroundColor: isApproved
-                                                ? "#02DE8225"
-                                                : "#FF000025",
-                                        }}
                                     >
                                         {
                                             // Loop over the rows cells
