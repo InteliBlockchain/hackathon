@@ -62,6 +62,7 @@ const Subscriptions = () => {
 
     const router = useRouter();
     const [inCampusQuantity, setInCampusQuantity] = useState(0)
+    const [outCampusQuantity, setOutCampusQuantity] = useState(0)
 
     const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
 
@@ -73,12 +74,16 @@ const Subscriptions = () => {
                 headers: { Authorization: `Bearer ${token}` },
             });
             let countInCampus = 0
+            let countOutCampus = 0
             for(let sub of data) {
                 if (sub.inCampus) {
                     countInCampus += 1
+                } else {
+                    countOutCampus += 1
                 }
             }
             setInCampusQuantity(countInCampus)
+            setOutCampusQuantity(countOutCampus)
             setSubscriptions(data);
         } catch (err) {
             router.replace("/admin/auth");
@@ -214,7 +219,7 @@ const Subscriptions = () => {
             <Container>
                 <div className="flex flex-row w-full items-center justify-between">
                     <h1>Marcar presença</h1>
-                    <p className="text-2xl">Inscritos: {subscriptions.length} | Em campus: {inCampusQuantity}</p>
+                    <p className="text-2xl">Inscritos: {subscriptions.length} | Em campus: {inCampusQuantity} | Fora Campus: {outCampusQuantity}</p>
                 </div>
                 <BiRefresh onClick={getSubscriptions} />
                 {loading ? (

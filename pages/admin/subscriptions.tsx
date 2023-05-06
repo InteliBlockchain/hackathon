@@ -127,6 +127,13 @@ const Subscriptions = () => {
                         accessor: 'contact',
                     },
                     {
+                        Header: "Já veio ao evento?",
+                        accessor: "presence",
+                        Cell: (props: any) => (
+                            <span>{props.value ? 'Sim' : 'Não'}</span>
+                        )
+                    },
+                    {
                         Header: "Aprovado",
                         accessor: "approved",
                         Cell: (props: any) => {
